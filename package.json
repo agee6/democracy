@@ -1,0 +1,23 @@
+{
+  "name": "democracy",
+  "version": "1.0.0",
+  "description": "Visualize the state of social media democracy",
+  "main": "main.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "democracy",
+    "d3",
+    "react"
+  ],
+  "author": "Austen Gee",
+  "license": "ISC",
+  "dependencies": {
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-react": "^6.16.0",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2"
+  }
+}
