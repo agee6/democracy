@@ -2,9 +2,8 @@ var path = require("path");
 
 module.exports = {
   context: __dirname,
-  entry: "./main.js",
+  entry: "./frontend/main.jsx",
   output: {
-    path: path, 
     filename: "bundle.js",
     devtoolModuleFilenameTemplate: '[resourcePath]',
     devtoolFallbackModuleFilenameTemplate: '[resourcePath]?[hash]'
@@ -16,7 +15,7 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         loader: 'babel',
         query: {
-          presets: ['react', 'es2015']
+          presets: ['react']
         }
       }
     ]
