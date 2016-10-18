@@ -35,3 +35,6 @@ hello.on('auth.login', function(auth) {
 		label.innerHTML = '<img src="' + r.thumbnail + '" /> Hey ' + r.name;
 	});
 });
+
+
+module.exports = helloUtil;
