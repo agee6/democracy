@@ -14,7 +14,13 @@ var helloUtil = {
       case "login":
         hello('facebook').login();
         break;
-      case "getTrump":
+      case "logout":
+        hello('facebook').logout().then(function() {
+          alert('Signed out');
+        }, function(e) {
+          alert('Signed out error: ' + e.error.message);
+        });
+        break;
 
     }
   }
