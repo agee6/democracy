@@ -73,7 +73,8 @@ var Navbar = React.createClass({
   },
   getTrumpFollwers: function(event){
     event.preventDefault();
-    APIUtil.getTrumpFacebook();
+    debugger;
+    APIUtil.getTrumpFollwers();
   },
   facebookLogin: function(){
     helloUtil.loginToFacebook();

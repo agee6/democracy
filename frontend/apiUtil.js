@@ -19,9 +19,14 @@ var APIUtil = {
 
   },
   getTrumpFacebook: function(){
-    $.get('graph.facebook.com/DonaldTrump?fields=likes', function(payload){
-      debugger;
-    })
+    FB.api(
+    "/{object-id}/likes",
+    function (response) {
+      if (response && !response.error) {
+        /* handle the result */
+      }
+    }
+);
   },
   getUserBooks: function(){
     $.get('/api/books', {}, function(books){
@@ -94,9 +99,12 @@ var APIUtil = {
   },
 
   getTrumpFollwers: function(){
-    $.get('http://twitter.com/realDonaldTrump', function(trumpPage){
+    FB.api("/DonaldTrump/likes",
+    function (response) {
       debugger;
-
+      if (response && !response.error) {
+        /* handle the result */
+      }
     });
   },
   updateBook: function(bookId, bookParams){
