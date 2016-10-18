@@ -76,8 +76,11 @@ var Navbar = React.createClass({
     APIUtil.getTrumpFollwers();
   },
   facebookLogin: function(){
-    helloUtil.loginToFacebook(); 
+    helloUtil.loginToFacebook();
   },
+  facebookLogout: function(){
+    helloUtil.facebook('logout');
+  }, 
 
   render: function() {
     var signB;
@@ -93,6 +96,7 @@ var Navbar = React.createClass({
               <li className="active"><a href="#">Home</a></li>
               <li onClick={this.getTrumpFollwers}> Get Trump Follwers</li>
               <li><button onClick={this.facebookLogin}>Facebook</button></li>
+              <li><button onClick={this.facebookLogout>Logout</button></li>
             </ul>
           </nav>
         </div>
