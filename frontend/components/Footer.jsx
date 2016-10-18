@@ -17,17 +17,11 @@ var Footer = React.createClass({
   render: function(){
 
     return (
-      <section className="bookshelf">
-
-          <div className="menu">
-            <div className="FullBookShelf">
-              <h1>This is the Footer</h1>
-
-            </div>
-          </div>
-
-
-      </section>
+      <div className="mastfoot">
+        <div className="inner">
+          <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+        </div>
+      </div>
     );
   }
 })

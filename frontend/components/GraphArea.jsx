@@ -20,16 +20,11 @@ var GraphArea = React.createClass({
   render: function(){
 
     return (
-      <section className="bookshelf">
+      <div className="container">
+        <div className="inner cover">
 
-          <div className="menu">
-            <div className="FullBookShelf">
-              <label className="ShelfLabel" id="ToRead">To Read</label>
-              <label className="ShelfLabel" id="Read">Read</label>
-            </div>
-          </div>
-
-      </section>
+        </div>
+      </div>
     );
   }
 })

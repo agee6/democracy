@@ -76,27 +76,20 @@ var Navbar = React.createClass({
     var un;
     var cb;
 
-
-
-
     return (
-      <div className="Navbar">
-        <nav className="header-nav group" >
-
-           <div className="header-logo" >
-             <img className="logo-corner" src="http://res.cloudinary.com/litlitves/image/upload/v1461114377/books-icon_f26trs.png" />
-
-           </div>
-
-           <ul className="header-list group">
-
-             <li className="nav-right" id="NavSearch" >Search</li>
-             <li className="nav-right" id="NavDesk" >Desk</li>
-           </ul>
-
-         </nav>
-
+      <div className="masthead clearfix">
+        <div className="inner container">
+          <h3 className="masthead-brand">Cover</h3>
+          <nav>
+            <ul className="nav masthead-nav">
+              <li className="active"><a href="#">Home</a></li>
+              <li><a href="#">Features</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </nav>
+        </div>
       </div>
+
     );
   }
 

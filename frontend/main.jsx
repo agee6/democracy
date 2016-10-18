@@ -41,13 +41,16 @@ var App = React.createClass({
   render: function(){
 
     return (
-      <div>
-        <Navbar />
-        <GraphArea />
-        <SideBar />
-        <Footer />
+      <div className="site-wrapper">
 
+        <div className="site-wrapper-inner">
 
+          <div className="cover-container">
+            <Navbar />
+            <GraphArea />
+            <Footer />
+          </div>
+        </div>
       </div>
     );
   }

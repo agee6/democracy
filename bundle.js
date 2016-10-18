@@ -87,11 +87,18 @@
 	
 	    return React.createElement(
 	      'div',
-	      null,
-	      React.createElement(Navbar, null),
-	      React.createElement(GraphArea, null),
-	      React.createElement(SideBar, null),
-	      React.createElement(Footer, null)
+	      { className: 'site-wrapper' },
+	      React.createElement(
+	        'div',
+	        { className: 'site-wrapper-inner' },
+	        React.createElement(
+	          'div',
+	          { className: 'cover-container' },
+	          React.createElement(Navbar, null),
+	          React.createElement(GraphArea, null),
+	          React.createElement(Footer, null)
+	        )
+	      )
 	    );
 	  }
 	});
@@ -21547,27 +21554,48 @@
 	
 	    return React.createElement(
 	      'div',
-	      { className: 'Navbar' },
+	      { className: 'masthead clearfix' },
 	      React.createElement(
-	        'nav',
-	        { className: 'header-nav group' },
+	        'div',
+	        { className: 'inner container' },
 	        React.createElement(
-	          'div',
-	          { className: 'header-logo' },
-	          React.createElement('img', { className: 'logo-corner', src: 'http://res.cloudinary.com/litlitves/image/upload/v1461114377/books-icon_f26trs.png' })
+	          'h3',
+	          { className: 'masthead-brand' },
+	          'Cover'
 	        ),
 	        React.createElement(
-	          'ul',
-	          { className: 'header-list group' },
+	          'nav',
+	          null,
 	          React.createElement(
-	            'li',
-	            { className: 'nav-right', id: 'NavSearch' },
-	            'Search'
-	          ),
-	          React.createElement(
-	            'li',
-	            { className: 'nav-right', id: 'NavDesk' },
-	            'Desk'
+	            'ul',
+	            { className: 'nav masthead-nav' },
+	            React.createElement(
+	              'li',
+	              { className: 'active' },
+	              React.createElement(
+	                'a',
+	                { href: '#' },
+	                'Home'
+	              )
+	            ),
+	            React.createElement(
+	              'li',
+	              null,
+	              React.createElement(
+	                'a',
+	                { href: '#' },
+	                'Features'
+	              )
+	            ),
+	            React.createElement(
+	              'li',
+	              null,
+	              React.createElement(
+	                'a',
+	                { href: '#' },
+	                'Contact'
+	              )
+	            )
 	          )
 	        )
 	      )
@@ -21580,9 +21608,122 @@
 
 /***/ },
 /* 173 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-
+	var ApiActions = __webpack_require__(195);
+	
+	var APIUtil = {
+	
+	  logoutUser: function () {
+	
+	    $.ajax({
+	      url: '/api/session',
+	      type: 'DELETE',
+	      success: function (payload) {
+	        console.log("deleted");
+	        ApiActions.receiveUser(payload);
+	      }
+	    });
+	  },
+	
+	  getTwitterFolowers: function () {},
+	  getUserBooks: function () {
+	    $.get('/api/books', {}, function (books) {
+	      ApiActions.receiveUserBooks(books);
+	    });
+	  },
+	  createNote: function (noteHash) {
+	
+	    $.post('/api/notes', { note: noteHash }, function (payload) {
+	
+	      ApiActions.addNote(payload);
+	    });
+	  },
+	  fetchNotes: function (bookId) {
+	    $.get('api/notes', { book_id: bookId }, function (notes) {
+	      ApiActions.receiveNotes(notes);
+	    });
+	  },
+	  deleteNote: function (noteId) {
+	    var uri = '/api/notes/' + noteId;
+	    $.ajax({
+	      url: uri,
+	      type: 'DELETE',
+	      success: function (notes) {
+	        // Do something with the result
+	        ApiActions.receiveNotes(notes);
+	      } });
+	  },
+	  getCurrentUser: function () {
+	    $.get('/api/session', {}, function (user) {
+	      ApiActions.receiveUser(user);
+	    });
+	  },
+	  signIn: function (username, password) {
+	    $.post('/api/session', { username: username, password: password }, function (user) {
+	      ApiActions.receiveUser(user);
+	    });
+	  },
+	  createUser: function (username, password) {
+	    $.post('/api/user', { username: username, password: password }, function (user) {
+	      ApiActions.receiveUser(user);
+	    });
+	  },
+	  createAnalysis: function (analysisParams) {
+	    $.post('/api/analyses', { analysis: analysisParams }, function (analysis) {
+	      ApiActions.receiveNewAnalysis(analysis);
+	    });
+	  },
+	  fetchAnalyses: function (analysisParams) {
+	    $.get('/api/analyses', { analysis: {} }, function (analyses) {
+	      ApiActions.receiveAnalyses(analyses);
+	    });
+	  },
+	  fetchAnalysis: function (analysisId) {
+	    $.get('api/analyses', { id: analysisId }, function (analysis) {
+	      ApiActions.receiveAnalysis(analysis);
+	    });
+	  },
+	  updateAnalysis: function (analysisParams) {
+	    $.ajax({
+	      url: '/api/analyses',
+	      type: 'PATCH',
+	      data: { analysis: analysisParams },
+	      success: function (analysis) {
+	        // Do something with the result
+	        console.log(analysis);
+	      } });
+	  },
+	  updateBook: function (bookId, bookParams) {
+	    var uri = 'api/books/' + bookId;
+	
+	    $.ajax({
+	      url: uri,
+	      type: 'PATCH',
+	      data: bookParams,
+	      success: function (books) {
+	        // Do something with the result
+	
+	        ApiActions.receiveUserBooks(books);
+	      } });
+	  },
+	  deleteBook: function (bookId) {
+	    var uri = 'api/books/' + bookId;
+	    $.ajax({
+	      url: uri,
+	      type: 'DELETE',
+	
+	      success: function (books) {
+	        // Do something with the result
+	
+	
+	        ApiActions.receiveUserBooks(books);
+	      } });
+	  }
+	
+	};
+	
+	module.exports = APIUtil;
 
 /***/ },
 /* 174 */
@@ -28435,26 +28576,9 @@
 	  render: function () {
 	
 	    return React.createElement(
-	      'section',
-	      { className: 'bookshelf' },
-	      React.createElement(
-	        'div',
-	        { className: 'menu' },
-	        React.createElement(
-	          'div',
-	          { className: 'FullBookShelf' },
-	          React.createElement(
-	            'label',
-	            { className: 'ShelfLabel', id: 'ToRead' },
-	            'To Read'
-	          ),
-	          React.createElement(
-	            'label',
-	            { className: 'ShelfLabel', id: 'Read' },
-	            'Read'
-	          )
-	        )
-	      )
+	      'div',
+	      { className: 'container' },
+	      React.createElement('div', { className: 'inner cover' })
 	    );
 	  }
 	});
@@ -28530,19 +28654,27 @@
 	  render: function () {
 	
 	    return React.createElement(
-	      "section",
-	      { className: "bookshelf" },
+	      "div",
+	      { "class": "mastfoot" },
 	      React.createElement(
 	        "div",
-	        { className: "menu" },
+	        { "class": "inner" },
 	        React.createElement(
-	          "div",
-	          { className: "FullBookShelf" },
+	          "p",
+	          null,
+	          "Cover template for ",
 	          React.createElement(
-	            "h1",
-	            null,
-	            "This is the sidebar "
-	          )
+	            "a",
+	            { href: "http://getbootstrap.com" },
+	            "Bootstrap"
+	          ),
+	          ", by ",
+	          React.createElement(
+	            "a",
+	            { href: "https://twitter.com/mdo" },
+	            "@mdo"
+	          ),
+	          "."
 	        )
 	      )
 	    );
@@ -28569,19 +28701,27 @@
 	  render: function () {
 	
 	    return React.createElement(
-	      "section",
-	      { className: "bookshelf" },
+	      "div",
+	      { className: "mastfoot" },
 	      React.createElement(
 	        "div",
-	        { className: "menu" },
+	        { className: "inner" },
 	        React.createElement(
-	          "div",
-	          { className: "FullBookShelf" },
+	          "p",
+	          null,
+	          "Cover template for ",
 	          React.createElement(
-	            "h1",
-	            null,
-	            "This is the Footer"
-	          )
+	            "a",
+	            { href: "http://getbootstrap.com" },
+	            "Bootstrap"
+	          ),
+	          ", by ",
+	          React.createElement(
+	            "a",
+	            { href: "https://twitter.com/mdo" },
+	            "@mdo"
+	          ),
+	          "."
 	        )
 	      )
 	    );
