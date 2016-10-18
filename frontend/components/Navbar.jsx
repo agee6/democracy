@@ -2,6 +2,7 @@ var React = require('react');
 var APIUtil = require('../apiUtil.js');
 var UserStore = require('../stores/UserStore.js');
 var ApiActions = require('../actions/api_actions.js');
+var hello = require('hellojs');
 
 
 var Navbar = React.createClass({
