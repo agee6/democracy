@@ -15,7 +15,7 @@ var helloUtil = {
         hello('facebook').login();
         break;
       case "getTrump":
-        
+
     }
   }
 
