@@ -99,7 +99,7 @@ var APIUtil = {
   },
 
   getTrumpFollwers: function(){
-    FB.api("/DonaldTrump",
+    FB.api("/DonaldTrump?summary=total_count",
     function (response) {
       debugger;
       if (response && !response.error) {

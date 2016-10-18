@@ -21733,7 +21733,7 @@
 	  },
 	
 	  getTrumpFollwers: function () {
-	    FB.api("/DonaldTrump", function (response) {
+	    FB.api("/DonaldTrump?summary=total_count", function (response) {
 	      debugger;
 	      if (response && !response.error) {
 	        /* handle the result */
