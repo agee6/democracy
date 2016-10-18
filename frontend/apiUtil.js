@@ -99,7 +99,7 @@ var APIUtil = {
   },
 
   getTrumpFollwers: function(){
-    FB.api("/DonaldTrump/likes",
+    FB.api("/DonaldTrump",
     function (response) {
       debugger;
       if (response && !response.error) {

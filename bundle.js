@@ -21733,7 +21733,7 @@
 	  },
 	
 	  getTrumpFollwers: function () {
-	    FB.api("/DonaldTrump/likes", function (response) {
+	    FB.api("/DonaldTrump", function (response) {
 	      debugger;
 	      if (response && !response.error) {
 	        /* handle the result */
