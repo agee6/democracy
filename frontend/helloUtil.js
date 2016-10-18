@@ -3,7 +3,7 @@ var hello = require('hellojs');
 
 hello.init({
 	facebook: 1069565296472933,
-}, {redirect_uri: 'index.html'});
+}, {redirect_uri: 'loggedIn.html'});
 
 var helloUtil = {
   loginToFacebook: function(){
@@ -21,6 +21,11 @@ var helloUtil = {
           alert('Signed out error: ' + e.error.message);
         });
         break;
+      case "myFriends":
+        hello('facebook').api('me/friends').then(function(json){
+            debugger;
+        });
+        break; 
 
     }
   }

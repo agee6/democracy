@@ -18,6 +18,11 @@ var APIUtil = {
   getTwitterFolowers: function(){
 
   },
+  getTrumpFacebook: function(){
+    $.get('graph.facebook.com/DonaldTrump?fields=likes', function(payload){
+      debugger;
+    })
+  },
   getUserBooks: function(){
     $.get('/api/books', {}, function(books){
       ApiActions.receiveUserBooks(books);
