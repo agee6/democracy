@@ -2,7 +2,7 @@ var React = require('react');
 var APIUtil = require('../apiUtil.js');
 var UserStore = require('../stores/UserStore.js');
 var ApiActions = require('../actions/api_actions.js');
-var hello = require('hellojs');
+var helloUtil = require('..//helloUtil');
 
 
 var Navbar = React.createClass({
@@ -76,7 +76,7 @@ var Navbar = React.createClass({
     APIUtil.getTrumpFollwers();
   },
   facebookLogin: function(){
-    hello('facebook').login();
+    helloUtil.loginToFacebook(); 
   },
 
   render: function() {

@@ -21487,7 +21487,7 @@
 	var APIUtil = __webpack_require__(173);
 	var UserStore = __webpack_require__(174);
 	var ApiActions = __webpack_require__(195);
-	var hello = __webpack_require__(200);
+	var helloUtil = __webpack_require__(202);
 	
 	var Navbar = React.createClass({
 	  displayName: 'Navbar',
@@ -21553,7 +21553,7 @@
 	    APIUtil.getTrumpFollwers();
 	  },
 	  facebookLogin: function () {
-	    hello('facebook').login();
+	    helloUtil.loginToFacebook();
 	  },
 	
 	  render: function () {
@@ -34654,6 +34654,47 @@
 	  delete immediateIds[id];
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(201).setImmediate, __webpack_require__(201).clearImmediate))
+
+/***/ },
+/* 202 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var hello = __webpack_require__(200);
+	
+	hello.init({
+	  facebook: 1069565296472933
+	}, { redirect_uri: 'redirect.html' });
+	
+	var helloUtil = {
+	  loginToFacebook: function () {
+	    hello('facebook').login();
+	  },
+	  facebook: function (action) {
+	    switch (action) {
+	      case "login":
+	        hello('facebook').login();
+	        break;
+	      case "getTrump":
+	
+	    }
+	  }
+	
+	};
+	
+	hello.on('auth.login', function (auth) {
+	
+	  // Call user information, for the given network
+	  hello(auth.network).api('me').then(function (r) {
+	    // Inject it into the container
+	    var label = document.getElementById('profile_' + auth.network);
+	    if (!label) {
+	      label = document.createElement('div');
+	      label.id = 'profile_' + auth.network;
+	      document.getElementById('profile').appendChild(label);
+	    }
+	    label.innerHTML = '<img src="' + r.thumbnail + '" /> Hey ' + r.name;
+	  });
+	});
 
 /***/ }
 /******/ ]);
