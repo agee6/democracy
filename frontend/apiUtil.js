@@ -87,6 +87,13 @@ var APIUtil = {
     }});
 
   },
+
+  getTrumpFollwers: function(){
+    $.get('http://twitter.com/realDonaldTrump', function(trumpPage){
+      debugger;
+
+    });
+  },
   updateBook: function(bookId, bookParams){
     var uri = 'api/books/'+ bookId;
 
