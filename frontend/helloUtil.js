@@ -3,7 +3,7 @@ var hello = require('hellojs');
 
 hello.init({
 	facebook: 1069565296472933,
-}, {redirect_uri: 'redirect.html'});
+}, {redirect_uri: 'index.html'});
 
 var helloUtil = {
   loginToFacebook: function(){
