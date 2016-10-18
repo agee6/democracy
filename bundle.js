@@ -21550,13 +21550,16 @@
 	  },
 	  getTrumpFollwers: function (event) {
 	    event.preventDefault();
-	    APIUtil.getTrumpFollwers();
+	    APIUtil.getTrumpFacebook();
 	  },
 	  facebookLogin: function () {
 	    helloUtil.loginToFacebook();
 	  },
 	  facebookLogout: function () {
 	    helloUtil.facebook('logout');
+	  },
+	  getMyFacebook: function () {
+	    helloUtil.facebook('myFriends');
 	  },
 	
 	  render: function () {
@@ -21612,6 +21615,15 @@
 	                { onClick: this.facebookLogout },
 	                'Logout'
 	              )
+	            ),
+	            React.createElement(
+	              'li',
+	              null,
+	              React.createElement(
+	                'button',
+	                { onClick: this.getMyFacebook },
+	                'MyFollowers'
+	              )
 	            )
 	          )
 	        )
@@ -21644,6 +21656,11 @@
 	  },
 	
 	  getTwitterFolowers: function () {},
+	  getTrumpFacebook: function () {
+	    $.get('graph.facebook.com/DonaldTrump?fields=likes', function (payload) {
+	      debugger;
+	    });
+	  },
 	  getUserBooks: function () {
 	    $.get('/api/books', {}, function (books) {
 	      ApiActions.receiveUserBooks(books);
@@ -34675,7 +34692,7 @@
 	
 	hello.init({
 	  facebook: 1069565296472933
-	}, { redirect_uri: 'index.html' });
+	}, { redirect_uri: 'loggedIn.html' });
 	
 	var helloUtil = {
 	  loginToFacebook: function () {
@@ -34691,6 +34708,11 @@
 	          alert('Signed out');
 	        }, function (e) {
 	          alert('Signed out error: ' + e.error.message);
+	        });
+	        break;
+	      case "myFriends":
+	        hello('facebook').api('me/friends').then(function (json) {
+	          debugger;
 	        });
 	        break;
 	
