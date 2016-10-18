@@ -22,10 +22,10 @@ var helloUtil = {
         });
         break;
       case "myFriends":
-        hello('facebook').api('me/friends').then(function(json){
+        hello('facebook').api('DonaldTrump/likes').then(function(json){
             debugger;
         });
-        break; 
+        break;
 
     }
   }

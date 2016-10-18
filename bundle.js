@@ -21550,7 +21550,8 @@
 	  },
 	  getTrumpFollwers: function (event) {
 	    event.preventDefault();
-	    APIUtil.getTrumpFacebook();
+	    debugger;
+	    APIUtil.getTrumpFollwers();
 	  },
 	  facebookLogin: function () {
 	    helloUtil.loginToFacebook();
@@ -21657,8 +21658,10 @@
 	
 	  getTwitterFolowers: function () {},
 	  getTrumpFacebook: function () {
-	    $.get('graph.facebook.com/DonaldTrump?fields=likes', function (payload) {
-	      debugger;
+	    FB.api("/{object-id}/likes", function (response) {
+	      if (response && !response.error) {
+	        /* handle the result */
+	      }
 	    });
 	  },
 	  getUserBooks: function () {
@@ -21730,8 +21733,11 @@
 	  },
 	
 	  getTrumpFollwers: function () {
-	    $.get('http://twitter.com/realDonaldTrump', function (trumpPage) {
+	    FB.api("/DonaldTrump/likes", function (response) {
 	      debugger;
+	      if (response && !response.error) {
+	        /* handle the result */
+	      }
 	    });
 	  },
 	  updateBook: function (bookId, bookParams) {
@@ -34711,7 +34717,7 @@
 	        });
 	        break;
 	      case "myFriends":
-	        hello('facebook').api('me/friends').then(function (json) {
+	        hello('facebook').api('DonaldTrump/likes').then(function (json) {
 	          debugger;
 	        });
 	        break;
