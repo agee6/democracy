@@ -80,7 +80,7 @@ var Navbar = React.createClass({
   },
   facebookLogout: function(){
     helloUtil.facebook('logout');
-  }, 
+  },
 
   render: function() {
     var signB;
@@ -96,7 +96,7 @@ var Navbar = React.createClass({
               <li className="active"><a href="#">Home</a></li>
               <li onClick={this.getTrumpFollwers}> Get Trump Follwers</li>
               <li><button onClick={this.facebookLogin}>Facebook</button></li>
-              <li><button onClick={this.facebookLogout>Logout</button></li>
+              <li><button onClick={this.facebookLogout}>Logout</button></li>
             </ul>
           </nav>
         </div>
