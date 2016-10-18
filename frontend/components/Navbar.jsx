@@ -70,6 +70,13 @@ var Navbar = React.createClass({
     debugger;
 
   },
+  getTrumpFollwers: function(event){
+    event.preventDefault();
+    APIUtil.getTrumpFollwers();
+  },
+  facebookLogin: function(){
+    hello('facebook').login();
+  },
 
   render: function() {
     var signB;
@@ -83,8 +90,8 @@ var Navbar = React.createClass({
           <nav>
             <ul className="nav masthead-nav">
               <li className="active"><a href="#">Home</a></li>
-              <li><a href="#">Features</a></li>
-              <li><a href="#">Contact</a></li>
+              <li onClick={this.getTrumpFollwers}> Get Trump Follwers</li>
+              <li><button onClick={this.facebookLogin}>Facebook</button></li>
             </ul>
           </nav>
         </div>

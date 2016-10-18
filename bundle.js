@@ -102,6 +102,7 @@
 	    );
 	  }
 	});
+	
 	// var routes = (
 	//   <Route path="/" component={App}>
 	//
@@ -21546,6 +21547,13 @@
 	    }
 	    debugger;
 	  },
+	  getTrumpFollwers: function (event) {
+	    event.preventDefault();
+	    APIUtil.getTrumpFollwers();
+	  },
+	  facebookLogin: function () {
+	    hello('facebook').login();
+	  },
 	
 	  render: function () {
 	    var signB;
@@ -21580,20 +21588,16 @@
 	            ),
 	            React.createElement(
 	              'li',
-	              null,
-	              React.createElement(
-	                'a',
-	                { href: '#' },
-	                'Features'
-	              )
+	              { onClick: this.getTrumpFollwers },
+	              ' Get Trump Follwers'
 	            ),
 	            React.createElement(
 	              'li',
 	              null,
 	              React.createElement(
-	                'a',
-	                { href: '#' },
-	                'Contact'
+	                'button',
+	                { onClick: this.facebookLogin },
+	                'Facebook'
 	              )
 	            )
 	          )
@@ -21693,6 +21697,12 @@
 	        // Do something with the result
 	        console.log(analysis);
 	      } });
+	  },
+	
+	  getTrumpFollwers: function () {
+	    $.get('http://twitter.com/realDonaldTrump', function (trumpPage) {
+	      debugger;
+	    });
 	  },
 	  updateBook: function (bookId, bookParams) {
 	    var uri = 'api/books/' + bookId;
