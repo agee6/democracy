@@ -95,8 +95,8 @@
 	      Gun: React.createElement(GunToHead, { nextClick: this.nextClick }),
 	      Child: React.createElement(ChildsLife, { nextClick: this.nextClick }),
 	      Loc: React.createElement(Country, { nextClick: this.nextClick }),
-	      Maine: React.createElement(Maine, { nextClick: this.nextClick }),
-	      Nebraska: React.createElement(Nebraska, { nextClick: this.nextClick }),
+	      ME: React.createElement(Maine, { nextClick: this.nextClick }),
+	      NE: React.createElement(Nebraska, { nextClick: this.nextClick }),
 	      Result: React.createElement(Result, { nextClick: this.nextClick })
 	    };
 	
@@ -34910,7 +34910,8 @@
 	var APIUtil = __webpack_require__(173);
 	var UserStore = __webpack_require__(180);
 	var ApiActions = __webpack_require__(174);
-	var helloUtil = __webpack_require__(196);
+	var States = __webpack_require__(214);
+	var OutputData = __webpack_require__(211);
 	
 	var Country = React.createClass({
 	  displayName: 'Country',
@@ -34921,8 +34922,28 @@
 	  componentDidMount: function () {
 	    this.userIndex = UserStore.addListener(this._onChange);
 	  },
+	  countryClick: function (event) {
+	    var stateCode = event.currentTarget.id;
+	    if (stateCode === "ME") {
+	      this.props.nextClick("ME");
+	    } else if (stateCode === "NE") {
+	      this.props.nextClick("NE");
+	    } else {
+	      OutputData.location = stateCode;
+	      this.props.nextClick("Result");
+	    }
+	  },
 	
 	  render: function () {
+	    var allButtons = [];
+	    var stateKeys = Object.keys(States);
+	    for (var i = 0; i < stateKeys.length; i++) {
+	      allButtons.push(React.createElement(
+	        'button',
+	        { key: stateKeys[i], id: stateKeys[i], onClick: this.countryClick },
+	        States[stateKeys[i]]
+	      ));
+	    }
 	    return React.createElement(
 	      'div',
 	      { className: 'inner container' },
@@ -34934,7 +34955,11 @@
 	          null,
 	          'Which state will you vote in? '
 	        ),
-	        React.createElement('div', { className: 'input-buttons' })
+	        React.createElement(
+	          'div',
+	          { className: 'input-buttons' },
+	          allButtons
+	        )
 	      )
 	    );
 	  }
@@ -35329,7 +35354,9 @@
 	var APIUtil = __webpack_require__(173);
 	var UserStore = __webpack_require__(180);
 	var ApiActions = __webpack_require__(174);
-	var helloUtil = __webpack_require__(196);
+	var President = __webpack_require__(210);
+	var OutputData = __webpack_require__(211);
+	var Swings = ["NV", "AZ", "CO", "IA", "OH", "NC", "FL", "PA", "NH", "NE2", "ME2", "MN", "MN", "WI"];
 	
 	var Results = React.createClass({
 	  displayName: 'Results',
@@ -35341,67 +35368,81 @@
 	  componentDidMount: function () {
 	    this.userIndex = UserStore.addListener(this._onChange);
 	  },
-	
+	  getPresident: function () {
+	    if (OutputData.location === "UT") {
+	      if (OutputData.gun === "DT") {
+	        if (OutputData.preferred === "DT") {
+	          return "DT";
+	        } else {
+	          return "EM";
+	        }
+	      } else if (OutputData.gun === "HC") {
+	        return "HC";
+	      } else {
+	        return OutputData.preferred;
+	      }
+	    } else if (Swings.indexOf(OutputData.location) !== -1) {
+	      if (OutputData.gun === "DT") {
+	        return "DT";
+	      } else if (OutputData.gun === "HC") {
+	        return "HC";
+	      } else {
+	        return OutputData.preferred;
+	      }
+	    } else {
+	      return OutputData.preferred;
+	    }
+	  },
+	  getMessage: function () {
+	    if (OutputData.gun === null) {
+	      return "You would rather die than vote for either of the two major candidates, so just do what you feel to gain attention to your preffered candidate";
+	    } else if (Swings.indexOf(OutputData.location) !== -1) {
+	      return "You live in a potential swing state. Your vote counts! Also it means you should probably vote for one the major candidates, even if you have to hold your nose.";
+	    } else if (OutputData.location === "UT") {
+	      return "You live in Utah. Utah is special because it appears Evan McMullin is going to win it. And has become a defacto Swing State";
+	    } else {
+	      return "You don't live in a swing state, Your electoral votes are already decided, vote for who you feel so they can gain attention";
+	    }
+	  },
+	  faceClick: function () {
+	    alert("hey there");
+	  },
+	  nextClick: function () {
+	    this.props.nextClick("Welcome");
+	  },
 	  render: function () {
+	    var pres = this.getPresident();
+	    var message = this.getMessage();
 	    return React.createElement(
 	      'div',
-	      { className: 'masthead clearfix' },
+	      { className: 'inner container' },
 	      React.createElement(
 	        'div',
-	        { className: 'inner container' },
+	        { className: 'center container' },
 	        React.createElement(
-	          'h3',
-	          { className: 'masthead-brand' },
-	          'Cover'
+	          'h2',
+	          null,
+	          'Result: '
 	        ),
 	        React.createElement(
-	          'nav',
+	          'h3',
 	          null,
-	          React.createElement(
-	            'ul',
-	            { className: 'nav masthead-nav' },
-	            React.createElement(
-	              'li',
-	              { className: 'active' },
-	              React.createElement(
-	                'a',
-	                { href: '#' },
-	                'Home'
-	              )
-	            ),
-	            React.createElement(
-	              'li',
-	              { onClick: this.getTrumpFollwers },
-	              ' Get Trump Follwers'
-	            ),
-	            React.createElement(
-	              'li',
-	              null,
-	              React.createElement(
-	                'button',
-	                { onClick: this.facebookLogin },
-	                'Facebook'
-	              )
-	            ),
-	            React.createElement(
-	              'li',
-	              null,
-	              React.createElement(
-	                'button',
-	                { onClick: this.facebookLogout },
-	                'Logout'
-	              )
-	            ),
-	            React.createElement(
-	              'li',
-	              null,
-	              React.createElement(
-	                'button',
-	                { onClick: this.getMyFacebook },
-	                'MyFollowers'
-	              )
-	            )
-	          )
+	          message
+	        ),
+	        React.createElement(
+	          'h1',
+	          null,
+	          ' Your choice is: '
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: 'input-buttons' },
+	          React.createElement(President, { id: pres, faceClick: this.faceClick })
+	        ),
+	        React.createElement(
+	          'button',
+	          { onClick: this.nextClick },
+	          'Start Over'
 	        )
 	      )
 	    );
@@ -35427,6 +35468,75 @@
 	};
 	
 	module.exports = images;
+
+/***/ },
+/* 214 */
+/***/ function(module, exports) {
+
+	
+	
+	var states = {
+	    "AL": "Alabama",
+	    "AK": "Alaska",
+	    "AS": "American Samoa",
+	    "AZ": "Arizona",
+	    "AR": "Arkansas",
+	    "CA": "California",
+	    "CO": "Colorado",
+	    "CT": "Connecticut",
+	    "DE": "Delaware",
+	    "DC": "District Of Columbia",
+	    "FM": "Federated States Of Micronesia",
+	    "FL": "Florida",
+	    "GA": "Georgia",
+	    "GU": "Guam",
+	    "HI": "Hawaii",
+	    "ID": "Idaho",
+	    "IL": "Illinois",
+	    "IN": "Indiana",
+	    "IA": "Iowa",
+	    "KS": "Kansas",
+	    "KY": "Kentucky",
+	    "LA": "Louisiana",
+	    "ME": "Maine",
+	    "MH": "Marshall Islands",
+	    "MD": "Maryland",
+	    "MA": "Massachusetts",
+	    "MI": "Michigan",
+	    "MN": "Minnesota",
+	    "MS": "Mississippi",
+	    "MO": "Missouri",
+	    "MT": "Montana",
+	    "NE": "Nebraska",
+	    "NV": "Nevada",
+	    "NH": "New Hampshire",
+	    "NJ": "New Jersey",
+	    "NM": "New Mexico",
+	    "NY": "New York",
+	    "NC": "North Carolina",
+	    "ND": "North Dakota",
+	    "MP": "Northern Mariana Islands",
+	    "OH": "Ohio",
+	    "OK": "Oklahoma",
+	    "OR": "Oregon",
+	    "PW": "Palau",
+	    "PA": "Pennsylvania",
+	    "PR": "Puerto Rico",
+	    "RI": "Rhode Island",
+	    "SC": "South Carolina",
+	    "SD": "South Dakota",
+	    "TN": "Tennessee",
+	    "TX": "Texas",
+	    "UT": "Utah",
+	    "VT": "Vermont",
+	    "VI": "Virgin Islands",
+	    "VA": "Virginia",
+	    "WA": "Washington",
+	    "WV": "West Virginia",
+	    "WI": "Wisconsin",
+	    "WY": "Wyoming"
+	};
+	module.exports = states;
 
 /***/ }
 /******/ ]);

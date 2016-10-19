@@ -39,7 +39,7 @@ var App = React.createClass({
   },
 
   nextClick: function(page){
-    console.log(OutputData); 
+    console.log(OutputData);
     this.setState({currentPage: page});
   },
   _onChange: function(){
@@ -52,8 +52,8 @@ var App = React.createClass({
       Gun: <GunToHead nextClick={this.nextClick} />,
       Child: <ChildsLife nextClick={this.nextClick} />,
       Loc: <Country nextClick={this.nextClick} />,
-      Maine: <Maine nextClick={this.nextClick} />,
-      Nebraska: <Nebraska nextClick={this.nextClick} />,
+      ME: <Maine nextClick={this.nextClick} />,
+      NE: <Nebraska nextClick={this.nextClick} />,
       Result: <Result nextClick={this.nextClick} />
     }
 
