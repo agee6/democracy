@@ -1,7 +1,7 @@
 {
-  "name": "democracy",
+  "name": "StrategicVoting",
   "version": "1.0.0",
-  "description": "Visualize the state of social media democracy",
+  "description": "vote strategically my friend",
   "main": "main.js",
   "scripts": {
     "test": "test"

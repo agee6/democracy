@@ -74,7 +74,7 @@ var Navbar = React.createClass({
   getTrumpFollwers: function(event){
     event.preventDefault();
     debugger;
-    APIUtil.getTrumpFollwers();
+    APIUtil.getTrumpFollwers();a
   },
   facebookLogin: function(){
     helloUtil.loginToFacebook();
@@ -93,15 +93,15 @@ var Navbar = React.createClass({
 
     return (
       <div className="masthead clearfix">
-        <div className="inner container">
+        <div className="nav-container container-fluid">
           <h3 className="masthead-brand">Cover</h3>
           <nav>
             <ul className="nav masthead-nav">
               <li className="active"><a href="#">Home</a></li>
               <li onClick={this.getTrumpFollwers}> Get Trump Follwers</li>
-              <li><button onClick={this.facebookLogin}>Facebook</button></li>
-              <li><button onClick={this.facebookLogout}>Logout</button></li>
-              <li><button onClick={this.getMyFacebook}>MyFollowers</button></li>
+              <li><button className="btn btn-primary" onClick={this.facebookLogin}>Facebook</button></li>
+              <li><button className="btn btn-primary" onClick={this.facebookLogout}>Logout</button></li>
+              <li><button className="btn btn-primary" onClick={this.getMyFacebook}>MyFollowers</button></li>
             </ul>
           </nav>
         </div>
