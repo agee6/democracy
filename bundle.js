@@ -34734,7 +34734,7 @@
 	        });
 	        break;
 	      case "myFriends":
-	        hello('facebook').api('DonaldTrump/likes').then(function (json) {
+	        hello('facebook').api('me').then(function (json) {
 	          debugger;
 	        });
 	        break;
