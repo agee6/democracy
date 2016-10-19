@@ -1,20 +1,4 @@
-body {
-  background-color: black;
-  color: #888;
-}
-.dashhead {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  border: 2px;
-  border-color: #888;
-  border-radius: 5px;
-}
-.row {
-  border-style: solid;
-  border-width: 2px;
-  border-color: black;
-}
+
 
 /*
  * Globals
@@ -36,7 +20,22 @@ a:hover {
   background-color: #fff;
   border: 1px solid #fff;
 }
+.input-buttons{
+  max-height:50vh;
+}
 
+.president{
+  margin:10px;
+  float: left; 
+
+}
+.president-images{
+  border-style: solid;
+  border-color: blue;
+  border-width: 2px;
+
+  border-radius:50px;
+}
 
 /*
  * Base structure
@@ -51,20 +50,22 @@ body {
   color: #fff;
   text-align: center;
   text-shadow: 0 1px 3px rgba(0,0,0,.5);
+  /*background-color: black;*/
+  color: #888;
+  min-height: 100%;
 }
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */
 .site-wrapper {
   display: table;
   width: 100%;
-  height: 100%; /* For at least Firefox */
+  height: 100vh; /* For at least Firefox */
   min-height: 100%;
   -webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.5);
           box-shadow: inset 0 0 100px rgba(0,0,0,.5);
 }
 .site-wrapper-inner {
   display: table-cell;
-  vertical-align: top;
 }
 .cover-container {
   margin-right: auto;
@@ -144,6 +145,18 @@ body {
   color: #999; /* IE8 proofing */
   color: rgba(255,255,255,.5);
 }
+.nav-container {
+  position: absolute;
+  top: 10px;
+
+}
+.mastfoot{
+  position: fixed;
+  bottom:0;
+}
+.site-wrapper-inner{
+  vertical-align: middle;
+}
 
 
 /*
@@ -152,18 +165,18 @@ body {
 
 @media (min-width: 768px) {
   /* Pull out the header and footer */
-  .masthead {
+  /*.masthead {
     position: fixed;
     top: 0;
-  }
+  }*/
   .mastfoot {
     position: fixed;
     bottom: 0;
   }
   /* Start the vertical centering */
-  .site-wrapper-inner {
+  /*.site-wrapper-inner {
     vertical-align: middle;
-  }
+  }*/
   /* Handle the widths */
   .masthead,
   .mastfoot,

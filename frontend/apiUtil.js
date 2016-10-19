@@ -86,6 +86,11 @@ var APIUtil = {
       ApiActions.receiveAnalysis(analysis);
     });
   },
+  getTrump: function(){
+    $.get('https://www.facebook.com/DonaldTrump', function(thing){
+      debugger;
+    });
+  },
   updateAnalysis: function(analysisParams){
     $.ajax({
       url: '/api/analyses',

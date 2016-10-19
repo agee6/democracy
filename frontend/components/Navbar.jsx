@@ -74,7 +74,7 @@ var Navbar = React.createClass({
   getTrumpFollwers: function(event){
     event.preventDefault();
     debugger;
-    APIUtil.getTrumpFollwers();
+    APIUtil.getTrumpFollwers();a
   },
   facebookLogin: function(){
     helloUtil.loginToFacebook();
@@ -93,7 +93,7 @@ var Navbar = React.createClass({
 
     return (
       <div className="masthead clearfix">
-        <div className="inner container">
+        <div className="nav-container container-fluid">
           <h3 className="masthead-brand">Cover</h3>
           <nav>
             <ul className="nav masthead-nav">
