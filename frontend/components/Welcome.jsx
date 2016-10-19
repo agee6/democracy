@@ -18,14 +18,17 @@ var Welcome = React.createClass({
     this.props.nextClick('PreferPage');
 
   },
+  noClick: function(){
+    this.props.nextClick("Anarchy");
+  },
 
   render: function() {
     return (
       <div className="inner container">
         <div className="center container">
           <p> Welcome to Strategic Voting, are you ready to determine your strategic vote? </p>
-          <button onClick={this.yesClick}>Yes</button>
-          <button onClick={this.noClick}>voting is for losers</button>
+          <button className="btn btn-primary" onClick={this.yesClick}>Yes</button>
+          <button className="btn btn-primary" onClick={this.noClick}>voting is for losers</button>
         </div>
       </div>
 

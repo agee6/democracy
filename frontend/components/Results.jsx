@@ -48,7 +48,7 @@ var Results = React.createClass({
     }else if(OutputData.location === "UT"){
       return "You live in Utah. Utah is special because it appears Evan McMullin is going to win it. And has become a defacto Swing State";
     }else{
-      return "You don't live in a swing state, Your electoral votes are already decided, vote for who you feel so they can gain attention"; 
+      return "You don't live in a swing state, Your electoral votes are already decided, vote for who you feel so they can gain attention";
     }
   },
   faceClick: function(){
@@ -69,7 +69,7 @@ var Results = React.createClass({
           <div className="input-buttons">
             <President id={pres} faceClick={this.faceClick} />
           </div>
-          <button onClick={this.nextClick}>Start Over</button>
+          <button className="btn btn-primary" onClick={this.nextClick}>Start Over</button>
         </div>
       </div>
 

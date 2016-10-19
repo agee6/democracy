@@ -8,8 +8,7 @@ var President = require('./President');
 
 var GunToHead = React.createClass({
   getInitialState: function(){
-    this.toWhere = "/Search";
-    return({loggedIn: UserStore.loggedIn(), username: null, password: null, message: ""})
+    return({gun: false});
   },
   componentDidMount: function(){
     this.userIndex = UserStore.addListener(this._onChange);
@@ -18,17 +17,34 @@ var GunToHead = React.createClass({
     OutputData.gun = faceID;
     this.props.nextClick("Loc");
   },
+  shootClick: function(){
+    if(this.state.gun){
+      this.props.nextClick("Loc");
+    }else{
+      this.setState({gun: true});
+    }
+  },
   render: function() {
+    var title, subtitle, buttonText;
+    if(this.state.gun){
+      title = "Okay, we will shoot you, but...";
+      subtitle = "Your children will have to live under one of these, who do you choose?";
+      buttonText = "Please, just do it. I don't care."
+    }else{
+      title = "Gun to your head, who do you choose?";
+      subtitle = "I'm sorry you have to do this."
+      buttonText ="Just Shoot me";
+    }
 
     return (
       <div className="inner container">
         <div className="center container">
-          <h2>Who is your favorite candidate? </h2>
-          <h3>i.e. the candidate you would definitely vote for if not for strategy concerns </h3>
+          <h2>{title}</h2>
+          <h3>{subtitle} </h3>
           <div className="input-buttons">
             <President id="DT" faceClick={this.faceClick} />
             <President id="HC" faceClick={this.faceClick} />
-            <button >Just Shoot me </button>
+            <button className="btn btn-primary" onClick={this.shootClick}>{buttonText} </button>
 
           </div>
         </div>

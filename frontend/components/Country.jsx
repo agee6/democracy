@@ -22,7 +22,7 @@ var Country = React.createClass({
     }else if(stateCode === "NE"){
       this.props.nextClick("NE");
     }else{
-      OutputData.location = stateCode; 
+      OutputData.location = stateCode;
       this.props.nextClick("Result");
     }
   },
@@ -31,7 +31,7 @@ var Country = React.createClass({
     var allButtons = [];
     var stateKeys = Object.keys(States);
     for (var i = 0; i < stateKeys.length; i++) {
-      allButtons.push(<button key={stateKeys[i]} id={stateKeys[i]} onClick={this.countryClick}>{States[stateKeys[i]]}</button>);
+      allButtons.push(<button className="btn btn-primary" key={stateKeys[i]} id={stateKeys[i]} onClick={this.countryClick}>{States[stateKeys[i]]}</button>);
     }
     return (
       <div className="inner container">

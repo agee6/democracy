@@ -57,10 +57,10 @@
 	var GunToHead = __webpack_require__(204);
 	var Country = __webpack_require__(205);
 	var Maine = __webpack_require__(206);
-	var ChildsLife = __webpack_require__(207);
 	var Nebraska = __webpack_require__(208);
 	var PreferPage = __webpack_require__(209);
 	var Result = __webpack_require__(212);
+	var Anarchy = __webpack_require__(216);
 	
 	//root html element
 	var root = document.getElementById('react-content');
@@ -93,11 +93,11 @@
 	      Welcome: React.createElement(Welcome, { nextClick: this.nextClick }),
 	      PreferPage: React.createElement(PreferPage, { nextClick: this.nextClick }),
 	      Gun: React.createElement(GunToHead, { nextClick: this.nextClick }),
-	      Child: React.createElement(ChildsLife, { nextClick: this.nextClick }),
 	      Loc: React.createElement(Country, { nextClick: this.nextClick }),
 	      ME: React.createElement(Maine, { nextClick: this.nextClick }),
 	      NE: React.createElement(Nebraska, { nextClick: this.nextClick }),
-	      Result: React.createElement(Result, { nextClick: this.nextClick })
+	      Result: React.createElement(Result, { nextClick: this.nextClick }),
+	      Anarchy: React.createElement(Anarchy, { nextClick: this.nextClick })
 	    };
 	
 	    return React.createElement(
@@ -21522,6 +21522,9 @@
 	
 	    this.props.nextClick('PreferPage');
 	  },
+	  noClick: function () {
+	    this.props.nextClick("Anarchy");
+	  },
 	
 	  render: function () {
 	    return React.createElement(
@@ -21537,12 +21540,12 @@
 	        ),
 	        React.createElement(
 	          'button',
-	          { onClick: this.yesClick },
+	          { className: 'btn btn-primary', onClick: this.yesClick },
 	          'Yes'
 	        ),
 	        React.createElement(
 	          'button',
-	          { onClick: this.noClick },
+	          { className: 'btn btn-primary', onClick: this.noClick },
 	          'voting is for losers'
 	        )
 	      )
@@ -34634,7 +34637,7 @@
 	              null,
 	              React.createElement(
 	                'button',
-	                { onClick: this.facebookLogin },
+	                { className: 'btn btn-primary', onClick: this.facebookLogin },
 	                'Facebook'
 	              )
 	            ),
@@ -34643,7 +34646,7 @@
 	              null,
 	              React.createElement(
 	                'button',
-	                { onClick: this.facebookLogout },
+	                { className: 'btn btn-primary', onClick: this.facebookLogout },
 	                'Logout'
 	              )
 	            ),
@@ -34652,7 +34655,7 @@
 	              null,
 	              React.createElement(
 	                'button',
-	                { onClick: this.getMyFacebook },
+	                { className: 'btn btn-primary', onClick: this.getMyFacebook },
 	                'MyFollowers'
 	              )
 	            )
@@ -34855,8 +34858,7 @@
 	  displayName: 'GunToHead',
 	
 	  getInitialState: function () {
-	    this.toWhere = "/Search";
-	    return { loggedIn: UserStore.loggedIn(), username: null, password: null, message: "" };
+	    return { gun: false };
 	  },
 	  componentDidMount: function () {
 	    this.userIndex = UserStore.addListener(this._onChange);
@@ -34865,7 +34867,24 @@
 	    OutputData.gun = faceID;
 	    this.props.nextClick("Loc");
 	  },
+	  shootClick: function () {
+	    if (this.state.gun) {
+	      this.props.nextClick("Loc");
+	    } else {
+	      this.setState({ gun: true });
+	    }
+	  },
 	  render: function () {
+	    var title, subtitle, buttonText;
+	    if (this.state.gun) {
+	      title = "Okay, we will shoot you, but...";
+	      subtitle = "Your children will have to live under one of these, who do you choose?";
+	      buttonText = "Please, just do it. I don't care.";
+	    } else {
+	      title = "Gun to your head, who do you choose?";
+	      subtitle = "I'm sorry you have to do this.";
+	      buttonText = "Just Shoot me";
+	    }
 	
 	    return React.createElement(
 	      'div',
@@ -34876,12 +34895,13 @@
 	        React.createElement(
 	          'h2',
 	          null,
-	          'Who is your favorite candidate? '
+	          title
 	        ),
 	        React.createElement(
 	          'h3',
 	          null,
-	          'i.e. the candidate you would definitely vote for if not for strategy concerns '
+	          subtitle,
+	          ' '
 	        ),
 	        React.createElement(
 	          'div',
@@ -34890,8 +34910,9 @@
 	          React.createElement(President, { id: 'HC', faceClick: this.faceClick }),
 	          React.createElement(
 	            'button',
-	            null,
-	            'Just Shoot me '
+	            { className: 'btn btn-primary', onClick: this.shootClick },
+	            buttonText,
+	            ' '
 	          )
 	        )
 	      )
@@ -34940,7 +34961,7 @@
 	    for (var i = 0; i < stateKeys.length; i++) {
 	      allButtons.push(React.createElement(
 	        'button',
-	        { key: stateKeys[i], id: stateKeys[i], onClick: this.countryClick },
+	        { className: 'btn btn-primary', key: stateKeys[i], id: stateKeys[i], onClick: this.countryClick },
 	        States[stateKeys[i]]
 	      ));
 	    }
@@ -34976,79 +34997,54 @@
 	var APIUtil = __webpack_require__(173);
 	var UserStore = __webpack_require__(180);
 	var ApiActions = __webpack_require__(174);
-	var helloUtil = __webpack_require__(196);
+	var OutputData = __webpack_require__(211);
 	
 	var Maine = React.createClass({
 	  displayName: 'Maine',
 	
 	  getInitialState: function () {
-	
-	    return { loggedIn: UserStore.loggedIn(), username: null, password: null, message: "" };
+	    return {};
 	  },
-	  componentDidMount: function () {
-	    this.userIndex = UserStore.addListener(this._onChange);
+	  componentDidMount: function () {},
+	  nextClick: function (event) {
+	    var district = event.currentTarget.id;
+	    if (district === 'none') {
+	      OutputData.location = "ME";
+	    } else {
+	      OutputData.location = "ME" + district;
+	    }
+	    this.props.nextClick("Result");
 	  },
-	
 	  render: function () {
 	
 	    return React.createElement(
 	      'div',
-	      { className: 'masthead clearfix' },
+	      { className: 'inner container' },
 	      React.createElement(
 	        'div',
-	        { className: 'inner container' },
+	        { className: 'center container' },
 	        React.createElement(
-	          'h3',
-	          { className: 'masthead-brand' },
-	          'Cover'
+	          'h2',
+	          null,
+	          'Which district are you in? '
 	        ),
 	        React.createElement(
-	          'nav',
-	          null,
+	          'div',
+	          { className: 'input-buttons' },
 	          React.createElement(
-	            'ul',
-	            { className: 'nav masthead-nav' },
-	            React.createElement(
-	              'li',
-	              { className: 'active' },
-	              React.createElement(
-	                'a',
-	                { href: '#' },
-	                'Home'
-	              )
-	            ),
-	            React.createElement(
-	              'li',
-	              { onClick: this.getTrumpFollwers },
-	              ' Get Trump Follwers'
-	            ),
-	            React.createElement(
-	              'li',
-	              null,
-	              React.createElement(
-	                'button',
-	                { onClick: this.facebookLogin },
-	                'Facebook'
-	              )
-	            ),
-	            React.createElement(
-	              'li',
-	              null,
-	              React.createElement(
-	                'button',
-	                { onClick: this.facebookLogout },
-	                'Logout'
-	              )
-	            ),
-	            React.createElement(
-	              'li',
-	              null,
-	              React.createElement(
-	                'button',
-	                { onClick: this.getMyFacebook },
-	                'MyFollowers'
-	              )
-	            )
+	            'button',
+	            { className: 'btn btn-primary', id: '1', onClick: this.nextClick },
+	            'District 1'
+	          ),
+	          React.createElement(
+	            'button',
+	            { className: 'btn btn-primary', id: '2', onClick: this.nextClick },
+	            'District 2'
+	          ),
+	          React.createElement(
+	            'button',
+	            { id: 'none', className: 'btn btn-primary', onClick: this.nextClick },
+	            '"I don\'t know"'
 	          )
 	        )
 	      )
@@ -35060,175 +35056,66 @@
 	module.exports = Maine;
 
 /***/ },
-/* 207 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var APIUtil = __webpack_require__(173);
-	var UserStore = __webpack_require__(180);
-	var ApiActions = __webpack_require__(174);
-	var helloUtil = __webpack_require__(196);
-	
-	var ChildsLife = React.createClass({
-	  displayName: 'ChildsLife',
-	
-	  getInitialState: function () {
-	    this.toWhere = "/Search";
-	    return { loggedIn: UserStore.loggedIn(), username: null, password: null, message: "" };
-	  },
-	  componentDidMount: function () {
-	    this.userIndex = UserStore.addListener(this._onChange);
-	  },
-	
-	  render: function () {
-	    return React.createElement(
-	      'div',
-	      { className: 'masthead clearfix' },
-	      React.createElement(
-	        'div',
-	        { className: 'inner container' },
-	        React.createElement(
-	          'h3',
-	          { className: 'masthead-brand' },
-	          'Cover'
-	        ),
-	        React.createElement(
-	          'nav',
-	          null,
-	          React.createElement(
-	            'ul',
-	            { className: 'nav masthead-nav' },
-	            React.createElement(
-	              'li',
-	              { className: 'active' },
-	              React.createElement(
-	                'a',
-	                { href: '#' },
-	                'Home'
-	              )
-	            ),
-	            React.createElement(
-	              'li',
-	              { onClick: this.getTrumpFollwers },
-	              ' Get Trump Follwers'
-	            ),
-	            React.createElement(
-	              'li',
-	              null,
-	              React.createElement(
-	                'button',
-	                { onClick: this.facebookLogin },
-	                'Facebook'
-	              )
-	            ),
-	            React.createElement(
-	              'li',
-	              null,
-	              React.createElement(
-	                'button',
-	                { onClick: this.facebookLogout },
-	                'Logout'
-	              )
-	            ),
-	            React.createElement(
-	              'li',
-	              null,
-	              React.createElement(
-	                'button',
-	                { onClick: this.getMyFacebook },
-	                'MyFollowers'
-	              )
-	            )
-	          )
-	        )
-	      )
-	    );
-	  }
-	
-	});
-	
-	module.exports = ChildsLife;
-
-/***/ },
+/* 207 */,
 /* 208 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
 	var APIUtil = __webpack_require__(173);
 	var ApiActions = __webpack_require__(174);
-	var helloUtil = __webpack_require__(196);
+	var OutputData = __webpack_require__(211);
 	
 	var Nebraska = React.createClass({
 	  displayName: 'Nebraska',
 	
 	  getInitialState: function () {
-	    this.toWhere = "/Search";
-	    return { loggedIn: UserStore.loggedIn(), username: null, password: null, message: "" };
+	    return {};
 	  },
-	  componentDidMount: function () {
-	    this.userIndex = UserStore.addListener(this._onChange);
+	  componentDidMount: function () {},
+	  nextClick: function (event) {
+	    var district = event.currentTarget.id;
+	    if (district === "none") {
+	      OutputData.location = "NE";
+	    } else {
+	      OutputData.location = "NE" + district;
+	    }
+	    this.props.nextClick("Result");
 	  },
-	
 	  render: function () {
 	
 	    return React.createElement(
 	      'div',
-	      { className: 'masthead clearfix' },
+	      { className: 'inner container' },
 	      React.createElement(
 	        'div',
-	        { className: 'inner container' },
+	        { className: 'center container' },
 	        React.createElement(
-	          'h3',
-	          { className: 'masthead-brand' },
-	          'Cover'
+	          'h2',
+	          null,
+	          'Which district are you in? '
 	        ),
 	        React.createElement(
-	          'nav',
-	          null,
+	          'div',
+	          { className: 'input-buttons' },
 	          React.createElement(
-	            'ul',
-	            { className: 'nav masthead-nav' },
-	            React.createElement(
-	              'li',
-	              { className: 'active' },
-	              React.createElement(
-	                'a',
-	                { href: '#' },
-	                'Home'
-	              )
-	            ),
-	            React.createElement(
-	              'li',
-	              { onClick: this.getTrumpFollwers },
-	              ' Get Trump Follwers'
-	            ),
-	            React.createElement(
-	              'li',
-	              null,
-	              React.createElement(
-	                'button',
-	                { onClick: this.facebookLogin },
-	                'Facebook'
-	              )
-	            ),
-	            React.createElement(
-	              'li',
-	              null,
-	              React.createElement(
-	                'button',
-	                { onClick: this.facebookLogout },
-	                'Logout'
-	              )
-	            ),
-	            React.createElement(
-	              'li',
-	              null,
-	              React.createElement(
-	                'button',
-	                { onClick: this.getMyFacebook },
-	                'MyFollowers'
-	              )
-	            )
+	            'button',
+	            { id: '1', className: 'btn btn-primary', onClick: this.nextClick },
+	            'District 1'
+	          ),
+	          React.createElement(
+	            'button',
+	            { id: '2', className: 'btn btn-primary', onClick: this.nextClick },
+	            'District 2'
+	          ),
+	          React.createElement(
+	            'button',
+	            { id: '3', className: 'btn btn-primary', onClick: this.nextClick },
+	            'District 3'
+	          ),
+	          React.createElement(
+	            'button',
+	            { id: 'none', className: 'btn btn-primary', onClick: this.nextClick },
+	            '"I don\'t know"'
 	          )
 	        )
 	      )
@@ -35309,6 +35196,7 @@
 
 	var React = __webpack_require__(1);
 	var images = __webpack_require__(213);
+	var names = __webpack_require__(215);
 	
 	var President = React.createClass({
 	  displayName: 'President',
@@ -35325,7 +35213,12 @@
 	    return React.createElement(
 	      'div',
 	      { className: 'president', onClick: this.faceClick },
-	      React.createElement('img', { className: 'president-images', src: images[this.props.id], alt: this.props.id, height: '100', width: '100' })
+	      React.createElement('img', { className: 'president-images', src: images[this.props.id], alt: this.props.id, height: '100', width: '100' }),
+	      React.createElement(
+	        'h2',
+	        null,
+	        names[this.props.id]
+	      )
 	    );
 	  }
 	
@@ -35441,7 +35334,7 @@
 	        ),
 	        React.createElement(
 	          'button',
-	          { onClick: this.nextClick },
+	          { className: 'btn btn-primary', onClick: this.nextClick },
 	          'Start Over'
 	        )
 	      )
@@ -35537,6 +35430,70 @@
 	    "WY": "Wyoming"
 	};
 	module.exports = states;
+
+/***/ },
+/* 215 */
+/***/ function(module, exports) {
+
+	
+	var names = {
+	  DT: "Donald Trump",
+	  JS: "Jill Stein",
+	  HC: "Hillary Clinton",
+	  GJ: "Gary Johnson",
+	  DC: "Darrell Castle",
+	  VS: "Vermin Supreme",
+	  EM: "Evan McMullin"
+	};
+	module.exports = names;
+
+/***/ },
+/* 216 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	
+	var Country = React.createClass({
+	  displayName: 'Country',
+	
+	  getInitialState: function () {
+	    return {};
+	  },
+	  componentDidMount: function () {},
+	  nextClick: function (event) {
+	    this.props.nextClick('PreferPage');
+	  },
+	
+	  render: function () {
+	
+	    return React.createElement(
+	      'div',
+	      { className: 'inner container' },
+	      React.createElement(
+	        'div',
+	        { className: 'center container' },
+	        React.createElement(
+	          'h2',
+	          null,
+	          '"well aren\'t we edgy?" '
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: 'input-buttons' },
+	          React.createElement('img', { src: 'http://podcast.robohara.com/wp-content/uploads/2016/06/Anarchy-psd355091.png' }),
+	          React.createElement(
+	            'button',
+	            { className: 'btn btn-primary', onClick: this.nextClick },
+	            'Back to Discover'
+	          )
+	        )
+	      )
+	    );
+	  }
+	
+	});
+	
+	module.exports = Country;
 
 /***/ }
 /******/ ]);

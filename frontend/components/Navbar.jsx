@@ -99,9 +99,9 @@ var Navbar = React.createClass({
             <ul className="nav masthead-nav">
               <li className="active"><a href="#">Home</a></li>
               <li onClick={this.getTrumpFollwers}> Get Trump Follwers</li>
-              <li><button onClick={this.facebookLogin}>Facebook</button></li>
-              <li><button onClick={this.facebookLogout}>Logout</button></li>
-              <li><button onClick={this.getMyFacebook}>MyFollowers</button></li>
+              <li><button className="btn btn-primary" onClick={this.facebookLogin}>Facebook</button></li>
+              <li><button className="btn btn-primary" onClick={this.facebookLogout}>Logout</button></li>
+              <li><button className="btn btn-primary" onClick={this.getMyFacebook}>MyFollowers</button></li>
             </ul>
           </nav>
         </div>

@@ -11,10 +11,10 @@ var Footer = require('./components/Footer.jsx');
 var GunToHead = require('./components/GunToHead.jsx');
 var Country = require('./components/Country.jsx');
 var Maine = require('./components/Maine.jsx');
-var ChildsLife = require('./components/ChildsLife.jsx');
 var Nebraska = require('./components/Nebraska.jsx');
 var PreferPage = require('./components/PreferPage.jsx');
 var Result = require('./components/Results.jsx');
+var Anarchy = require('./components/Anarchy.jsx');
 
 //root html element
 var root = document.getElementById('react-content');
@@ -50,11 +50,11 @@ var App = React.createClass({
       Welcome:    <Welcome nextClick={this.nextClick} />,
       PreferPage:  <PreferPage nextClick={this.nextClick} />,
       Gun: <GunToHead nextClick={this.nextClick} />,
-      Child: <ChildsLife nextClick={this.nextClick} />,
       Loc: <Country nextClick={this.nextClick} />,
       ME: <Maine nextClick={this.nextClick} />,
       NE: <Nebraska nextClick={this.nextClick} />,
-      Result: <Result nextClick={this.nextClick} />
+      Result: <Result nextClick={this.nextClick} />,
+      Anarchy: <Anarchy nextClick={this.nextClick} />
     }
 
     return (
