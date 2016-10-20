@@ -16,7 +16,7 @@ var Country = React.createClass({
     return (
       <div className="inner">
 
-          <h2>"edgy" </h2>
+          <h2>edgy</h2>
           <div className="input-buttons">
             <div className="vertical-container">
               <div className="anarchy-div">
