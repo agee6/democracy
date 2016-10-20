@@ -154,6 +154,7 @@ var GraphArea = React.createClass({
             <DoughnutChart data={doughData} height="250" width="500" />
           </div>
 
+
         </div>
       </div>
     );

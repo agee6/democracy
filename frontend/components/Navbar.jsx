@@ -7,7 +7,7 @@ var helloUtil = require('../helloUtil');
 
 var Navbar = React.createClass({
   getInitialState: function(){
-    return({loggedIn: false});
+    return({loggedIn: false, onGraph: false});
   },
   componentDidMount: function(){
     this.userIndex = UserStore.addListener(this._onChange);
@@ -54,25 +54,30 @@ var Navbar = React.createClass({
     debugger;
 
   },
+  toGraph: function(){
+    this.props.nextClick("GraphArea");
+    this.setState({onGraph: true});
+
+  },
   goHome: function(){
-    this.props.nextClick("GraphArea")
+    this.props.nextClick("Welcome");
+    this.setState({onGraph:false});
   },
   facebookLogin: function(){
     if(this.state.loggedIn){
       this.nextClick("GraphArea");
     }else{
       helloUtil.loginToFacebook();
-
     }
-  },
-  facebookLogout: function(){
-    helloUtil.facebook('logout');
-  },
-  getMyFacebook: function(){
-    helloUtil.facebook('myFriends');
   },
 
   render: function() {
+    var element;
+    if(this.state.onGraph){
+      element = <li className="active" onClick={this.goHome}><a href="#">Home</a></li>
+    }else{
+      element = <li className="active" onClick={this.toGraph}><a href="#">Graphs</a></li>
+    }
 
     return (
       <div className="masthead clearfix">
@@ -80,7 +85,7 @@ var Navbar = React.createClass({
           <h3 className="masthead-brand">Strategic Voting</h3>
           <nav>
             <ul className="nav masthead-nav">
-              <li className="active" onClick={this.goHome}><a href="#">Home</a></li>
+              {element}
               <li><button id="facebook" className="btn btn-primary" onClick={this.facebookLogin}>F</button></li>
             </ul>
           </nav>
