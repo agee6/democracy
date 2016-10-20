@@ -3,7 +3,8 @@ var apiActions = require('./actions/api_actions.js');
 
 
 hello.init({
-	facebook: 1069565296472933,
+	facebook: "1069565296472933",
+	twitter: 	"PxN6bFdyKncXJY4Khzw3p2XuH",
 }, {redirect_uri: 'loggedIn.html'});
 
 var helloUtil = {
@@ -13,7 +14,7 @@ var helloUtil = {
   facebook: function(action){
     switch(action){
       case "login":
-        hello('facebook').login();
+        hello('facebook').login({scope: 'friends'});
         break;
       case "logout":
         hello('facebook').logout().then(function() {
@@ -27,14 +28,29 @@ var helloUtil = {
             debugger;
         });
         break;
-
-    }
-  }
-
+  	}
+  },
+	twitter: function(action){
+		switch(action){
+			case "login":
+				hello('twitter').login().then(function(){
+					console.log('logged in');
+				});
+				break;
+			case "logout":
+				hello("twitter").logout().then(function(){
+					alert('Signed out');
+				}, function(e){
+					alert("Signed out error: " + e.error.message);
+				});
+				break;
+			case "getData":
+				break;
+		}
+	}
 };
 
 hello.on('auth.login', function(auth) {
-
 	// Call user information, for the given network
 	hello(auth.network).api('me').then(function(r) {
 		// Inject it into the container
@@ -46,7 +62,7 @@ hello.on('auth.login', function(auth) {
 		}
 		label.innerHTML = '<img src="' + r.thumbnail + '" /> Hey ' + r.name;
 	});
-	apiActions.loginToFacebook(); 
+	apiActions.loginToFacebook();
 });
 
 

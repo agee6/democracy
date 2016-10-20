@@ -28458,50 +28458,66 @@
 	var apiActions = __webpack_require__(174);
 	
 	hello.init({
-	  facebook: 1069565296472933
+		facebook: "1069565296472933",
+		twitter: "PxN6bFdyKncXJY4Khzw3p2XuH"
 	}, { redirect_uri: 'loggedIn.html' });
 	
 	var helloUtil = {
-	  loginToFacebook: function () {
-	    hello('facebook').login();
-	  },
-	  facebook: function (action) {
-	    switch (action) {
-	      case "login":
-	        hello('facebook').login();
-	        break;
-	      case "logout":
-	        hello('facebook').logout().then(function () {
-	          alert('Signed out');
-	        }, function (e) {
-	          alert('Signed out error: ' + e.error.message);
-	        });
-	        break;
-	      case "myFriends":
-	        hello('facebook').api('me').then(function (json) {
-	          debugger;
-	        });
-	        break;
-	
-	    }
-	  }
-	
+		loginToFacebook: function () {
+			hello('facebook').login();
+		},
+		facebook: function (action) {
+			switch (action) {
+				case "login":
+					hello('facebook').login({ scope: 'friends' });
+					break;
+				case "logout":
+					hello('facebook').logout().then(function () {
+						alert('Signed out');
+					}, function (e) {
+						alert('Signed out error: ' + e.error.message);
+					});
+					break;
+				case "myFriends":
+					hello('facebook').api('me').then(function (json) {
+						debugger;
+					});
+					break;
+			}
+		},
+		twitter: function (action) {
+			switch (action) {
+				case "login":
+					hello('twitter').login().then(function () {
+						console.log('logged in');
+					});
+					break;
+				case "logout":
+					hello("twitter").logout().then(function () {
+						alert('Signed out');
+					}, function (e) {
+						alert("Signed out error: " + e.error.message);
+					});
+					break;
+				case "getData":
+					break;
+			}
+		}
 	};
 	
 	hello.on('auth.login', function (auth) {
-	
-	  // Call user information, for the given network
-	  hello(auth.network).api('me').then(function (r) {
-	    // Inject it into the container
-	    var label = document.getElementById('profile_' + auth.network);
-	    if (!label) {
-	      label = document.createElement('div');
-	      label.id = 'profile_' + auth.network;
-	      document.getElementById('profile').appendChild(label);
-	    }
-	    label.innerHTML = '<img src="' + r.thumbnail + '" /> Hey ' + r.name;
-	  });
-	  apiActions.loginToFacebook();
+		// Call user information, for the given network
+		hello(auth.network).api('me').then(function (r) {
+			// Inject it into the container
+			var label = document.getElementById('profile_' + auth.network);
+			if (!label) {
+				label = document.createElement('div');
+				label.id = 'profile_' + auth.network;
+				document.getElementById('profile').appendChild(label);
+			}
+			label.innerHTML = '<img src="' + r.thumbnail + '" /> Hey ' + r.name;
+		});
+		apiActions.loginToFacebook();
 	});
 	
 	module.exports = helloUtil;
@@ -34559,6 +34575,7 @@
 
 	var React = __webpack_require__(1);
 	var DataStore = __webpack_require__(201);
+	var helloUtil = __webpack_require__(196);
 	var BarChart = __webpack_require__(217).Bar;
 	var DoughnutChart = __webpack_require__(217).Doughnut;
 	var names = __webpack_require__(215);
@@ -34571,14 +34588,23 @@
 	  VS: 49444,
 	  DC: 13314
 	};
-	var colors = ["red", "blue", "yellow", "purple", "green", "black", "orange"];
+	var twitterFollowers = {
+	  DT: 12620553,
+	  HC: 9891782,
+	  GJ: 376838,
+	  JS: 253192,
+	  EM: 77941,
+	  VS: 14017,
+	  DC: 4127
+	};
+	var colors = ["red", "blue", "yellow", "green", "purple", "black", "orange"];
 	
 	var GraphArea = React.createClass({
 	  displayName: 'GraphArea',
 	
 	
 	  getInitialState: function () {
-	    return {};
+	    return { showing: "facebook" };
 	  },
 	  componentDidMount: function () {},
 	  componentWillUnmount: function () {},
@@ -34594,62 +34620,82 @@
 	    return color;
 	  },
 	  _onChange: function () {},
+	  twitter: function () {
+	    //helloUtil.twitter("login");
+	    this.setState({ showing: "twitter" });
+	  },
+	  switchData: function () {
+	    if (this.state.showing === 'facebook') {
+	      this.setState({ showing: "twitter" });
+	    } else {
+	      this.setState({ showing: "facebook" });
+	    }
+	  },
 	  render: function () {
 	    var ids = Object.keys(facebookLikes);
 	    var labels = [];
 	    var dataSet = [];
 	    var total = 0;
 	    for (var i = 0; i < ids.length; i++) {
-	      dataSet.push(facebookLikes[ids[i]]);
-	      total += facebookLikes[ids[i]];
+	      if (this.state.showing === "facebook") {
+	        dataSet.push(facebookLikes[ids[i]]);
+	        total += facebookLikes[ids[i]];
+	      } else if (this.state.showing === "twitter") {
+	        dataSet.push(twitterFollowers[ids[i]]);
+	        total += twitterFollowers[ids[i]];
+	      }
 	      labels.push(names[ids[i]]);
 	    }
+	    var percentages = [];
+	    for (var j = 0; j < dataSet.length; j++) {
+	      percentages.push((dataSet[j] / total * 100).toFixed(2));
+	    }
 	
-	    var dataChart = {
+	    var barData = {
 	      labels: labels,
 	      datasets: [{
-	        label: "My First dataset",
+	        label: "Facebook Likes",
 	        fillColor: colors,
 	        strokeColor: "rgba(220,220,220,1)",
 	        pointColor: "rgba(220,220,220,1)",
 	        pointStrokeColor: "#fff",
 	        pointHighlightFill: "#fff",
 	        pointHighlightStroke: "rgba(220,220,220,1)",
-	        data: dataSet
+	        data: percentages
 	      }]
 	    };
 	    var doughData = [{
-	      value: Math.floor(dataSet[0] / total * 100),
+	      value: percentages[0],
 	      color: colors[0],
 	      highlight: "#FF5A5E",
 	      label: labels[0]
 	    }, {
-	      value: Math.floor(dataSet[1] / total * 100),
+	      value: percentages[1],
 	      color: colors[1],
 	      highlight: "#5AD3D1",
 	      label: labels[1]
 	    }, {
-	      value: Math.floor(dataSet[2] / total * 100),
+	      value: percentages[2],
 	      color: colors[2],
 	      highlight: "#FFC870",
 	      label: labels[2]
 	    }, {
-	      value: Math.floor(dataSet[3] / total * 100),
+	      value: percentages[3],
 	      color: colors[3],
 	      highlight: "#A8B3C5",
 	      label: labels[3]
 	    }, {
-	      value: Math.floor(dataSet[4] / total * 100),
+	      value: percentages[4],
 	      color: colors[4],
 	      highlight: "#616774",
 	      label: labels[4]
 	    }, {
-	      value: Math.floor(dataSet[5] / total * 100),
+	      value: percentages[5],
 	      color: colors[5],
 	      highlight: "#616774",
 	      label: labels[5]
 	    }, {
-	      value: Math.floor(dataSet[6] / total * 100),
+	      value: percentages[6],
 	      color: colors[6],
 	      highlight: "#616774",
 	      label: labels[6]
@@ -34660,25 +34706,21 @@
 	          stacked: true
 	        }],
 	        yAxes: [{
+	          stacked: true,
 	          type: "linear",
-	          ticks: {
-	            max: dataSet[0]
-	
-	          }
+	          max: 15000000
 	        }]
 	      }
 	    };
-	    var chartData = {
 	
-	      labels: labels,
-	      datasets: [{
-	        data: dataSet,
-	        backgroundColor: colors,
-	        hoverBackgroundColor: colors,
-	        label: "Facebook Likes"
-	      }]
-	    };
-	
+	    var mainLabel, buttonText;
+	    if (this.state.showing === 'facebook') {
+	      mainLabel = "Facebook Likes";
+	      buttonText = "Show Twitter Data";
+	    } else if (this.state.showing === 'twitter') {
+	      mainLabel = "Twitter Followers";
+	      buttonText = "Show Facebook Likes";
+	    }
 	    return React.createElement(
 	      'div',
 	      { className: 'container' },
@@ -34688,17 +34730,22 @@
 	        React.createElement(
 	          'div',
 	          { className: 'chart' },
-	          React.createElement(BarChart, { data: dataChart, options: chartOptions, height: '250', width: '500' })
+	          React.createElement(BarChart, { data: barData, height: '250', width: '500' })
 	        ),
 	        React.createElement(
 	          'div',
 	          { className: 'chartLabel' },
-	          'FaceeBook Likes'
+	          mainLabel
 	        ),
 	        React.createElement(
 	          'div',
 	          { className: 'chart' },
 	          React.createElement(DoughnutChart, { data: doughData, height: '250', width: '500' })
+	        ),
+	        React.createElement(
+	          'button',
+	          { className: 'btn btn-primary', onClick: this.switchData },
+	          buttonText
 	        )
 	      )
 	    );
@@ -34831,13 +34878,12 @@
 	        React.createElement(
 	          "p",
 	          null,
-	          "Design by Austen Gee. Here is ",
+	          "Design by Austen Gee",
 	          React.createElement(
 	            "a",
 	            { href: "http://agee6.github.io/austenGee/FEEResume.pdf" },
-	            "my resume"
-	          ),
-	          " if you are looking."
+	            "."
+	          )
 	        )
 	      )
 	    );
