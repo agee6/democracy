@@ -37,8 +37,7 @@ var GunToHead = React.createClass({
     }
 
     return (
-      <div className="inner container">
-        <div className="center container">
+      <div className="inner">
           <h2>{title}</h2>
           <h3>{subtitle} </h3>
           <div className="input-buttons">
@@ -47,7 +46,6 @@ var GunToHead = React.createClass({
             <button className="btn btn-primary" onClick={this.shootClick}>{buttonText} </button>
 
           </div>
-        </div>
       </div>
 
     );

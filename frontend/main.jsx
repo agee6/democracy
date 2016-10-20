@@ -62,13 +62,13 @@ var App = React.createClass({
 
         <div className="site-wrapper-inner">
 
-          <div className="cover-container">
-            <Navbar />
-            <div className="container">
-                {pages[this.state.currentPage]}
-            </div>
-            <Footer />
+
+          <Navbar nextClick={this.nextClick} />
+          <div className="container">
+              {pages[this.state.currentPage]}
           </div>
+          <Footer />
+
         </div>
       </div>
     );

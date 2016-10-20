@@ -106,17 +106,13 @@
 	      React.createElement(
 	        'div',
 	        { className: 'site-wrapper-inner' },
+	        React.createElement(Navbar, { nextClick: this.nextClick }),
 	        React.createElement(
 	          'div',
-	          { className: 'cover-container' },
-	          React.createElement(Navbar, null),
-	          React.createElement(
-	            'div',
-	            { className: 'container' },
-	            pages[this.state.currentPage]
-	          ),
-	          React.createElement(Footer, null)
-	        )
+	          { className: 'container' },
+	          pages[this.state.currentPage]
+	        ),
+	        React.createElement(Footer, null)
 	      )
 	    );
 	  }
@@ -21529,24 +21525,33 @@
 	  render: function () {
 	    return React.createElement(
 	      'div',
-	      { className: 'inner container' },
+	      { className: 'inner' },
 	      React.createElement(
 	        'div',
 	        { className: 'center container' },
 	        React.createElement(
+	          'h1',
+	          null,
+	          'Welcome to Strategic Voting'
+	        ),
+	        React.createElement(
 	          'p',
 	          null,
-	          ' Welcome to Strategic Voting, are you ready to determine your strategic vote? '
+	          'Are you ready to determine your strategic vote? '
 	        ),
 	        React.createElement(
-	          'button',
-	          { className: 'btn btn-primary', onClick: this.yesClick },
-	          'Yes'
-	        ),
-	        React.createElement(
-	          'button',
-	          { className: 'btn btn-primary', onClick: this.noClick },
-	          'voting is for losers'
+	          'div',
+	          { className: 'input-buttons' },
+	          React.createElement(
+	            'button',
+	            { className: 'btn btn-primary', onClick: this.yesClick },
+	            'Yes'
+	          ),
+	          React.createElement(
+	            'button',
+	            { className: 'btn btn-primary', onClick: this.noClick },
+	            'voting is for losers'
+	          )
 	        )
 	      )
 	    );
@@ -34526,8 +34531,7 @@
 	  displayName: 'Navbar',
 	
 	  getInitialState: function () {
-	    this.toWhere = "/Search";
-	    return { loggedIn: UserStore.loggedIn(), username: null, password: null, message: "" };
+	    return {};
 	  },
 	  componentDidMount: function () {
 	    this.userIndex = UserStore.addListener(this._onChange);
@@ -34581,10 +34585,8 @@
 	    }
 	    debugger;
 	  },
-	  getTrumpFollwers: function (event) {
-	    event.preventDefault();
-	    debugger;
-	    APIUtil.getTrumpFollwers();a;
+	  goHome: function () {
+	    this.props.nextClick("Welcome");
 	  },
 	  facebookLogin: function () {
 	    helloUtil.loginToFacebook();
@@ -34597,9 +34599,6 @@
 	  },
 	
 	  render: function () {
-	    var signB;
-	    var un;
-	    var cb;
 	
 	    return React.createElement(
 	      'div',
@@ -34610,7 +34609,7 @@
 	        React.createElement(
 	          'h3',
 	          { className: 'masthead-brand' },
-	          'Cover'
+	          'Strategic Voting'
 	        ),
 	        React.createElement(
 	          'nav',
@@ -34620,7 +34619,7 @@
 	            { className: 'nav masthead-nav' },
 	            React.createElement(
 	              'li',
-	              { className: 'active' },
+	              { className: 'active', onClick: this.goHome },
 	              React.createElement(
 	                'a',
 	                { href: '#' },
@@ -34629,34 +34628,11 @@
 	            ),
 	            React.createElement(
 	              'li',
-	              { onClick: this.getTrumpFollwers },
-	              ' Get Trump Follwers'
-	            ),
-	            React.createElement(
-	              'li',
 	              null,
 	              React.createElement(
 	                'button',
 	                { className: 'btn btn-primary', onClick: this.facebookLogin },
 	                'Facebook'
-	              )
-	            ),
-	            React.createElement(
-	              'li',
-	              null,
-	              React.createElement(
-	                'button',
-	                { className: 'btn btn-primary', onClick: this.facebookLogout },
-	                'Logout'
-	              )
-	            ),
-	            React.createElement(
-	              'li',
-	              null,
-	              React.createElement(
-	                'button',
-	                { className: 'btn btn-primary', onClick: this.getMyFacebook },
-	                'MyFollowers'
 	              )
 	            )
 	          )
@@ -34888,32 +34864,28 @@
 	
 	    return React.createElement(
 	      'div',
-	      { className: 'inner container' },
+	      { className: 'inner' },
+	      React.createElement(
+	        'h2',
+	        null,
+	        title
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        subtitle,
+	        ' '
+	      ),
 	      React.createElement(
 	        'div',
-	        { className: 'center container' },
+	        { className: 'input-buttons' },
+	        React.createElement(President, { id: 'DT', faceClick: this.faceClick }),
+	        React.createElement(President, { id: 'HC', faceClick: this.faceClick }),
 	        React.createElement(
-	          'h2',
-	          null,
-	          title
-	        ),
-	        React.createElement(
-	          'h3',
-	          null,
-	          subtitle,
+	          'button',
+	          { className: 'btn btn-primary', onClick: this.shootClick },
+	          buttonText,
 	          ' '
-	        ),
-	        React.createElement(
-	          'div',
-	          { className: 'input-buttons' },
-	          React.createElement(President, { id: 'DT', faceClick: this.faceClick }),
-	          React.createElement(President, { id: 'HC', faceClick: this.faceClick }),
-	          React.createElement(
-	            'button',
-	            { className: 'btn btn-primary', onClick: this.shootClick },
-	            buttonText,
-	            ' '
-	          )
 	        )
 	      )
 	    );
@@ -34967,20 +34939,16 @@
 	    }
 	    return React.createElement(
 	      'div',
-	      { className: 'inner container' },
+	      { className: 'inner' },
+	      React.createElement(
+	        'h2',
+	        null,
+	        'Which state will you vote in? '
+	      ),
 	      React.createElement(
 	        'div',
-	        { className: 'center container' },
-	        React.createElement(
-	          'h2',
-	          null,
-	          'Which state will you vote in? '
-	        ),
-	        React.createElement(
-	          'div',
-	          { className: 'input-buttons' },
-	          allButtons
-	        )
+	        { className: 'input-buttons' },
+	        allButtons
 	      )
 	    );
 	  }
@@ -35019,33 +34987,29 @@
 	
 	    return React.createElement(
 	      'div',
-	      { className: 'inner container' },
+	      { className: 'inner' },
+	      React.createElement(
+	        'h2',
+	        null,
+	        'Which district are you in? '
+	      ),
 	      React.createElement(
 	        'div',
-	        { className: 'center container' },
+	        { className: 'input-buttons' },
 	        React.createElement(
-	          'h2',
-	          null,
-	          'Which district are you in? '
+	          'button',
+	          { className: 'btn btn-primary', id: '1', onClick: this.nextClick },
+	          'District 1'
 	        ),
 	        React.createElement(
-	          'div',
-	          { className: 'input-buttons' },
-	          React.createElement(
-	            'button',
-	            { className: 'btn btn-primary', id: '1', onClick: this.nextClick },
-	            'District 1'
-	          ),
-	          React.createElement(
-	            'button',
-	            { className: 'btn btn-primary', id: '2', onClick: this.nextClick },
-	            'District 2'
-	          ),
-	          React.createElement(
-	            'button',
-	            { id: 'none', className: 'btn btn-primary', onClick: this.nextClick },
-	            '"I don\'t know"'
-	          )
+	          'button',
+	          { className: 'btn btn-primary', id: '2', onClick: this.nextClick },
+	          'District 2'
+	        ),
+	        React.createElement(
+	          'button',
+	          { id: 'none', className: 'btn btn-primary', onClick: this.nextClick },
+	          '"I don\'t know"'
 	        )
 	      )
 	    );
@@ -35085,38 +35049,34 @@
 	
 	    return React.createElement(
 	      'div',
-	      { className: 'inner container' },
+	      { className: 'inner' },
+	      React.createElement(
+	        'h2',
+	        null,
+	        'Which district are you in? '
+	      ),
 	      React.createElement(
 	        'div',
-	        { className: 'center container' },
+	        { className: 'input-buttons' },
 	        React.createElement(
-	          'h2',
-	          null,
-	          'Which district are you in? '
+	          'button',
+	          { id: '1', className: 'btn btn-primary', onClick: this.nextClick },
+	          'District 1'
 	        ),
 	        React.createElement(
-	          'div',
-	          { className: 'input-buttons' },
-	          React.createElement(
-	            'button',
-	            { id: '1', className: 'btn btn-primary', onClick: this.nextClick },
-	            'District 1'
-	          ),
-	          React.createElement(
-	            'button',
-	            { id: '2', className: 'btn btn-primary', onClick: this.nextClick },
-	            'District 2'
-	          ),
-	          React.createElement(
-	            'button',
-	            { id: '3', className: 'btn btn-primary', onClick: this.nextClick },
-	            'District 3'
-	          ),
-	          React.createElement(
-	            'button',
-	            { id: 'none', className: 'btn btn-primary', onClick: this.nextClick },
-	            '"I don\'t know"'
-	          )
+	          'button',
+	          { id: '2', className: 'btn btn-primary', onClick: this.nextClick },
+	          'District 2'
+	        ),
+	        React.createElement(
+	          'button',
+	          { id: '3', className: 'btn btn-primary', onClick: this.nextClick },
+	          'District 3'
+	        ),
+	        React.createElement(
+	          'button',
+	          { id: 'none', className: 'btn btn-primary', onClick: this.nextClick },
+	          '"I don\'t know"'
 	        )
 	      )
 	    );
@@ -35158,30 +35118,26 @@
 	
 	    return React.createElement(
 	      'div',
-	      { className: 'inner container' },
+	      { className: 'inner' },
+	      React.createElement(
+	        'h2',
+	        null,
+	        'Who is your favorite candidate? '
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'i.e. the candidate you would definitely vote for if not for strategy concerns '
+	      ),
 	      React.createElement(
 	        'div',
-	        { className: 'center container' },
-	        React.createElement(
-	          'h2',
-	          null,
-	          'Who is your favorite candidate? '
-	        ),
-	        React.createElement(
-	          'h3',
-	          null,
-	          'i.e. the candidate you would definitely vote for if not for strategy concerns '
-	        ),
-	        React.createElement(
-	          'div',
-	          { className: 'input-buttons' },
-	          React.createElement(President, { id: 'EM', faceClick: this.faceClick }),
-	          React.createElement(President, { id: 'DT', faceClick: this.faceClick }),
-	          React.createElement(President, { id: 'GJ', faceClick: this.faceClick }),
-	          React.createElement(President, { id: 'HC', faceClick: this.faceClick }),
-	          React.createElement(President, { id: 'JS', faceClick: this.faceClick }),
-	          React.createElement(President, { id: 'VS', faceClick: this.faceClick })
-	        )
+	        { className: 'input-buttons' },
+	        React.createElement(President, { id: 'EM', faceClick: this.faceClick }),
+	        React.createElement(President, { id: 'DT', faceClick: this.faceClick }),
+	        React.createElement(President, { id: 'GJ', faceClick: this.faceClick }),
+	        React.createElement(President, { id: 'HC', faceClick: this.faceClick }),
+	        React.createElement(President, { id: 'JS', faceClick: this.faceClick }),
+	        React.createElement(President, { id: 'VS', faceClick: this.faceClick })
 	      )
 	    );
 	  }
@@ -35308,35 +35264,31 @@
 	    var message = this.getMessage();
 	    return React.createElement(
 	      'div',
-	      { className: 'inner container' },
+	      { className: 'inner' },
+	      React.createElement(
+	        'h2',
+	        null,
+	        'Result: '
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        message
+	      ),
+	      React.createElement(
+	        'h1',
+	        null,
+	        ' Your choice is: '
+	      ),
 	      React.createElement(
 	        'div',
-	        { className: 'center container' },
-	        React.createElement(
-	          'h2',
-	          null,
-	          'Result: '
-	        ),
-	        React.createElement(
-	          'h3',
-	          null,
-	          message
-	        ),
-	        React.createElement(
-	          'h1',
-	          null,
-	          ' Your choice is: '
-	        ),
-	        React.createElement(
-	          'div',
-	          { className: 'input-buttons' },
-	          React.createElement(President, { id: pres, faceClick: this.faceClick })
-	        ),
-	        React.createElement(
-	          'button',
-	          { className: 'btn btn-primary', onClick: this.nextClick },
-	          'Start Over'
-	        )
+	        { className: 'input-buttons' },
+	        React.createElement(President, { id: pres, faceClick: this.faceClick })
+	      ),
+	      React.createElement(
+	        'button',
+	        { className: 'btn btn-primary', onClick: this.nextClick },
+	        'Start Over'
 	      )
 	    );
 	  }
@@ -35468,24 +35420,20 @@
 	
 	    return React.createElement(
 	      'div',
-	      { className: 'inner container' },
+	      { className: 'inner' },
+	      React.createElement(
+	        'h2',
+	        null,
+	        '"well aren\'t we edgy?" '
+	      ),
 	      React.createElement(
 	        'div',
-	        { className: 'center container' },
+	        { className: 'input-buttons' },
+	        React.createElement('img', { src: 'http://podcast.robohara.com/wp-content/uploads/2016/06/Anarchy-psd355091.png' }),
 	        React.createElement(
-	          'h2',
-	          null,
-	          '"well aren\'t we edgy?" '
-	        ),
-	        React.createElement(
-	          'div',
-	          { className: 'input-buttons' },
-	          React.createElement('img', { src: 'http://podcast.robohara.com/wp-content/uploads/2016/06/Anarchy-psd355091.png' }),
-	          React.createElement(
-	            'button',
-	            { className: 'btn btn-primary', onClick: this.nextClick },
-	            'Back to Discover'
-	          )
+	          'button',
+	          { className: 'btn btn-primary', onClick: this.nextClick },
+	          'Back to Discover'
 	        )
 	      )
 	    );

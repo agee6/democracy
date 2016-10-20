@@ -24,8 +24,8 @@ var PreferPage = React.createClass({
   render: function() {
 
     return (
-      <div className="inner container">
-        <div className="center container">
+      <div className="inner">
+
           <h2>Who is your favorite candidate? </h2>
           <h3>i.e. the candidate you would definitely vote for if not for strategy concerns </h3>
           <div className="input-buttons">
@@ -37,7 +37,6 @@ var PreferPage = React.createClass({
             <President id="VS" faceClick={this.faceClick} />
 
           </div>
-        </div>
       </div>
 
     );

@@ -7,8 +7,7 @@ var helloUtil = require('..//helloUtil');
 
 var Navbar = React.createClass({
   getInitialState: function(){
-    this.toWhere = "/Search";
-    return({loggedIn: UserStore.loggedIn(), username: null, password: null, message: ""})
+    return({});
   },
   componentDidMount: function(){
     this.userIndex = UserStore.addListener(this._onChange);
@@ -71,10 +70,8 @@ var Navbar = React.createClass({
     debugger;
 
   },
-  getTrumpFollwers: function(event){
-    event.preventDefault();
-    debugger;
-    APIUtil.getTrumpFollwers();a
+  goHome: function(){
+    this.props.nextClick("Welcome")
   },
   facebookLogin: function(){
     helloUtil.loginToFacebook();
@@ -87,21 +84,15 @@ var Navbar = React.createClass({
   },
 
   render: function() {
-    var signB;
-    var un;
-    var cb;
 
     return (
       <div className="masthead clearfix">
         <div className="nav-container container-fluid">
-          <h3 className="masthead-brand">Cover</h3>
+          <h3 className="masthead-brand">Strategic Voting</h3>
           <nav>
             <ul className="nav masthead-nav">
-              <li className="active"><a href="#">Home</a></li>
-              <li onClick={this.getTrumpFollwers}> Get Trump Follwers</li>
+              <li className="active" onClick={this.goHome}><a href="#">Home</a></li>
               <li><button className="btn btn-primary" onClick={this.facebookLogin}>Facebook</button></li>
-              <li><button className="btn btn-primary" onClick={this.facebookLogout}>Logout</button></li>
-              <li><button className="btn btn-primary" onClick={this.getMyFacebook}>MyFollowers</button></li>
             </ul>
           </nav>
         </div>

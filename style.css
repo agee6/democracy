@@ -20,22 +20,10 @@ a:hover {
   background-color: #fff;
   border: 1px solid #fff;
 }
-.input-buttons{
-  max-height:50vh;
-}
 
-.president{
-  margin:10px;
-  float: left; 
 
-}
-.president-images{
-  border-style: solid;
-  border-color: blue;
-  border-width: 2px;
 
-  border-radius:50px;
-}
+
 
 /*
  * Base structure
@@ -44,44 +32,82 @@ a:hover {
 html,
 body {
   height: 100%;
-  background-color: #333;
+  background-color: #555;
 }
 body {
   color: #fff;
   text-align: center;
   text-shadow: 0 1px 3px rgba(0,0,0,.5);
-  /*background-color: black;*/
   color: #888;
   min-height: 100%;
 }
+.container {
+  vertical-align: center;
+}
 
+.input-buttons{
+  max-height:50vh;
+}
+
+.president{
+  margin:10px;
+  float: left;
+}
+.president-images{
+  border-style: solid;
+  border-color: blue;
+  border-width: 2px;
+  border-radius:50px;
+}
 /* Extra markup and styles for table-esque vertical and horizontal centering */
 .site-wrapper {
-  display: table;
   width: 100%;
-  height: 100vh; /* For at least Firefox */
+  height: 100vh;
   min-height: 100%;
-  -webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.5);
-          box-shadow: inset 0 0 100px rgba(0,0,0,.5);
+
+  -webkit-box-shadow: inset 0 0 100px rgba(0,50,100,.5);
+          box-shadow: inset 0 0 100px rgba(0,50,100,.5);
+
 }
-.site-wrapper-inner {
+
+.nav-container{
+  width: 100%;
+  position: relative;
+  height: 50px;
+}
+.masthead-brand{
+  margin:10px;
+}
+.masthead-nav{
+  display: flex;
+}
+/*.site-wrapper-inner {
   display: table-cell;
-}
-.cover-container {
+}*/
+
+/*.cover-container {
   margin-right: auto;
   margin-left: auto;
+  display: flex;
+}*/
+
+.container{
+ margin-right: auto;
+ margin-left: auto;
 }
 
 /* Padding for spacing */
 .inner {
   padding: 30px;
+
+  vertical-align: middle;
 }
 
 
 /*
  * Header
  */
-.masthead-brand {
+/*.masthead-brand {
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -98,7 +124,7 @@ body {
   font-size: 16px;
   font-weight: bold;
   color: #fff; /* IE8 proofing */
-  color: rgba(255,255,255,.75);
+  /*color: rgba(255,255,255,.75);
   border-bottom: 2px solid transparent;
 }
 .masthead-nav > li > a:hover,
@@ -112,16 +138,15 @@ body {
 .masthead-nav > .active > a:focus {
   color: #fff;
   border-bottom-color: #fff;
+}*/
+
+.masthead-brand {
+  float: left;
+}
+.masthead-nav {
+  float: right;
 }
 
-@media (min-width: 768px) {
-  .masthead-brand {
-    float: left;
-  }
-  .masthead-nav {
-    float: right;
-  }
-}
 
 
 /*
@@ -145,17 +170,15 @@ body {
   color: #999; /* IE8 proofing */
   color: rgba(255,255,255,.5);
 }
-.nav-container {
-  position: absolute;
-  top: 10px;
 
-}
 .mastfoot{
   position: fixed;
   bottom:0;
 }
 .site-wrapper-inner{
   vertical-align: middle;
+  display: flex;
+  flex-direction: column;
 }
 
 
@@ -169,10 +192,6 @@ body {
     position: fixed;
     top: 0;
   }*/
-  .mastfoot {
-    position: fixed;
-    bottom: 0;
-  }
   /* Start the vertical centering */
   /*.site-wrapper-inner {
     vertical-align: middle;
@@ -185,10 +204,10 @@ body {
   }
 }
 
-@media (min-width: 992px) {
+/*@media (min-width: 992px) {
   .masthead,
   .mastfoot,
   .cover-container {
     width: 700px;
   }
-}
+}*/
