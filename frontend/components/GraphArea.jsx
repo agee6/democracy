@@ -1,5 +1,6 @@
 var React = require('react');
 var DataStore = require('../stores/DataStore.js');
+var helloUtil = require('../helloUtil.js');
 var BarChart = require("react-chartjs").Bar;
 var DoughnutChart = require("react-chartjs").Doughnut
 var names = require('../constants/CandidateNames.js');
@@ -12,14 +13,21 @@ var facebookLikes = {
   VS: 49444,
   DC: 13314
 };
-var colors = ["red", "blue", "yellow", "purple", "green", "black", "orange"];
-
-
+var twitterFollowers = {
+  DT: 12620553,
+  HC: 9891782,
+  GJ: 376838,
+  JS: 253192,
+  EM: 77941,
+  VS: 14017,
+  DC: 4127
+};
+var colors = ["red", "blue", "yellow", "green","purple", "black", "orange"];
 
 var GraphArea = React.createClass({
 
   getInitialState: function(){
-    return({});
+    return({showing: "facebook"});
   },
   componentDidMount: function(){
 
@@ -42,71 +50,91 @@ var GraphArea = React.createClass({
   _onChange: function(){
 
   },
+  twitter: function(){
+    //helloUtil.twitter("login");
+    this.setState({showing: "twitter"});
+  },
+  switchData: function(){
+    if(this.state.showing === 'facebook'){
+      this.setState({showing: "twitter"});
+    }else{
+      this.setState({showing: "facebook"});
+    }
+  },
   render: function(){
     var ids = Object.keys(facebookLikes);
     var labels = [];
     var dataSet = [];
     var total = 0;
     for (var i = 0; i < ids.length; i++) {
-      dataSet.push(facebookLikes[ids[i]]);
-      total += facebookLikes[ids[i]];
+      if(this.state.showing === "facebook"){
+        dataSet.push(facebookLikes[ids[i]]);
+        total += facebookLikes[ids[i]];
+      }else if(this.state.showing === "twitter"){
+        dataSet.push(twitterFollowers[ids[i]]);
+        total += twitterFollowers[ids[i]];
+      }
       labels.push(names[ids[i]]);
     }
+    var percentages = []
+    for (var j = 0; j < dataSet.length; j++) {
+      percentages.push(((dataSet[j]/total) * 100).toFixed(2));
+    }
 
-    var dataChart = {
+    var barData = {
             labels: labels,
             datasets: [
                 {
-                    label: "My First dataset",
+                    label: "Facebook Likes",
                     fillColor: colors,
                     strokeColor: "rgba(220,220,220,1)",
                     pointColor: "rgba(220,220,220,1)",
                     pointStrokeColor: "#fff",
                     pointHighlightFill: "#fff",
                     pointHighlightStroke: "rgba(220,220,220,1)",
-                    data: dataSet
+                    data: percentages
                 }
             ]
           };
     var doughData = [
           {
-              value: Math.floor((dataSet[0]/total) * 100),
+              value: percentages[0],
               color:colors[0],
               highlight: "#FF5A5E",
               label: labels[0]
           },
           {
-              value: Math.floor((dataSet[1]/total) * 100),
+              value: percentages[1],
               color: colors[1],
               highlight: "#5AD3D1",
               label: labels[1]
           },
           {
-              value: Math.floor(dataSet[2]/total * 100),
+              value: percentages[2],
               color: colors[2],
               highlight: "#FFC870",
               label: labels[2]
           },
           {
-              value: Math.floor(dataSet[3]/total * 100),
+              value: percentages[3],
               color: colors[3],
               highlight: "#A8B3C5",
               label: labels[3]
           },
           {
-              value: Math.floor(dataSet[4]/total * 100),
+              value: percentages[4],
               color: colors[4],
               highlight: "#616774",
               label: labels[4]
           },
           {
-              value: Math.floor(dataSet[5]/total * 100),
+              value: percentages[5],
               color: colors[5],
               highlight: "#616774",
               label: labels[5]
           },
           {
-              value: Math.floor(dataSet[6]/total * 100),
+              value: percentages[6],
               color: colors[6],
               highlight: "#616774",
               label: labels[6]
@@ -119,40 +147,35 @@ var GraphArea = React.createClass({
                 stacked: true
             }],
             yAxes: [{
+              stacked: true,
                 type: "linear",
-                ticks: {
-                  max: dataSet[0]
-
-                }
+                  max: 15000000
             }]
         }
+    };
+
+    var mainLabel, buttonText;
+    if(this.state.showing === 'facebook'){
+      mainLabel = "Facebook Likes";
+      buttonText = "Show Twitter Data";
+    }else if(this.state.showing === 'twitter'){
+      mainLabel = "Twitter Followers";
+      buttonText = "Show Facebook Likes"
     }
-    var chartData = {
-
-              labels: labels,
-              datasets: [
-                  {
-                      data: dataSet,
-                      backgroundColor: colors,
-                      hoverBackgroundColor: colors,
-                      label: "Facebook Likes"
-                  }]
-                };
-
-
-
     return (
       <div className="container">
         <div className="inner">
           <div className="chart">
-            <BarChart data={dataChart} options={chartOptions} height="250" width="500"  />
+            <BarChart data={barData} height="250" width="500"  />
           </div>
           <div className="chartLabel">
-            FaceeBook Likes
+            {mainLabel}
           </div>
           <div className="chart">
             <DoughnutChart data={doughData} height="250" width="500" />
           </div>
+
+          <button className="btn btn-primary" onClick={this.switchData}>{buttonText}</button>
 
 
         </div>

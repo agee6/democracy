@@ -58,7 +58,13 @@ body {
   margin:10px;
   width:30%;
   height: 200px;
-  float: left;
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+
+
 }
 .president-images{
   border-style: solid;
@@ -77,12 +83,7 @@ body {
   .president{
     height: 150px;
   }
-  .president-input-div{
-    margin-left: 20%;
-  }
-  .president-force-div{
-    padding-left: 20%;
-  }
+
 }
 
 @media(max-width: 420px){
@@ -94,9 +95,7 @@ body {
   .president{
     height: 100px;
   }
-  .president-input-div{
-    margin-left: 10%;
-  }
+
 }
 .president-images:hover{
   cursor: pointer;
@@ -108,13 +107,8 @@ body {
   align-items: center;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 10%;
 }
-@media(max-width: 900px){
-  .president-force-div{
-    padding-left: 15%;
-  }
-}
+
 /* Extra markup and styles for table-esque vertical and horizontal centering */
 .site-wrapper {
   width: 100%;
@@ -229,13 +223,7 @@ body {
 .btn.state{
   width: 120px;
 }
-.result-div{
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 10%;
-  align-items: center;
 
-}
 .chartLabel {
   margin-bottom: 15px;
 }
