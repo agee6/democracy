@@ -34795,19 +34795,13 @@
 	        React.createElement(
 	          "p",
 	          null,
-	          "Cover template for ",
+	          "Design by Austen Gee. Here is ",
 	          React.createElement(
 	            "a",
-	            { href: "http://getbootstrap.com" },
-	            "Bootstrap"
+	            { href: "http://agee6.github.io/austenGee/FEEResume.pdf" },
+	            "my resume"
 	          ),
-	          ", by ",
-	          React.createElement(
-	            "a",
-	            { href: "https://twitter.com/mdo" },
-	            "@mdo"
-	          ),
-	          "."
+	          " if you are looking."
 	        )
 	      )
 	    );

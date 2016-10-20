@@ -19,7 +19,7 @@ var Footer = React.createClass({
     return (
       <div className="mastfoot">
         <div className="inner">
-          <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+          <p>Design by Austen Gee. Here is <a href="http://agee6.github.io/austenGee/FEEResume.pdf">my resume</a> if you are looking.</p>
         </div>
       </div>
     );
