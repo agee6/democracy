@@ -34435,7 +34435,7 @@
 	  displayName: 'Navbar',
 	
 	  getInitialState: function () {
-	    return { loggedIn: false };
+	    return { loggedIn: false, onGraph: false };
 	  },
 	  componentDidMount: function () {
 	    this.userIndex = UserStore.addListener(this._onChange);
@@ -34476,8 +34476,13 @@
 	    }
 	    debugger;
 	  },
-	  goHome: function () {
+	  toGraph: function () {
 	    this.props.nextClick("GraphArea");
+	    this.setState({ onGraph: true });
+	  },
+	  goHome: function () {
+	    this.props.nextClick("Welcome");
+	    this.setState({ onGraph: false });
 	  },
 	  facebookLogin: function () {
 	    if (this.state.loggedIn) {
@@ -34486,14 +34491,30 @@
 	      helloUtil.loginToFacebook();
 	    }
 	  },
-	  facebookLogout: function () {
-	    helloUtil.facebook('logout');
-	  },
-	  getMyFacebook: function () {
-	    helloUtil.facebook('myFriends');
-	  },
 	
 	  render: function () {
+	    var element;
+	    if (this.state.onGraph) {
+	      element = React.createElement(
+	        'li',
+	        { className: 'active', onClick: this.goHome },
+	        React.createElement(
+	          'a',
+	          { href: '#' },
+	          'Home'
+	        )
+	      );
+	    } else {
+	      element = React.createElement(
+	        'li',
+	        { className: 'active', onClick: this.toGraph },
+	        React.createElement(
+	          'a',
+	          { href: '#' },
+	          'Graphs'
+	        )
+	      );
+	    }
 	
 	    return React.createElement(
 	      'div',
@@ -34512,15 +34533,7 @@
 	          React.createElement(
 	            'ul',
 	            { className: 'nav masthead-nav' },
-	            React.createElement(
-	              'li',
-	              { className: 'active', onClick: this.goHome },
-	              React.createElement(
-	                'a',
-	                { href: '#' },
-	                'Home'
-	              )
-	            ),
+	            element,
 	            React.createElement(
 	              'li',
 	              null,
