@@ -35326,7 +35326,7 @@
 	    } else if (OutputData.location === "UT") {
 	      return "You live in Utah. Utah is special because it appears Evan McMullin is going to win it. Best strategy is either to vote for him or Hillary Clinton";
 	    } else {
-	      return "You don't live in a swing state, Your electoral votes are already decided, vote for who you feel so they can gain attention";
+	      return "You don't live in a swing state, your electoral votes are already decided. Vote for who you feel so they can gain attention";
 	    }
 	  },
 	  faceClick: function () {
@@ -35354,7 +35354,7 @@
 	      React.createElement(
 	        'h1',
 	        null,
-	        ' Your choice is: '
+	        ' Best strategic vote: '
 	      ),
 	      React.createElement(
 	        'div',
@@ -35499,7 +35499,7 @@
 	      React.createElement(
 	        'h2',
 	        null,
-	        '"edgy" '
+	        'edgy'
 	      ),
 	      React.createElement(
 	        'div',
