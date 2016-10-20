@@ -1,4 +1,5 @@
 var hello = require('hellojs');
+var apiActions = require('./actions/api_actions.js');
 
 
 hello.init({
@@ -45,6 +46,7 @@ hello.on('auth.login', function(auth) {
 		}
 		label.innerHTML = '<img src="' + r.thumbnail + '" /> Hey ' + r.name;
 	});
+	apiActions.loginToFacebook(); 
 });
 
 
