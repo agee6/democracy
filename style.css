@@ -214,7 +214,7 @@ body {
   color: #333;
 }
 .btn#facebook {
-  width: 30px;
+  width: 40px;
 }
 .anarchy-div{
   margin-left: auto;
@@ -232,7 +232,10 @@ body {
 .result-div{
   margin-left: auto;
   margin-right: auto;
-  padding-left: 10%; 
+  padding-left: 10%;
   align-items: center;
 
+}
+.chartLabel {
+  margin-bottom: 15px;
 }

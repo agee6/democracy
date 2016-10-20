@@ -4,11 +4,13 @@ var needsToLogin = false;
 var Constants = require('../constants/Constants');
 var AppDispatcher = require('../dispatcher/dispatcher');
 var UserStore = new Store(AppDispatcher);
+var loggedIn = false;
 
 
 var resetUser = function(user){
   _users = [];
   _users[0] = user;
+  loggedIn = true; 
 };
 var updateNeeds = function(need){
   needsToLogin = need;
@@ -29,22 +31,11 @@ UserStore.currentUser = function () {
 };
 UserStore.__onDispatch = function (payload) {
   switch(payload.actionType) {
-    case UserConstants.RegisterUser:
-      var result = resetUser(payload.user);
+    case "LOGGED_IN":
+      var result = resetUser(true);
       UserStore.__emitChange();
       break;
-    case UserConstants.LogoutUser:
-      var logout = resetUser(null);
-      UserStore.__emitChange();
-      break;
-    case UserConstants.ReceiveUser:
-      var r2 = resetUser(payload.results);
-      UserStore.__emitChange();
-      break;
-    case UserConstants.UpdateNeeds:
-      var d2 = updateNeeds(payload.need);
-      UserStore.__emitChange();
-      break;
+
   }
 };
 

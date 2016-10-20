@@ -7,7 +7,7 @@ var helloUtil = require('../helloUtil');
 
 var Navbar = React.createClass({
   getInitialState: function(){
-    return({});
+    return({loggedIn: false});
   },
   componentDidMount: function(){
     this.userIndex = UserStore.addListener(this._onChange);
@@ -38,23 +38,7 @@ var Navbar = React.createClass({
   },
   _onChange: function(){
 
-
-    if(UserStore.loggedIn()){
-      this.closeModal();
-      this.setState({loggedIn: UserStore.loggedIn()});
-      this.history.push({pathname: this.toWhere});
-
-    }else{
-      if(this.clicked){
-        this.setState({message:"unsuccessful, please try again", loggedIn: UserStore.loggedIn()});
-      }else {
-        if(UserStore.needsToLogin()){
-          this.openModal();
-          this.setState({loggedIn: UserStore.loggedIn(), message: "login to continue"});
-        }
-
-      }
-    }
+     this.props.nextClick('GraphArea');
 
   },
   signUpClick: function(event){
@@ -71,10 +55,15 @@ var Navbar = React.createClass({
 
   },
   goHome: function(){
-    this.props.nextClick("Welcome")
+    this.props.nextClick("GraphArea")
   },
   facebookLogin: function(){
-    helloUtil.loginToFacebook();
+    if(this.state.loggedIn){
+      this.nextClick("GraphArea");
+    }else{
+      helloUtil.loginToFacebook();
+
+    }
   },
   facebookLogout: function(){
     helloUtil.facebook('logout');
