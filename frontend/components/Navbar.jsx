@@ -2,7 +2,7 @@ var React = require('react');
 var APIUtil = require('../apiUtil.js');
 var UserStore = require('../stores/UserStore.js');
 var ApiActions = require('../actions/api_actions.js');
-var helloUtil = require('..//helloUtil');
+var helloUtil = require('../helloUtil');
 
 
 var Navbar = React.createClass({
@@ -92,7 +92,7 @@ var Navbar = React.createClass({
           <nav>
             <ul className="nav masthead-nav">
               <li className="active" onClick={this.goHome}><a href="#">Home</a></li>
-              <li><button className="btn btn-primary" onClick={this.facebookLogin}>Facebook</button></li>
+              <li><button id="facebook" className="btn btn-primary" onClick={this.facebookLogin}>F</button></li>
             </ul>
           </nav>
         </div>

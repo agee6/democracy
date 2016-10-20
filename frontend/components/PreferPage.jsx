@@ -28,7 +28,7 @@ var PreferPage = React.createClass({
 
           <h2>Who is your favorite candidate? </h2>
           <h3>i.e. the candidate you would definitely vote for if not for strategy concerns </h3>
-          <div className="input-buttons">
+          <div className="president-input-div">
             <President id="EM" faceClick={this.faceClick} />
             <President id="DT" faceClick={this.faceClick} />
             <President id="GJ" faceClick={this.faceClick} />

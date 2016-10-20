@@ -48,16 +48,72 @@ body {
 .input-buttons{
   max-height:50vh;
 }
+.president-input-div{
+  display: block;
+  margin-left: 5%;
+  margin-right: auto;
+}
 
 .president{
   margin:10px;
+  width:30%;
+  height: 200px;
   float: left;
 }
 .president-images{
   border-style: solid;
-  border-color: blue;
+  border-color: rgb(0, 50, 100, 0.5);
   border-width: 2px;
   border-radius:50px;
+  width: 100px;
+  height: 100px;
+}
+@media(max-width: 750px){
+  .president-images{
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+  }
+  .president{
+    height: 150px;
+  }
+  .president-input-div{
+    margin-left: 20%;
+  }
+  .president-force-div{
+    padding-left: 20%;
+  }
+}
+
+@media(max-width: 420px){
+  .president-images{
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+  }
+  .president{
+    height: 100px;
+  }
+  .president-input-div{
+    margin-left: 10%;
+  }
+}
+.president-images:hover{
+  cursor: pointer;
+}
+
+.president-force-div{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10%;
+}
+@media(max-width: 900px){
+  .president-force-div{
+    padding-left: 15%;
+  }
 }
 /* Extra markup and styles for table-esque vertical and horizontal centering */
 .site-wrapper {
@@ -81,15 +137,7 @@ body {
 .masthead-nav{
   display: flex;
 }
-/*.site-wrapper-inner {
-  display: table-cell;
-}*/
 
-/*.cover-container {
-  margin-right: auto;
-  margin-left: auto;
-  display: flex;
-}*/
 
 .container{
  margin-right: auto;
@@ -107,38 +155,6 @@ body {
 /*
  * Header
  */
-/*.masthead-brand {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.masthead-nav > li {
-  display: inline-block;
-}
-.masthead-nav > li + li {
-  margin-left: 20px;
-}
-.masthead-nav > li > a {
-  padding-right: 0;
-  padding-left: 0;
-  font-size: 16px;
-  font-weight: bold;
-  color: #fff; /* IE8 proofing */
-  /*color: rgba(255,255,255,.75);
-  border-bottom: 2px solid transparent;
-}
-.masthead-nav > li > a:hover,
-.masthead-nav > li > a:focus {
-  background-color: transparent;
-  border-bottom-color: #a9a9a9;
-  border-bottom-color: rgba(255,255,255,.25);
-}
-.masthead-nav > .active > a,
-.masthead-nav > .active > a:hover,
-.masthead-nav > .active > a:focus {
-  color: #fff;
-  border-bottom-color: #fff;
-}*/
 
 .masthead-brand {
   float: left;
@@ -186,28 +202,37 @@ body {
  * Affix and center
  */
 
-@media (min-width: 768px) {
-  /* Pull out the header and footer */
-  /*.masthead {
-    position: fixed;
-    top: 0;
-  }*/
-  /* Start the vertical centering */
-  /*.site-wrapper-inner {
-    vertical-align: middle;
-  }*/
-  /* Handle the widths */
-  .masthead,
-  .mastfoot,
-  .cover-container {
-    width: 100%; /* Must be percentage or pixels for horizontal alignment */
-  }
+.vertical-container {
+  display:flex;
+  flex-direction: column;
+}
+.btn{
+  margin:5px;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333;
+}
+.btn#facebook {
+  width: 30px;
+}
+.anarchy-div{
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/*@media (min-width: 992px) {
-  .masthead,
-  .mastfoot,
-  .cover-container {
-    width: 700px;
+@media(max-width:  400px){
+  h3{
+    font-size: 12px;
   }
-}*/
+}
+.btn.state{
+  width: 120px;
+}
+.result-div{
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10%; 
+  align-items: center;
+
+}

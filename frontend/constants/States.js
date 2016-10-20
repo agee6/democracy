@@ -3,15 +3,13 @@
 var states = {
     "AL": "Alabama",
     "AK": "Alaska",
-    "AS": "American Samoa",
     "AZ": "Arizona",
     "AR": "Arkansas",
     "CA": "California",
     "CO": "Colorado",
     "CT": "Connecticut",
     "DE": "Delaware",
-    "DC": "District Of Columbia",
-    "FM": "Federated States Of Micronesia",
+    "DC": "D.C.",
     "FL": "Florida",
     "GA": "Georgia",
     "GU": "Guam",
@@ -24,7 +22,6 @@ var states = {
     "KY": "Kentucky",
     "LA": "Louisiana",
     "ME": "Maine",
-    "MH": "Marshall Islands",
     "MD": "Maryland",
     "MA": "Massachusetts",
     "MI": "Michigan",
@@ -40,7 +37,6 @@ var states = {
     "NY": "New York",
     "NC": "North Carolina",
     "ND": "North Dakota",
-    "MP": "Northern Mariana Islands",
     "OH": "Ohio",
     "OK": "Oklahoma",
     "OR": "Oregon",
@@ -54,11 +50,10 @@ var states = {
     "TX": "Texas",
     "UT": "Utah",
     "VT": "Vermont",
-    "VI": "Virgin Islands",
     "VA": "Virginia",
     "WA": "Washington",
     "WV": "West Virginia",
     "WI": "Wisconsin",
     "WY": "Wyoming"
 };
-module.exports = states; 
+module.exports = states;

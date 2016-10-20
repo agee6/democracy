@@ -21527,31 +21527,27 @@
 	      'div',
 	      { className: 'inner' },
 	      React.createElement(
+	        'h1',
+	        null,
+	        'Welcome to Strategic Voting'
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'Are you ready to determine your strategic vote? '
+	      ),
+	      React.createElement(
 	        'div',
-	        { className: 'center container' },
+	        { className: 'vertical-container' },
 	        React.createElement(
-	          'h1',
-	          null,
-	          'Welcome to Strategic Voting'
+	          'button',
+	          { className: 'btn btn-primary', onClick: this.yesClick },
+	          'Yes'
 	        ),
 	        React.createElement(
-	          'p',
-	          null,
-	          'Are you ready to determine your strategic vote? '
-	        ),
-	        React.createElement(
-	          'div',
-	          { className: 'input-buttons' },
-	          React.createElement(
-	            'button',
-	            { className: 'btn btn-primary', onClick: this.yesClick },
-	            'Yes'
-	          ),
-	          React.createElement(
-	            'button',
-	            { className: 'btn btn-primary', onClick: this.noClick },
-	            'voting is for losers'
-	          )
+	          'button',
+	          { className: 'btn btn-primary', onClick: this.noClick },
+	          'voting is for losers'
 	        )
 	      )
 	    );
@@ -34631,8 +34627,8 @@
 	              null,
 	              React.createElement(
 	                'button',
-	                { className: 'btn btn-primary', onClick: this.facebookLogin },
-	                'Facebook'
+	                { id: 'facebook', className: 'btn btn-primary', onClick: this.facebookLogin },
+	                'F'
 	              )
 	            )
 	          )
@@ -34878,9 +34874,13 @@
 	      ),
 	      React.createElement(
 	        'div',
-	        { className: 'input-buttons' },
-	        React.createElement(President, { id: 'DT', faceClick: this.faceClick }),
-	        React.createElement(President, { id: 'HC', faceClick: this.faceClick }),
+	        { className: 'vertical-container' },
+	        React.createElement(
+	          'div',
+	          { className: 'president-force-div' },
+	          React.createElement(President, { id: 'DT', faceClick: this.faceClick }),
+	          React.createElement(President, { id: 'HC', faceClick: this.faceClick })
+	        ),
 	        React.createElement(
 	          'button',
 	          { className: 'btn btn-primary', onClick: this.shootClick },
@@ -34933,7 +34933,7 @@
 	    for (var i = 0; i < stateKeys.length; i++) {
 	      allButtons.push(React.createElement(
 	        'button',
-	        { className: 'btn btn-primary', key: stateKeys[i], id: stateKeys[i], onClick: this.countryClick },
+	        { className: 'btn btn-primary state', key: stateKeys[i], id: stateKeys[i], onClick: this.countryClick },
 	        States[stateKeys[i]]
 	      ));
 	    }
@@ -35131,7 +35131,7 @@
 	      ),
 	      React.createElement(
 	        'div',
-	        { className: 'input-buttons' },
+	        { className: 'president-input-div' },
 	        React.createElement(President, { id: 'EM', faceClick: this.faceClick }),
 	        React.createElement(President, { id: 'DT', faceClick: this.faceClick }),
 	        React.createElement(President, { id: 'GJ', faceClick: this.faceClick }),
@@ -35169,9 +35169,9 @@
 	    return React.createElement(
 	      'div',
 	      { className: 'president', onClick: this.faceClick },
-	      React.createElement('img', { className: 'president-images', src: images[this.props.id], alt: this.props.id, height: '100', width: '100' }),
+	      React.createElement('img', { className: 'president-images', src: images[this.props.id], alt: this.props.id }),
 	      React.createElement(
-	        'h2',
+	        'h3',
 	        null,
 	        names[this.props.id]
 	      )
@@ -35248,7 +35248,7 @@
 	    } else if (Swings.indexOf(OutputData.location) !== -1) {
 	      return "You live in a potential swing state. Your vote counts! Also it means you should probably vote for one the major candidates, even if you have to hold your nose.";
 	    } else if (OutputData.location === "UT") {
-	      return "You live in Utah. Utah is special because it appears Evan McMullin is going to win it. And has become a defacto Swing State";
+	      return "You live in Utah. Utah is special because it appears Evan McMullin is going to win it. Best strategy is either to vote for him or Hillary Clinton";
 	    } else {
 	      return "You don't live in a swing state, Your electoral votes are already decided, vote for who you feel so they can gain attention";
 	    }
@@ -35282,13 +35282,17 @@
 	      ),
 	      React.createElement(
 	        'div',
-	        { className: 'input-buttons' },
-	        React.createElement(President, { id: pres, faceClick: this.faceClick })
-	      ),
-	      React.createElement(
-	        'button',
-	        { className: 'btn btn-primary', onClick: this.nextClick },
-	        'Start Over'
+	        { className: 'vertical-container' },
+	        React.createElement(
+	          'div',
+	          { className: 'result-div' },
+	          React.createElement(President, { id: pres, faceClick: this.faceClick })
+	        ),
+	        React.createElement(
+	          'button',
+	          { className: 'btn btn-primary', onClick: this.nextClick },
+	          'Start Over'
+	        )
 	      )
 	    );
 	  }
@@ -35323,15 +35327,13 @@
 	var states = {
 	    "AL": "Alabama",
 	    "AK": "Alaska",
-	    "AS": "American Samoa",
 	    "AZ": "Arizona",
 	    "AR": "Arkansas",
 	    "CA": "California",
 	    "CO": "Colorado",
 	    "CT": "Connecticut",
 	    "DE": "Delaware",
-	    "DC": "District Of Columbia",
-	    "FM": "Federated States Of Micronesia",
+	    "DC": "D.C.",
 	    "FL": "Florida",
 	    "GA": "Georgia",
 	    "GU": "Guam",
@@ -35344,7 +35346,6 @@
 	    "KY": "Kentucky",
 	    "LA": "Louisiana",
 	    "ME": "Maine",
-	    "MH": "Marshall Islands",
 	    "MD": "Maryland",
 	    "MA": "Massachusetts",
 	    "MI": "Michigan",
@@ -35360,7 +35361,6 @@
 	    "NY": "New York",
 	    "NC": "North Carolina",
 	    "ND": "North Dakota",
-	    "MP": "Northern Mariana Islands",
 	    "OH": "Ohio",
 	    "OK": "Oklahoma",
 	    "OR": "Oregon",
@@ -35374,7 +35374,6 @@
 	    "TX": "Texas",
 	    "UT": "Utah",
 	    "VT": "Vermont",
-	    "VI": "Virgin Islands",
 	    "VA": "Virginia",
 	    "WA": "Washington",
 	    "WV": "West Virginia",
@@ -35429,11 +35428,19 @@
 	      React.createElement(
 	        'div',
 	        { className: 'input-buttons' },
-	        React.createElement('img', { src: 'http://podcast.robohara.com/wp-content/uploads/2016/06/Anarchy-psd355091.png' }),
 	        React.createElement(
-	          'button',
-	          { className: 'btn btn-primary', onClick: this.nextClick },
-	          'Back to Discover'
+	          'div',
+	          { className: 'vertical-container' },
+	          React.createElement(
+	            'div',
+	            { className: 'anarchy-div' },
+	            React.createElement('img', { src: 'http://podcast.robohara.com/wp-content/uploads/2016/06/Anarchy-psd355091.png' })
+	          ),
+	          React.createElement(
+	            'button',
+	            { className: 'btn btn-primary', onClick: this.nextClick },
+	            'Back to Discover'
+	          )
 	        )
 	      )
 	    );

@@ -25,14 +25,12 @@ var Welcome = React.createClass({
   render: function() {
     return (
       <div className="inner">
-        <div className="center container">
           <h1>Welcome to Strategic Voting</h1>
           <p>Are you ready to determine your strategic vote? </p>
-          <div className="input-buttons">
+          <div className="vertical-container">
             <button className="btn btn-primary" onClick={this.yesClick}>Yes</button>
             <button className="btn btn-primary" onClick={this.noClick}>voting is for losers</button>
-          </div> 
-        </div>
+          </div>
       </div>
 
     );

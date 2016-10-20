@@ -40,9 +40,11 @@ var GunToHead = React.createClass({
       <div className="inner">
           <h2>{title}</h2>
           <h3>{subtitle} </h3>
-          <div className="input-buttons">
-            <President id="DT" faceClick={this.faceClick} />
-            <President id="HC" faceClick={this.faceClick} />
+          <div className="vertical-container">
+            <div className='president-force-div'>
+              <President id="DT" faceClick={this.faceClick} />
+              <President id="HC" faceClick={this.faceClick} />
+            </div>
             <button className="btn btn-primary" onClick={this.shootClick}>{buttonText} </button>
 
           </div>

@@ -16,8 +16,8 @@ var President = React.createClass({
 
     return (
       <div className="president" onClick={this.faceClick}>
-        <img className="president-images" src={images[this.props.id]} alt={this.props.id} height="100" width="100" />
-        <h2>{names[this.props.id]}</h2>
+        <img className="president-images" src={images[this.props.id]} alt={this.props.id}  />
+        <h3>{names[this.props.id]}</h3>
       </div>
 
     );
