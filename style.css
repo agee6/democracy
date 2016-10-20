@@ -20,22 +20,10 @@ a:hover {
   background-color: #fff;
   border: 1px solid #fff;
 }
-.input-buttons{
-  max-height:50vh;
-}
 
-.president{
-  margin:10px;
-  float: left; 
 
-}
-.president-images{
-  border-style: solid;
-  border-color: blue;
-  border-width: 2px;
 
-  border-radius:50px;
-}
+
 
 /*
  * Base structure
@@ -44,84 +32,137 @@ a:hover {
 html,
 body {
   height: 100%;
-  background-color: #333;
+  background-color: #555;
 }
 body {
   color: #fff;
   text-align: center;
   text-shadow: 0 1px 3px rgba(0,0,0,.5);
-  /*background-color: black;*/
   color: #888;
   min-height: 100%;
 }
+.container {
+  vertical-align: center;
+}
 
+.input-buttons{
+  max-height:50vh;
+}
+.president-input-div{
+  display: block;
+  margin-left: 5%;
+  margin-right: auto;
+}
+
+.president{
+  margin:10px;
+  width:30%;
+  height: 200px;
+  float: left;
+}
+.president-images{
+  border-style: solid;
+  border-color: rgb(0, 50, 100, 0.5);
+  border-width: 2px;
+  border-radius:50px;
+  width: 100px;
+  height: 100px;
+}
+@media(max-width: 750px){
+  .president-images{
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+  }
+  .president{
+    height: 150px;
+  }
+  .president-input-div{
+    margin-left: 20%;
+  }
+  .president-force-div{
+    padding-left: 20%;
+  }
+}
+
+@media(max-width: 420px){
+  .president-images{
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+  }
+  .president{
+    height: 100px;
+  }
+  .president-input-div{
+    margin-left: 10%;
+  }
+}
+.president-images:hover{
+  cursor: pointer;
+}
+
+.president-force-div{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10%;
+}
+@media(max-width: 900px){
+  .president-force-div{
+    padding-left: 15%;
+  }
+}
 /* Extra markup and styles for table-esque vertical and horizontal centering */
 .site-wrapper {
-  display: table;
   width: 100%;
-  height: 100vh; /* For at least Firefox */
+  height: 100vh;
   min-height: 100%;
-  -webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.5);
-          box-shadow: inset 0 0 100px rgba(0,0,0,.5);
+
+  -webkit-box-shadow: inset 0 0 100px rgba(0,50,100,.5);
+          box-shadow: inset 0 0 100px rgba(0,50,100,.5);
+
 }
-.site-wrapper-inner {
-  display: table-cell;
+
+.nav-container{
+  width: 100%;
+  position: relative;
+  height: 50px;
 }
-.cover-container {
-  margin-right: auto;
-  margin-left: auto;
+.masthead-brand{
+  margin:10px;
+}
+.masthead-nav{
+  display: flex;
+}
+
+
+.container{
+ margin-right: auto;
+ margin-left: auto;
 }
 
 /* Padding for spacing */
 .inner {
   padding: 30px;
+
+  vertical-align: middle;
 }
 
 
 /*
  * Header
  */
+
 .masthead-brand {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  float: left;
+}
+.masthead-nav {
+  float: right;
 }
 
-.masthead-nav > li {
-  display: inline-block;
-}
-.masthead-nav > li + li {
-  margin-left: 20px;
-}
-.masthead-nav > li > a {
-  padding-right: 0;
-  padding-left: 0;
-  font-size: 16px;
-  font-weight: bold;
-  color: #fff; /* IE8 proofing */
-  color: rgba(255,255,255,.75);
-  border-bottom: 2px solid transparent;
-}
-.masthead-nav > li > a:hover,
-.masthead-nav > li > a:focus {
-  background-color: transparent;
-  border-bottom-color: #a9a9a9;
-  border-bottom-color: rgba(255,255,255,.25);
-}
-.masthead-nav > .active > a,
-.masthead-nav > .active > a:hover,
-.masthead-nav > .active > a:focus {
-  color: #fff;
-  border-bottom-color: #fff;
-}
-
-@media (min-width: 768px) {
-  .masthead-brand {
-    float: left;
-  }
-  .masthead-nav {
-    float: right;
-  }
-}
 
 
 /*
@@ -145,17 +186,15 @@ body {
   color: #999; /* IE8 proofing */
   color: rgba(255,255,255,.5);
 }
-.nav-container {
-  position: absolute;
-  top: 10px;
 
-}
 .mastfoot{
   position: fixed;
   bottom:0;
 }
 .site-wrapper-inner{
   vertical-align: middle;
+  display: flex;
+  flex-direction: column;
 }
 
 
@@ -163,32 +202,37 @@ body {
  * Affix and center
  */
 
-@media (min-width: 768px) {
-  /* Pull out the header and footer */
-  /*.masthead {
-    position: fixed;
-    top: 0;
-  }*/
-  .mastfoot {
-    position: fixed;
-    bottom: 0;
-  }
-  /* Start the vertical centering */
-  /*.site-wrapper-inner {
-    vertical-align: middle;
-  }*/
-  /* Handle the widths */
-  .masthead,
-  .mastfoot,
-  .cover-container {
-    width: 100%; /* Must be percentage or pixels for horizontal alignment */
-  }
+.vertical-container {
+  display:flex;
+  flex-direction: column;
+}
+.btn{
+  margin:5px;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333;
+}
+.btn#facebook {
+  width: 30px;
+}
+.anarchy-div{
+  margin-left: auto;
+  margin-right: auto;
 }
 
-@media (min-width: 992px) {
-  .masthead,
-  .mastfoot,
-  .cover-container {
-    width: 700px;
+@media(max-width:  400px){
+  h3{
+    font-size: 12px;
   }
+}
+.btn.state{
+  width: 120px;
+}
+.result-div{
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10%; 
+  align-items: center;
+
 }

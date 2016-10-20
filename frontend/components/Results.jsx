@@ -46,7 +46,7 @@ var Results = React.createClass({
     }else if( Swings.indexOf(OutputData.location) !== -1 ){
       return "You live in a potential swing state. Your vote counts! Also it means you should probably vote for one the major candidates, even if you have to hold your nose."
     }else if(OutputData.location === "UT"){
-      return "You live in Utah. Utah is special because it appears Evan McMullin is going to win it. And has become a defacto Swing State";
+      return "You live in Utah. Utah is special because it appears Evan McMullin is going to win it. Best strategy is either to vote for him or Hillary Clinton";
     }else{
       return "You don't live in a swing state, Your electoral votes are already decided, vote for who you feel so they can gain attention";
     }
@@ -61,12 +61,12 @@ var Results = React.createClass({
     var pres = this.getPresident();
     var message = this.getMessage();
     return (
-      <div className="inner container">
-        <div className="center container">
-          <h2>Result: </h2>
-          <h3>{message}</h3>
-          <h1> Your choice is: </h1>
-          <div className="input-buttons">
+      <div className="inner">
+        <h2>Result: </h2>
+        <h3>{message}</h3>
+        <h1> Your choice is: </h1>
+        <div className="vertical-container">
+          <div className="result-div">
             <President id={pres} faceClick={this.faceClick} />
           </div>
           <button className="btn btn-primary" onClick={this.nextClick}>Start Over</button>

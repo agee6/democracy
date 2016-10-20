@@ -31,17 +31,14 @@ var Country = React.createClass({
     var allButtons = [];
     var stateKeys = Object.keys(States);
     for (var i = 0; i < stateKeys.length; i++) {
-      allButtons.push(<button className="btn btn-primary" key={stateKeys[i]} id={stateKeys[i]} onClick={this.countryClick}>{States[stateKeys[i]]}</button>);
+      allButtons.push(<button className="btn btn-primary state" key={stateKeys[i]} id={stateKeys[i]} onClick={this.countryClick}>{States[stateKeys[i]]}</button>);
     }
     return (
-      <div className="inner container">
-        <div className="center container">
+      <div className="inner">
           <h2>Which state will you vote in? </h2>
           <div className="input-buttons">
             {allButtons}
-
           </div>
-        </div>
       </div>
 
     );
