@@ -8,7 +8,7 @@ var Country = React.createClass({
 
   },
   nextClick: function(event){
-    this.props.nextClick('PreferPage');
+    this.props.nextClick('Welcome');
   },
 
   render: function() {
@@ -22,7 +22,7 @@ var Country = React.createClass({
               <div className="anarchy-div">
                 <img src="http://podcast.robohara.com/wp-content/uploads/2016/06/Anarchy-psd355091.png" />
               </div>
-              <button className="btn btn-primary" onClick={this.nextClick}>Back to Discover</button>
+              <button className="btn btn-primary" onClick={this.nextClick}>Back to Main Page</button>
             </div>
           </div>
 
