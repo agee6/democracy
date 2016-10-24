@@ -35488,7 +35488,7 @@
 	  },
 	  componentDidMount: function () {},
 	  nextClick: function (event) {
-	    this.props.nextClick('PreferPage');
+	    this.props.nextClick('Welcome');
 	  },
 	
 	  render: function () {
@@ -35515,7 +35515,7 @@
 	          React.createElement(
 	            'button',
 	            { className: 'btn btn-primary', onClick: this.nextClick },
-	            'Back to Discover'
+	            'Back to Main Page'
 	          )
 	        )
 	      )
