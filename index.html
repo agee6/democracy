@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Democracy</title>
+    <title>DemocracyLive!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Latest compiled and minified CSS -->
     <script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
@@ -16,6 +16,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css" />
     <link rel="shortcut icon" href="https://cdn2.iconfinder.com/data/icons/fruits-and-vegetables/100/_banana-512.png" />
+
+    <meta property="og:url"           content="https://agee6.github.io/democracy" />
+  	<meta property="og:type"          content="DemocracyLive" />
+  	<meta property="og:title"         content="Your Website Title" />
+  	<meta property="og:description"   content="Find out how to best use" />
+  	<!-- <meta property="og:image"         content="http://www.your-domain.com/path/image.jpg" /> -->
 
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -32,7 +38,7 @@
     <script>
       window.fbAsyncInit = function() {
         FB.init({
-          appId      : 'your-app-id',
+          appId      : "1069565296472933",
           xfbml      : true,
           version    : 'v2.8'
         });
@@ -60,16 +66,33 @@
       data-show-faces="true">
     </div> -->
 
+
+
     <script type="text/javascript" src="./bundle.js">
 
     </script>
-    <script type="text/javascript">
+
+    <div id="fb-root"></div>
+  	<script>(function(d, s, id) {
+  	  var js, fjs = d.getElementsByTagName(s)[0];
+  	  if (d.getElementById(id)) return;
+  	  js = d.createElement(s); js.id = id;
+  	  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1";
+  	  fjs.parentNode.insertBefore(js, fjs);
+  	}(document, 'script', 'facebook-jssdk'));</script>
+
+  	<!-- Your share button code -->
+  	<div class="fb-share-button"
+  		data-href="http://www.your-domain.com/your-page.html"
+  		data-layout="button_count">
+  	</div>
+    <!-- <script type="text/javascript">
       FB.ui(
       {
       method: 'share',
       href: 'https://developers.facebook.com/docs/'
       }, function(response){});
-    </script>
+    </script> -->
 
 
   </body>
