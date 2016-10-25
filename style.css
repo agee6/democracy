@@ -53,6 +53,15 @@ body {
   margin-left: 5%;
   margin-right: auto;
 }
+.facebook-like-button{
+  position: absolute;
+  left: 0;
+  top:0;
+}
+.facebook-area{
+  width: 100px;
+  height: 50px; 
+}
 
 .president{
   margin:10px;
