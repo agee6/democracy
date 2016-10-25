@@ -87,7 +87,7 @@ var Navbar = React.createClass({
           <nav>
             <ul className="nav masthead-nav">
               {element}
-              <li> <div className="facebook-area"></div></li>
+              <li><div class="fb-share-button" data-href="https://agee6.github.io/democracy" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fagee6.github.io%2Fdemocracy&amp;src=sdkpreparse">Share</a></div></li>
             </ul>
             <div className="fb-share-button"
               data-href="http://www.your-domain.com/your-page.html"
