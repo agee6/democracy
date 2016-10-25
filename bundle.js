@@ -34548,21 +34548,8 @@
 	            React.createElement(
 	              'li',
 	              null,
-	              React.createElement(
-	                'div',
-	                { className: 'fb-share-button', 'data-href': 'https://agee6.github.io/democracy', 'data-layout': 'button', 'data-size': 'large', 'data-mobile-iframe': 'true' },
-	                React.createElement(
-	                  'a',
-	                  { className: 'fb-xfbml-parse-ignore', target: '_blank', href: 'https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fagee6.github.io%2Fdemocracy&src=sdkpreparse' },
-	                  'Share'
-	                )
-	              )
-	            ),
-	            React.createElement(
-	              'li',
-	              null,
 	              React.createElement('div', {
-	                className: 'fb-like',
+	                className: 'fb-like fb-area',
 	                'data-share': 'true',
 	                'data-width': '450',
 	                'data-show-faces': 'true' })
