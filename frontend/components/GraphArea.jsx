@@ -87,10 +87,10 @@ var GraphArea = React.createClass({
                 {
                     label: "Facebook Likes",
                     fillColor: colors,
-                    strokeColor: "rgba(220,220,220,1)",
-                    pointColor: "rgba(220,220,220,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
+                    strokeColor: "rgba(200,200,220,1)",
+                    pointColor: "rgba(220,200,220,1)",
+                    pointStrokeColor: "#000",
+                    pointHighlightFill: "#eee",
                     pointHighlightStroke: "rgba(220,220,220,1)",
                     data: percentages
                 }
@@ -142,16 +142,13 @@ var GraphArea = React.createClass({
 
           ]
     var chartOptions = {
-        scales: {
-            xAxes: [{
-                stacked: true
-            }],
-            yAxes: [{
-              stacked: true,
-                type: "linear",
-                  max: 15000000
-            }]
+        fontColor: "rgb(200,200,200)",
+        title: {
+          display: true,
+          text: "Facebook Likes",
+          fontColor: "rgb(200,200,200)"
         }
+
     };
 
     var mainLabel, buttonText;
@@ -166,7 +163,7 @@ var GraphArea = React.createClass({
       <div className="container">
         <div className="inner">
           <div className="chart">
-            <BarChart data={barData} height="250" width="500"  />
+            <BarChart data={barData} options={chartOptions} height="250" width="500" style={{backgroundColor: "rgb(150,170,180)", borderRadius: "10px", boxShadow: "inset 0 0 200px rgba(0,0,0, 0.5)"}}/>
           </div>
           <div className="chartLabel">
             {mainLabel}
@@ -175,7 +172,7 @@ var GraphArea = React.createClass({
             <DoughnutChart data={doughData} height="250" width="500" />
           </div>
 
-          <button className="btn btn-primary" onClick={this.switchData}>{buttonText}</button>
+          <button className="btn btn-primary" onClick={this.switchData} >{buttonText}</button>
 
 
         </div>
@@ -183,4 +180,6 @@ var GraphArea = React.createClass({
     );
   }
 })
+
+// style={{backgroundColor: "rgb(200,200,200)", borderRadius: "10px", boxShadow: "inset 0 0 100px rgba(0,0,0, 0.5)"}}
 module.exports = GraphArea;

@@ -34548,7 +34548,8 @@
 	            React.createElement(
 	              'li',
 	              null,
-	              React.createElement('div', { id: 'fb-root' })
+	              ' ',
+	              React.createElement('div', { className: 'facebook-area' })
 	            )
 	          ),
 	          React.createElement('div', { className: 'fb-share-button',
@@ -34651,10 +34652,10 @@
 	      datasets: [{
 	        label: "Facebook Likes",
 	        fillColor: colors,
-	        strokeColor: "rgba(220,220,220,1)",
-	        pointColor: "rgba(220,220,220,1)",
-	        pointStrokeColor: "#fff",
-	        pointHighlightFill: "#fff",
+	        strokeColor: "rgba(200,200,220,1)",
+	        pointColor: "rgba(220,200,220,1)",
+	        pointStrokeColor: "#000",
+	        pointHighlightFill: "#eee",
 	        pointHighlightStroke: "rgba(220,220,220,1)",
 	        data: percentages
 	      }]
@@ -34696,16 +34697,13 @@
 	      label: labels[6]
 	    }];
 	    var chartOptions = {
-	      scales: {
-	        xAxes: [{
-	          stacked: true
-	        }],
-	        yAxes: [{
-	          stacked: true,
-	          type: "linear",
-	          max: 15000000
-	        }]
+	      fontColor: "rgb(200,200,200)",
+	      title: {
+	        display: true,
+	        text: "Facebook Likes",
+	        fontColor: "rgb(200,200,200)"
 	      }
+	
 	    };
 	
 	    var mainLabel, buttonText;
@@ -34725,7 +34723,7 @@
 	        React.createElement(
 	          'div',
 	          { className: 'chart' },
-	          React.createElement(BarChart, { data: barData, height: '250', width: '500' })
+	          React.createElement(BarChart, { data: barData, options: chartOptions, height: '250', width: '500', style: { backgroundColor: "rgb(150,170,180)", borderRadius: "10px", boxShadow: "inset 0 0 200px rgba(0,0,0, 0.5)" } })
 	        ),
 	        React.createElement(
 	          'div',
@@ -34746,6 +34744,8 @@
 	    );
 	  }
 	});
+	
+	// style={{backgroundColor: "rgb(200,200,200)", borderRadius: "10px", boxShadow: "inset 0 0 100px rgba(0,0,0, 0.5)"}}
 	module.exports = GraphArea;
 
 /***/ },

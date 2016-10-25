@@ -55,7 +55,7 @@ var Navbar = React.createClass({
 
   },
   toGraph: function(){
-    APIUtil.getTrumpFacebook(); 
+    APIUtil.getTrumpFacebook();
     this.props.nextClick("GraphArea");
     this.setState({onGraph: true});
 
@@ -87,7 +87,7 @@ var Navbar = React.createClass({
           <nav>
             <ul className="nav masthead-nav">
               {element}
-              <li><div id="fb-root"></div></li>
+              <li> <div className="facebook-area"></div></li>
             </ul>
             <div className="fb-share-button"
               data-href="http://www.your-domain.com/your-page.html"
