@@ -19,7 +19,7 @@ var Footer = React.createClass({
     return (
       <div className="mastfoot">
         <div className="inner">
-          <p>Design by Austen Gee<a href="http://agee6.github.io/austenGee/FEEResume.pdf">.</a></p>
+          <p>Design by Austen Gee<a href="http://agee6.github.io/austenGee/ResumeWeb.pdf">.</a></p>
         </div>
       </div>
     );

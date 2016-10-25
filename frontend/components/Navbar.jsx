@@ -55,6 +55,7 @@ var Navbar = React.createClass({
 
   },
   toGraph: function(){
+    APIUtil.getTrumpFacebook(); 
     this.props.nextClick("GraphArea");
     this.setState({onGraph: true});
 
@@ -86,8 +87,12 @@ var Navbar = React.createClass({
           <nav>
             <ul className="nav masthead-nav">
               {element}
-              <li><button id="facebook" className="btn btn-primary" onClick={this.facebookLogin}>F</button></li>
+              <li><div id="fb-root"></div></li>
             </ul>
+            <div className="fb-share-button"
+              data-href="http://www.your-domain.com/your-page.html"
+              data-layout="button_count">
+            </div>
           </nav>
         </div>
       </div>
@@ -97,4 +102,5 @@ var Navbar = React.createClass({
 
 });
 
+// <li><button id="facebook" className="btn btn-primary" onClick={this.facebookLogin}>F</button></li>
 module.exports = Navbar;

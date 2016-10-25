@@ -52,15 +52,15 @@
 	var Welcome = __webpack_require__(172);
 	var Navbar = __webpack_require__(199);
 	var GraphArea = __webpack_require__(200);
-	var SideBar = __webpack_require__(202);
-	var Footer = __webpack_require__(203);
-	var GunToHead = __webpack_require__(204);
-	var Country = __webpack_require__(205);
-	var Maine = __webpack_require__(206);
-	var Nebraska = __webpack_require__(208);
-	var PreferPage = __webpack_require__(209);
-	var Result = __webpack_require__(212);
-	var Anarchy = __webpack_require__(216);
+	var SideBar = __webpack_require__(213);
+	var Footer = __webpack_require__(214);
+	var GunToHead = __webpack_require__(215);
+	var Country = __webpack_require__(219);
+	var Maine = __webpack_require__(221);
+	var Nebraska = __webpack_require__(222);
+	var PreferPage = __webpack_require__(223);
+	var Result = __webpack_require__(224);
+	var Anarchy = __webpack_require__(225);
 	
 	//root html element
 	var root = document.getElementById('react-content');
@@ -72,7 +72,7 @@
 	var ApiActions = __webpack_require__(174);
 	
 	//constants
-	var OutputData = __webpack_require__(211);
+	var OutputData = __webpack_require__(216);
 	
 	//base App
 	var App = React.createClass({
@@ -21578,13 +21578,7 @@
 	  },
 	
 	  getTwitterFolowers: function () {},
-	  getTrumpFacebook: function () {
-	    FB.api("/{object-id}/likes", function (response) {
-	      if (response && !response.error) {
-	        /* handle the result */
-	      }
-	    });
-	  },
+	  getTrumpFacebook: function () {},
 	  getUserBooks: function () {
 	    $.get('/api/books', {}, function (books) {
 	      ApiActions.receiveUserBooks(books);
@@ -34493,6 +34487,7 @@
 	    debugger;
 	  },
 	  toGraph: function () {
+	    APIUtil.getTrumpFacebook();
 	    this.props.nextClick("GraphArea");
 	    this.setState({ onGraph: true });
 	  },
@@ -34553,13 +34548,12 @@
 	            React.createElement(
 	              'li',
 	              null,
-	              React.createElement(
-	                'button',
-	                { id: 'facebook', className: 'btn btn-primary', onClick: this.facebookLogin },
-	                'F'
-	              )
+	              React.createElement('div', { id: 'fb-root' })
 	            )
-	          )
+	          ),
+	          React.createElement('div', { className: 'fb-share-button',
+	            'data-href': 'http://www.your-domain.com/your-page.html',
+	            'data-layout': 'button_count' })
 	        )
 	      )
 	    );
@@ -34567,6 +34561,7 @@
 	
 	});
 	
+	// <li><button id="facebook" className="btn btn-primary" onClick={this.facebookLogin}>F</button></li>
 	module.exports = Navbar;
 
 /***/ },
@@ -34576,9 +34571,9 @@
 	var React = __webpack_require__(1);
 	var DataStore = __webpack_require__(201);
 	var helloUtil = __webpack_require__(196);
-	var BarChart = __webpack_require__(217).Bar;
-	var DoughnutChart = __webpack_require__(217).Doughnut;
-	var names = __webpack_require__(215);
+	var BarChart = __webpack_require__(202).Bar;
+	var DoughnutChart = __webpack_require__(202).Doughnut;
+	var names = __webpack_require__(212);
 	var facebookLikes = {
 	  DT: 11576634,
 	  HC: 7246609,
@@ -34807,751 +34802,28 @@
 /* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var React = __webpack_require__(1);
-	
-	var SideBar = React.createClass({
-	  displayName: "SideBar",
-	
-	
-	  getInitialState: function () {
-	    return {};
-	  },
-	  componentDidMount: function () {},
-	  componentWillUnmount: function () {},
-	  _onChange: function () {},
-	
-	  render: function () {
-	
-	    return React.createElement(
-	      "div",
-	      { "class": "mastfoot" },
-	      React.createElement(
-	        "div",
-	        { "class": "inner" },
-	        React.createElement(
-	          "p",
-	          null,
-	          "Cover template for ",
-	          React.createElement(
-	            "a",
-	            { href: "http://getbootstrap.com" },
-	            "Bootstrap"
-	          ),
-	          ", by ",
-	          React.createElement(
-	            "a",
-	            { href: "https://twitter.com/mdo" },
-	            "@mdo"
-	          ),
-	          "."
-	        )
-	      )
-	    );
-	  }
-	});
-	module.exports = SideBar;
+	module.exports = {
+	  Bar: __webpack_require__(203),
+	  Doughnut: __webpack_require__(207),
+	  Line: __webpack_require__(208),
+	  Pie: __webpack_require__(209),
+	  PolarArea: __webpack_require__(210),
+	  Radar: __webpack_require__(211),
+	  createClass: __webpack_require__(204).createClass
+	};
+
 
 /***/ },
 /* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var React = __webpack_require__(1);
-	
-	var Footer = React.createClass({
-	  displayName: "Footer",
-	
-	
-	  getInitialState: function () {
-	    return {};
-	  },
-	  componentDidMount: function () {},
-	  componentWillUnmount: function () {},
-	  _onChange: function () {},
-	  render: function () {
-	
-	    return React.createElement(
-	      "div",
-	      { className: "mastfoot" },
-	      React.createElement(
-	        "div",
-	        { className: "inner" },
-	        React.createElement(
-	          "p",
-	          null,
-	          "Design by Austen Gee",
-	          React.createElement(
-	            "a",
-	            { href: "http://agee6.github.io/austenGee/FEEResume.pdf" },
-	            "."
-	          )
-	        )
-	      )
-	    );
-	  }
-	});
-	module.exports = Footer;
-
-/***/ },
-/* 204 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var APIUtil = __webpack_require__(173);
-	var UserStore = __webpack_require__(180);
-	var ApiActions = __webpack_require__(174);
-	var OutputData = __webpack_require__(211);
-	var President = __webpack_require__(210);
-	
-	var GunToHead = React.createClass({
-	  displayName: 'GunToHead',
-	
-	  getInitialState: function () {
-	    return { gun: false };
-	  },
-	  componentDidMount: function () {
-	    this.userIndex = UserStore.addListener(this._onChange);
-	  },
-	  faceClick: function (faceID) {
-	    OutputData.gun = faceID;
-	    this.props.nextClick("Loc");
-	  },
-	  shootClick: function () {
-	    if (this.state.gun) {
-	      this.props.nextClick("Loc");
-	    } else {
-	      this.setState({ gun: true });
-	    }
-	  },
-	  render: function () {
-	    var title, subtitle, buttonText;
-	    if (this.state.gun) {
-	      title = "Okay, we will shoot you, but...";
-	      subtitle = "Your children will have to live under one of these, who do you choose?";
-	      buttonText = "Please, just do it. I don't care.";
-	    } else {
-	      title = "Gun to your head, who do you choose?";
-	      subtitle = "I'm sorry you have to do this.";
-	      buttonText = "Just Shoot me";
-	    }
-	
-	    return React.createElement(
-	      'div',
-	      { className: 'inner' },
-	      React.createElement(
-	        'h2',
-	        null,
-	        title
-	      ),
-	      React.createElement(
-	        'h3',
-	        null,
-	        subtitle,
-	        ' '
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'vertical-container' },
-	        React.createElement(
-	          'div',
-	          { className: 'president-force-div' },
-	          React.createElement(President, { id: 'DT', faceClick: this.faceClick }),
-	          React.createElement(President, { id: 'HC', faceClick: this.faceClick })
-	        ),
-	        React.createElement(
-	          'button',
-	          { className: 'btn btn-primary', onClick: this.shootClick },
-	          buttonText,
-	          ' '
-	        )
-	      )
-	    );
-	  }
-	
-	});
-	
-	module.exports = GunToHead;
-
-/***/ },
-/* 205 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var APIUtil = __webpack_require__(173);
-	var UserStore = __webpack_require__(180);
-	var ApiActions = __webpack_require__(174);
-	var States = __webpack_require__(214);
-	var OutputData = __webpack_require__(211);
-	
-	var Country = React.createClass({
-	  displayName: 'Country',
-	
-	  getInitialState: function () {
-	    return { loggedIn: UserStore.loggedIn(), username: null, password: null, message: "" };
-	  },
-	  componentDidMount: function () {
-	    this.userIndex = UserStore.addListener(this._onChange);
-	  },
-	  countryClick: function (event) {
-	    var stateCode = event.currentTarget.id;
-	    if (stateCode === "ME") {
-	      this.props.nextClick("ME");
-	    } else if (stateCode === "NE") {
-	      this.props.nextClick("NE");
-	    } else {
-	      OutputData.location = stateCode;
-	      this.props.nextClick("Result");
-	    }
-	  },
-	
-	  render: function () {
-	    var allButtons = [];
-	    var stateKeys = Object.keys(States);
-	    for (var i = 0; i < stateKeys.length; i++) {
-	      allButtons.push(React.createElement(
-	        'button',
-	        { className: 'btn btn-primary state', key: stateKeys[i], id: stateKeys[i], onClick: this.countryClick },
-	        States[stateKeys[i]]
-	      ));
-	    }
-	    return React.createElement(
-	      'div',
-	      { className: 'inner' },
-	      React.createElement(
-	        'h2',
-	        null,
-	        'Which state will you vote in? '
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'input-buttons' },
-	        allButtons
-	      )
-	    );
-	  }
-	
-	});
-	
-	module.exports = Country;
-
-/***/ },
-/* 206 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var APIUtil = __webpack_require__(173);
-	var UserStore = __webpack_require__(180);
-	var ApiActions = __webpack_require__(174);
-	var OutputData = __webpack_require__(211);
-	
-	var Maine = React.createClass({
-	  displayName: 'Maine',
-	
-	  getInitialState: function () {
-	    return {};
-	  },
-	  componentDidMount: function () {},
-	  nextClick: function (event) {
-	    var district = event.currentTarget.id;
-	    if (district === 'none') {
-	      OutputData.location = "ME";
-	    } else {
-	      OutputData.location = "ME" + district;
-	    }
-	    this.props.nextClick("Result");
-	  },
-	  render: function () {
-	
-	    return React.createElement(
-	      'div',
-	      { className: 'inner' },
-	      React.createElement(
-	        'h2',
-	        null,
-	        'Which district are you in? '
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'input-buttons' },
-	        React.createElement(
-	          'button',
-	          { className: 'btn btn-primary', id: '1', onClick: this.nextClick },
-	          'District 1'
-	        ),
-	        React.createElement(
-	          'button',
-	          { className: 'btn btn-primary', id: '2', onClick: this.nextClick },
-	          'District 2'
-	        ),
-	        React.createElement(
-	          'button',
-	          { id: 'none', className: 'btn btn-primary', onClick: this.nextClick },
-	          '"I don\'t know"'
-	        )
-	      )
-	    );
-	  }
-	
-	});
-	
-	module.exports = Maine;
-
-/***/ },
-/* 207 */,
-/* 208 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var APIUtil = __webpack_require__(173);
-	var ApiActions = __webpack_require__(174);
-	var OutputData = __webpack_require__(211);
-	
-	var Nebraska = React.createClass({
-	  displayName: 'Nebraska',
-	
-	  getInitialState: function () {
-	    return {};
-	  },
-	  componentDidMount: function () {},
-	  nextClick: function (event) {
-	    var district = event.currentTarget.id;
-	    if (district === "none") {
-	      OutputData.location = "NE";
-	    } else {
-	      OutputData.location = "NE" + district;
-	    }
-	    this.props.nextClick("Result");
-	  },
-	  render: function () {
-	
-	    return React.createElement(
-	      'div',
-	      { className: 'inner' },
-	      React.createElement(
-	        'h2',
-	        null,
-	        'Which district are you in? '
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'input-buttons' },
-	        React.createElement(
-	          'button',
-	          { id: '1', className: 'btn btn-primary', onClick: this.nextClick },
-	          'District 1'
-	        ),
-	        React.createElement(
-	          'button',
-	          { id: '2', className: 'btn btn-primary', onClick: this.nextClick },
-	          'District 2'
-	        ),
-	        React.createElement(
-	          'button',
-	          { id: '3', className: 'btn btn-primary', onClick: this.nextClick },
-	          'District 3'
-	        ),
-	        React.createElement(
-	          'button',
-	          { id: 'none', className: 'btn btn-primary', onClick: this.nextClick },
-	          '"I don\'t know"'
-	        )
-	      )
-	    );
-	  }
-	
-	});
-	
-	module.exports = Nebraska;
-
-/***/ },
-/* 209 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var APIUtil = __webpack_require__(173);
-	var UserStore = __webpack_require__(180);
-	var ApiActions = __webpack_require__(174);
-	var helloUtil = __webpack_require__(196);
-	var President = __webpack_require__(210);
-	var OutputData = __webpack_require__(211);
-	
-	var PreferPage = React.createClass({
-	  displayName: 'PreferPage',
-	
-	  getInitialState: function () {
-	    this.toWhere = "/Search";
-	    return { loggedIn: UserStore.loggedIn(), username: null, password: null, message: "" };
-	  },
-	  componentDidMount: function () {
-	    this.userIndex = UserStore.addListener(this._onChange);
-	  },
-	
-	  faceClick: function (faceID) {
-	    OutputData.preferred = faceID;
-	    this.props.nextClick("Gun");
-	  },
-	
-	  render: function () {
-	
-	    return React.createElement(
-	      'div',
-	      { className: 'inner' },
-	      React.createElement(
-	        'h2',
-	        null,
-	        'Who is your favorite candidate? '
-	      ),
-	      React.createElement(
-	        'h3',
-	        null,
-	        'i.e. the candidate you would definitely vote for if not for strategy concerns '
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'president-input-div' },
-	        React.createElement(President, { id: 'EM', faceClick: this.faceClick }),
-	        React.createElement(President, { id: 'DT', faceClick: this.faceClick }),
-	        React.createElement(President, { id: 'GJ', faceClick: this.faceClick }),
-	        React.createElement(President, { id: 'HC', faceClick: this.faceClick }),
-	        React.createElement(President, { id: 'JS', faceClick: this.faceClick }),
-	        React.createElement(President, { id: 'VS', faceClick: this.faceClick })
-	      )
-	    );
-	  }
-	
-	});
-	
-	module.exports = PreferPage;
-
-/***/ },
-/* 210 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var images = __webpack_require__(213);
-	var names = __webpack_require__(215);
-	
-	var President = React.createClass({
-	  displayName: 'President',
-	
-	  getInitialState: function () {
-	    return { id: this.props.id };
-	  },
-	  faceClick: function () {
-	    this.props.faceClick(this.state.id);
-	  },
-	
-	  render: function () {
-	
-	    return React.createElement(
-	      'div',
-	      { className: 'president', onClick: this.faceClick },
-	      React.createElement('img', { className: 'president-images', src: images[this.props.id], alt: this.props.id }),
-	      React.createElement(
-	        'h3',
-	        null,
-	        names[this.props.id]
-	      )
-	    );
-	  }
-	
-	});
-	
-	module.exports = President;
-
-/***/ },
-/* 211 */
-/***/ function(module, exports) {
-
-	
-	
-	var output = {
-	  preferred: null,
-	  gun: null,
-	  location: null
-	};
-	module.exports = output;
-
-/***/ },
-/* 212 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var APIUtil = __webpack_require__(173);
-	var UserStore = __webpack_require__(180);
-	var ApiActions = __webpack_require__(174);
-	var President = __webpack_require__(210);
-	var OutputData = __webpack_require__(211);
-	var Swings = ["NV", "AZ", "CO", "IA", "OH", "NC", "FL", "PA", "NH", "NE2", "ME2", "MN", "MN", "WI"];
-	
-	var Results = React.createClass({
-	  displayName: 'Results',
-	
-	  getInitialState: function () {
-	    this.toWhere = "/Search";
-	    return { loggedIn: UserStore.loggedIn(), username: null, password: null, message: "" };
-	  },
-	  componentDidMount: function () {
-	    this.userIndex = UserStore.addListener(this._onChange);
-	  },
-	  getPresident: function () {
-	    if (OutputData.location === "UT") {
-	      if (OutputData.gun === "DT") {
-	        if (OutputData.preferred === "DT") {
-	          return "DT";
-	        } else {
-	          return "EM";
-	        }
-	      } else if (OutputData.gun === "HC") {
-	        return "HC";
-	      } else {
-	        return OutputData.preferred;
-	      }
-	    } else if (Swings.indexOf(OutputData.location) !== -1) {
-	      if (OutputData.gun === "DT") {
-	        return "DT";
-	      } else if (OutputData.gun === "HC") {
-	        return "HC";
-	      } else {
-	        return OutputData.preferred;
-	      }
-	    } else {
-	      return OutputData.preferred;
-	    }
-	  },
-	  getMessage: function () {
-	    if (OutputData.gun === null) {
-	      return "You would rather die than vote for either of the two major candidates, so just do what you feel to gain attention to your preffered candidate";
-	    } else if (Swings.indexOf(OutputData.location) !== -1) {
-	      return "You live in a potential swing state. Your vote counts! Also it means you should probably vote for one the major candidates, even if you have to hold your nose.";
-	    } else if (OutputData.location === "UT") {
-	      return "You live in Utah. Utah is special because it appears Evan McMullin is going to win it. Best strategy is either to vote for him or Hillary Clinton";
-	    } else {
-	      return "You don't live in a swing state, your electoral votes are already decided. Vote for who you feel so they can gain attention";
-	    }
-	  },
-	  faceClick: function () {
-	    alert("hey there");
-	  },
-	  nextClick: function () {
-	    this.props.nextClick("Welcome");
-	  },
-	  render: function () {
-	    var pres = this.getPresident();
-	    var message = this.getMessage();
-	    return React.createElement(
-	      'div',
-	      { className: 'inner' },
-	      React.createElement(
-	        'h2',
-	        null,
-	        'Result: '
-	      ),
-	      React.createElement(
-	        'h3',
-	        null,
-	        message
-	      ),
-	      React.createElement(
-	        'h1',
-	        null,
-	        ' Best strategic vote: '
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'vertical-container' },
-	        React.createElement(
-	          'div',
-	          { className: 'result-div' },
-	          React.createElement(President, { id: pres, faceClick: this.faceClick })
-	        ),
-	        React.createElement(
-	          'button',
-	          { className: 'btn btn-primary', onClick: this.nextClick },
-	          'Start Over'
-	        )
-	      )
-	    );
-	  }
-	
-	});
-	
-	module.exports = Results;
-
-/***/ },
-/* 213 */
-/***/ function(module, exports) {
-
-	
-	
-	var images = {
-	  VS: "http://cbsnews1.cbsistatic.com/hub/i/2016/02/10/5debb876-130a-437e-9685-98c6dbd4f961/0209cbsncsxvermin897938490083640x360.jpg",
-	  EM: "https://pbs.twimg.com/profile_images/771412672738955264/sRBfBvjW.jpg",
-	  DT: "http://www.slate.com/content/dam/slate/blogs/moneybox/2015/08/16/donald_trump_on_immigration_build_border_fence_make_mexico_pay_for_it/483208412-real-estate-tycoon-donald-trump-flashes-the-thumbs-up.jpg.CROP.promo-xlarge2.jpg",
-	  HC: "http://dynaimage.cdn.turner.com/cnn-elections/candidates/,w_800/2701a6d0-clinton-4x3.jpg",
-	  GJ: "http://az616578.vo.msecnd.net/files/2016/04/24/6359711238064290441312406225_GJTwitter.png",
-	  JS: "https://pbs.twimg.com/profile_images/756593715833995264/58FJ0pQJ.jpg"
-	};
-	
-	module.exports = images;
-
-/***/ },
-/* 214 */
-/***/ function(module, exports) {
-
-	
-	
-	var states = {
-	    "AL": "Alabama",
-	    "AK": "Alaska",
-	    "AZ": "Arizona",
-	    "AR": "Arkansas",
-	    "CA": "California",
-	    "CO": "Colorado",
-	    "CT": "Connecticut",
-	    "DE": "Delaware",
-	    "DC": "D.C.",
-	    "FL": "Florida",
-	    "GA": "Georgia",
-	    "GU": "Guam",
-	    "HI": "Hawaii",
-	    "ID": "Idaho",
-	    "IL": "Illinois",
-	    "IN": "Indiana",
-	    "IA": "Iowa",
-	    "KS": "Kansas",
-	    "KY": "Kentucky",
-	    "LA": "Louisiana",
-	    "ME": "Maine",
-	    "MD": "Maryland",
-	    "MA": "Massachusetts",
-	    "MI": "Michigan",
-	    "MN": "Minnesota",
-	    "MS": "Mississippi",
-	    "MO": "Missouri",
-	    "MT": "Montana",
-	    "NE": "Nebraska",
-	    "NV": "Nevada",
-	    "NH": "New Hampshire",
-	    "NJ": "New Jersey",
-	    "NM": "New Mexico",
-	    "NY": "New York",
-	    "NC": "North Carolina",
-	    "ND": "North Dakota",
-	    "OH": "Ohio",
-	    "OK": "Oklahoma",
-	    "OR": "Oregon",
-	    "PW": "Palau",
-	    "PA": "Pennsylvania",
-	    "PR": "Puerto Rico",
-	    "RI": "Rhode Island",
-	    "SC": "South Carolina",
-	    "SD": "South Dakota",
-	    "TN": "Tennessee",
-	    "TX": "Texas",
-	    "UT": "Utah",
-	    "VT": "Vermont",
-	    "VA": "Virginia",
-	    "WA": "Washington",
-	    "WV": "West Virginia",
-	    "WI": "Wisconsin",
-	    "WY": "Wyoming"
-	};
-	module.exports = states;
-
-/***/ },
-/* 215 */
-/***/ function(module, exports) {
-
-	
-	var names = {
-	  DT: "Donald Trump",
-	  JS: "Jill Stein",
-	  HC: "Hillary Clinton",
-	  GJ: "Gary Johnson",
-	  DC: "Darrell Castle",
-	  VS: "Vermin Supreme",
-	  EM: "Evan McMullin"
-	};
-	module.exports = names;
-
-/***/ },
-/* 216 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	
-	var Country = React.createClass({
-	  displayName: 'Country',
-	
-	  getInitialState: function () {
-	    return {};
-	  },
-	  componentDidMount: function () {},
-	  nextClick: function (event) {
-	    this.props.nextClick('Welcome');
-	  },
-	
-	  render: function () {
-	
-	    return React.createElement(
-	      'div',
-	      { className: 'inner' },
-	      React.createElement(
-	        'h2',
-	        null,
-	        'edgy'
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'input-buttons' },
-	        React.createElement(
-	          'div',
-	          { className: 'vertical-container' },
-	          React.createElement(
-	            'div',
-	            { className: 'anarchy-div' },
-	            React.createElement('img', { src: 'http://podcast.robohara.com/wp-content/uploads/2016/06/Anarchy-psd355091.png' })
-	          ),
-	          React.createElement(
-	            'button',
-	            { className: 'btn btn-primary', onClick: this.nextClick },
-	            'Back to Main Page'
-	          )
-	        )
-	      )
-	    );
-	  }
-	
-	});
-	
-	module.exports = Country;
-
-/***/ },
-/* 217 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = {
-	  Bar: __webpack_require__(218),
-	  Doughnut: __webpack_require__(222),
-	  Line: __webpack_require__(223),
-	  Pie: __webpack_require__(224),
-	  PolarArea: __webpack_require__(225),
-	  Radar: __webpack_require__(226),
-	  createClass: __webpack_require__(219).createClass
-	};
-
-
-/***/ },
-/* 218 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var vars = __webpack_require__(219);
+	var vars = __webpack_require__(204);
 	
 	module.exports = vars.createClass('Bar', ['getBarsAtEvent']);
 
 
 /***/ },
-/* 219 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
@@ -35614,7 +34886,7 @@
 	    };
 	
 	    classData.initializeChart = function(nextProps) {
-	      var Chart = __webpack_require__(220);
+	      var Chart = __webpack_require__(205);
 	      var el = ReactDOM.findDOMNode(this);
 	      var ctx = el.getContext("2d");
 	      var chart = new Chart(ctx)[chartType](nextProps.data, nextProps.options || {});
@@ -35705,7 +34977,7 @@
 
 
 /***/ },
-/* 220 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -36019,7 +35291,7 @@
 				//Method for warning of errors
 				if (window.console && typeof window.console.warn === "function") console.warn(str);
 			},
-			amd = helpers.amd = ("function" === 'function' && __webpack_require__(221)),
+			amd = helpers.amd = ("function" === 'function' && __webpack_require__(206)),
 			//-- Math methods
 			isNumber = helpers.isNumber = function(n){
 				return !isNaN(parseFloat(n)) && isFinite(n);
@@ -39447,7 +38719,7 @@
 
 
 /***/ },
-/* 221 */
+/* 206 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {module.exports = __webpack_amd_options__;
@@ -39455,49 +38727,771 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ },
-/* 222 */
+/* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var vars = __webpack_require__(219);
+	var vars = __webpack_require__(204);
 	
 	module.exports = vars.createClass('Doughnut', ['getSegmentsAtEvent']);
 
 
 /***/ },
-/* 223 */
+/* 208 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var vars = __webpack_require__(219);
+	var vars = __webpack_require__(204);
 	
 	module.exports = vars.createClass('Line', ['getPointsAtEvent']);
 
 
 /***/ },
-/* 224 */
+/* 209 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var vars = __webpack_require__(219);
+	var vars = __webpack_require__(204);
 	
 	module.exports = vars.createClass('Pie', ['getSegmentsAtEvent']);
 
 
 /***/ },
-/* 225 */
+/* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var vars = __webpack_require__(219);
+	var vars = __webpack_require__(204);
 	
 	module.exports = vars.createClass('PolarArea', ['getSegmentsAtEvent']);
 
 
 /***/ },
-/* 226 */
+/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var vars = __webpack_require__(219);
+	var vars = __webpack_require__(204);
 	
 	module.exports = vars.createClass('Radar', ['getPointsAtEvent']);
 
+
+/***/ },
+/* 212 */
+/***/ function(module, exports) {
+
+	
+	var names = {
+	  DT: "Donald Trump",
+	  JS: "Jill Stein",
+	  HC: "Hillary Clinton",
+	  GJ: "Gary Johnson",
+	  DC: "Darrell Castle",
+	  VS: "Vermin Supreme",
+	  EM: "Evan McMullin"
+	};
+	module.exports = names;
+
+/***/ },
+/* 213 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	
+	var SideBar = React.createClass({
+	  displayName: "SideBar",
+	
+	
+	  getInitialState: function () {
+	    return {};
+	  },
+	  componentDidMount: function () {},
+	  componentWillUnmount: function () {},
+	  _onChange: function () {},
+	
+	  render: function () {
+	
+	    return React.createElement(
+	      "div",
+	      { "class": "mastfoot" },
+	      React.createElement(
+	        "div",
+	        { "class": "inner" },
+	        React.createElement(
+	          "p",
+	          null,
+	          "Cover template for ",
+	          React.createElement(
+	            "a",
+	            { href: "http://getbootstrap.com" },
+	            "Bootstrap"
+	          ),
+	          ", by ",
+	          React.createElement(
+	            "a",
+	            { href: "https://twitter.com/mdo" },
+	            "@mdo"
+	          ),
+	          "."
+	        )
+	      )
+	    );
+	  }
+	});
+	module.exports = SideBar;
+
+/***/ },
+/* 214 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	
+	var Footer = React.createClass({
+	  displayName: "Footer",
+	
+	
+	  getInitialState: function () {
+	    return {};
+	  },
+	  componentDidMount: function () {},
+	  componentWillUnmount: function () {},
+	  _onChange: function () {},
+	  render: function () {
+	
+	    return React.createElement(
+	      "div",
+	      { className: "mastfoot" },
+	      React.createElement(
+	        "div",
+	        { className: "inner" },
+	        React.createElement(
+	          "p",
+	          null,
+	          "Design by Austen Gee",
+	          React.createElement(
+	            "a",
+	            { href: "http://agee6.github.io/austenGee/ResumeWeb.pdf" },
+	            "."
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
+	module.exports = Footer;
+
+/***/ },
+/* 215 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var APIUtil = __webpack_require__(173);
+	var UserStore = __webpack_require__(180);
+	var ApiActions = __webpack_require__(174);
+	var OutputData = __webpack_require__(216);
+	var President = __webpack_require__(217);
+	
+	var GunToHead = React.createClass({
+	  displayName: 'GunToHead',
+	
+	  getInitialState: function () {
+	    return { gun: false };
+	  },
+	  componentDidMount: function () {
+	    this.userIndex = UserStore.addListener(this._onChange);
+	  },
+	  faceClick: function (faceID) {
+	    OutputData.gun = faceID;
+	    this.props.nextClick("Loc");
+	  },
+	  shootClick: function () {
+	    if (this.state.gun) {
+	      this.props.nextClick("Loc");
+	    } else {
+	      this.setState({ gun: true });
+	    }
+	  },
+	  render: function () {
+	    var title, subtitle, buttonText;
+	    if (this.state.gun) {
+	      title = "Okay, we will shoot you, but...";
+	      subtitle = "Your children will have to live under one of these, who do you choose?";
+	      buttonText = "Please, just do it. I don't care.";
+	    } else {
+	      title = "Gun to your head, who do you choose?";
+	      subtitle = "I'm sorry you have to do this.";
+	      buttonText = "Just Shoot me";
+	    }
+	
+	    return React.createElement(
+	      'div',
+	      { className: 'inner' },
+	      React.createElement(
+	        'h2',
+	        null,
+	        title
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        subtitle,
+	        ' '
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'vertical-container' },
+	        React.createElement(
+	          'div',
+	          { className: 'president-force-div' },
+	          React.createElement(President, { id: 'DT', faceClick: this.faceClick }),
+	          React.createElement(President, { id: 'HC', faceClick: this.faceClick })
+	        ),
+	        React.createElement(
+	          'button',
+	          { className: 'btn btn-primary', onClick: this.shootClick },
+	          buttonText,
+	          ' '
+	        )
+	      )
+	    );
+	  }
+	
+	});
+	
+	module.exports = GunToHead;
+
+/***/ },
+/* 216 */
+/***/ function(module, exports) {
+
+	
+	
+	var output = {
+	  preferred: null,
+	  gun: null,
+	  location: null
+	};
+	module.exports = output;
+
+/***/ },
+/* 217 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var images = __webpack_require__(218);
+	var names = __webpack_require__(212);
+	
+	var President = React.createClass({
+	  displayName: 'President',
+	
+	  getInitialState: function () {
+	    return { id: this.props.id };
+	  },
+	  faceClick: function () {
+	    this.props.faceClick(this.state.id);
+	  },
+	
+	  render: function () {
+	
+	    return React.createElement(
+	      'div',
+	      { className: 'president', onClick: this.faceClick },
+	      React.createElement('img', { className: 'president-images', src: images[this.props.id], alt: this.props.id }),
+	      React.createElement(
+	        'h3',
+	        null,
+	        names[this.props.id]
+	      )
+	    );
+	  }
+	
+	});
+	
+	module.exports = President;
+
+/***/ },
+/* 218 */
+/***/ function(module, exports) {
+
+	
+	
+	var images = {
+	  VS: "http://cbsnews1.cbsistatic.com/hub/i/2016/02/10/5debb876-130a-437e-9685-98c6dbd4f961/0209cbsncsxvermin897938490083640x360.jpg",
+	  EM: "https://pbs.twimg.com/profile_images/771412672738955264/sRBfBvjW.jpg",
+	  DT: "http://www.slate.com/content/dam/slate/blogs/moneybox/2015/08/16/donald_trump_on_immigration_build_border_fence_make_mexico_pay_for_it/483208412-real-estate-tycoon-donald-trump-flashes-the-thumbs-up.jpg.CROP.promo-xlarge2.jpg",
+	  HC: "http://dynaimage.cdn.turner.com/cnn-elections/candidates/,w_800/2701a6d0-clinton-4x3.jpg",
+	  GJ: "http://az616578.vo.msecnd.net/files/2016/04/24/6359711238064290441312406225_GJTwitter.png",
+	  JS: "https://pbs.twimg.com/profile_images/756593715833995264/58FJ0pQJ.jpg"
+	};
+	
+	module.exports = images;
+
+/***/ },
+/* 219 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var APIUtil = __webpack_require__(173);
+	var UserStore = __webpack_require__(180);
+	var ApiActions = __webpack_require__(174);
+	var States = __webpack_require__(220);
+	var OutputData = __webpack_require__(216);
+	
+	var Country = React.createClass({
+	  displayName: 'Country',
+	
+	  getInitialState: function () {
+	    return { loggedIn: UserStore.loggedIn(), username: null, password: null, message: "" };
+	  },
+	  componentDidMount: function () {
+	    this.userIndex = UserStore.addListener(this._onChange);
+	  },
+	  countryClick: function (event) {
+	    var stateCode = event.currentTarget.id;
+	    if (stateCode === "ME") {
+	      this.props.nextClick("ME");
+	    } else if (stateCode === "NE") {
+	      this.props.nextClick("NE");
+	    } else {
+	      OutputData.location = stateCode;
+	      this.props.nextClick("Result");
+	    }
+	  },
+	
+	  render: function () {
+	    var allButtons = [];
+	    var stateKeys = Object.keys(States);
+	    for (var i = 0; i < stateKeys.length; i++) {
+	      allButtons.push(React.createElement(
+	        'button',
+	        { className: 'btn btn-primary state', key: stateKeys[i], id: stateKeys[i], onClick: this.countryClick },
+	        States[stateKeys[i]]
+	      ));
+	    }
+	    return React.createElement(
+	      'div',
+	      { className: 'inner' },
+	      React.createElement(
+	        'h2',
+	        null,
+	        'Which state will you vote in? '
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'input-buttons' },
+	        allButtons
+	      )
+	    );
+	  }
+	
+	});
+	
+	module.exports = Country;
+
+/***/ },
+/* 220 */
+/***/ function(module, exports) {
+
+	
+	
+	var states = {
+	    "AL": "Alabama",
+	    "AK": "Alaska",
+	    "AZ": "Arizona",
+	    "AR": "Arkansas",
+	    "CA": "California",
+	    "CO": "Colorado",
+	    "CT": "Connecticut",
+	    "DE": "Delaware",
+	    "DC": "D.C.",
+	    "FL": "Florida",
+	    "GA": "Georgia",
+	    "GU": "Guam",
+	    "HI": "Hawaii",
+	    "ID": "Idaho",
+	    "IL": "Illinois",
+	    "IN": "Indiana",
+	    "IA": "Iowa",
+	    "KS": "Kansas",
+	    "KY": "Kentucky",
+	    "LA": "Louisiana",
+	    "ME": "Maine",
+	    "MD": "Maryland",
+	    "MA": "Massachusetts",
+	    "MI": "Michigan",
+	    "MN": "Minnesota",
+	    "MS": "Mississippi",
+	    "MO": "Missouri",
+	    "MT": "Montana",
+	    "NE": "Nebraska",
+	    "NV": "Nevada",
+	    "NH": "New Hampshire",
+	    "NJ": "New Jersey",
+	    "NM": "New Mexico",
+	    "NY": "New York",
+	    "NC": "North Carolina",
+	    "ND": "North Dakota",
+	    "OH": "Ohio",
+	    "OK": "Oklahoma",
+	    "OR": "Oregon",
+	    "PW": "Palau",
+	    "PA": "Pennsylvania",
+	    "PR": "Puerto Rico",
+	    "RI": "Rhode Island",
+	    "SC": "South Carolina",
+	    "SD": "South Dakota",
+	    "TN": "Tennessee",
+	    "TX": "Texas",
+	    "UT": "Utah",
+	    "VT": "Vermont",
+	    "VA": "Virginia",
+	    "WA": "Washington",
+	    "WV": "West Virginia",
+	    "WI": "Wisconsin",
+	    "WY": "Wyoming"
+	};
+	module.exports = states;
+
+/***/ },
+/* 221 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var APIUtil = __webpack_require__(173);
+	var UserStore = __webpack_require__(180);
+	var ApiActions = __webpack_require__(174);
+	var OutputData = __webpack_require__(216);
+	
+	var Maine = React.createClass({
+	  displayName: 'Maine',
+	
+	  getInitialState: function () {
+	    return {};
+	  },
+	  componentDidMount: function () {},
+	  nextClick: function (event) {
+	    var district = event.currentTarget.id;
+	    if (district === 'none') {
+	      OutputData.location = "ME";
+	    } else {
+	      OutputData.location = "ME" + district;
+	    }
+	    this.props.nextClick("Result");
+	  },
+	  render: function () {
+	
+	    return React.createElement(
+	      'div',
+	      { className: 'inner' },
+	      React.createElement(
+	        'h2',
+	        null,
+	        'Which district are you in? '
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'input-buttons' },
+	        React.createElement(
+	          'button',
+	          { className: 'btn btn-primary', id: '1', onClick: this.nextClick },
+	          'District 1'
+	        ),
+	        React.createElement(
+	          'button',
+	          { className: 'btn btn-primary', id: '2', onClick: this.nextClick },
+	          'District 2'
+	        ),
+	        React.createElement(
+	          'button',
+	          { id: 'none', className: 'btn btn-primary', onClick: this.nextClick },
+	          '"I don\'t know"'
+	        )
+	      )
+	    );
+	  }
+	
+	});
+	
+	module.exports = Maine;
+
+/***/ },
+/* 222 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var APIUtil = __webpack_require__(173);
+	var ApiActions = __webpack_require__(174);
+	var OutputData = __webpack_require__(216);
+	
+	var Nebraska = React.createClass({
+	  displayName: 'Nebraska',
+	
+	  getInitialState: function () {
+	    return {};
+	  },
+	  componentDidMount: function () {},
+	  nextClick: function (event) {
+	    var district = event.currentTarget.id;
+	    if (district === "none") {
+	      OutputData.location = "NE";
+	    } else {
+	      OutputData.location = "NE" + district;
+	    }
+	    this.props.nextClick("Result");
+	  },
+	  render: function () {
+	
+	    return React.createElement(
+	      'div',
+	      { className: 'inner' },
+	      React.createElement(
+	        'h2',
+	        null,
+	        'Which district are you in? '
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'input-buttons' },
+	        React.createElement(
+	          'button',
+	          { id: '1', className: 'btn btn-primary', onClick: this.nextClick },
+	          'District 1'
+	        ),
+	        React.createElement(
+	          'button',
+	          { id: '2', className: 'btn btn-primary', onClick: this.nextClick },
+	          'District 2'
+	        ),
+	        React.createElement(
+	          'button',
+	          { id: '3', className: 'btn btn-primary', onClick: this.nextClick },
+	          'District 3'
+	        ),
+	        React.createElement(
+	          'button',
+	          { id: 'none', className: 'btn btn-primary', onClick: this.nextClick },
+	          '"I don\'t know"'
+	        )
+	      )
+	    );
+	  }
+	
+	});
+	
+	module.exports = Nebraska;
+
+/***/ },
+/* 223 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var APIUtil = __webpack_require__(173);
+	var UserStore = __webpack_require__(180);
+	var ApiActions = __webpack_require__(174);
+	var helloUtil = __webpack_require__(196);
+	var President = __webpack_require__(217);
+	var OutputData = __webpack_require__(216);
+	
+	var PreferPage = React.createClass({
+	  displayName: 'PreferPage',
+	
+	  getInitialState: function () {
+	    this.toWhere = "/Search";
+	    return { loggedIn: UserStore.loggedIn(), username: null, password: null, message: "" };
+	  },
+	  componentDidMount: function () {
+	    this.userIndex = UserStore.addListener(this._onChange);
+	  },
+	
+	  faceClick: function (faceID) {
+	    OutputData.preferred = faceID;
+	    this.props.nextClick("Gun");
+	  },
+	
+	  render: function () {
+	
+	    return React.createElement(
+	      'div',
+	      { className: 'inner' },
+	      React.createElement(
+	        'h2',
+	        null,
+	        'Who is your favorite candidate? '
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'i.e. the candidate you would definitely vote for if not for strategy concerns '
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'president-input-div' },
+	        React.createElement(President, { id: 'EM', faceClick: this.faceClick }),
+	        React.createElement(President, { id: 'DT', faceClick: this.faceClick }),
+	        React.createElement(President, { id: 'GJ', faceClick: this.faceClick }),
+	        React.createElement(President, { id: 'HC', faceClick: this.faceClick }),
+	        React.createElement(President, { id: 'JS', faceClick: this.faceClick }),
+	        React.createElement(President, { id: 'VS', faceClick: this.faceClick })
+	      )
+	    );
+	  }
+	
+	});
+	
+	module.exports = PreferPage;
+
+/***/ },
+/* 224 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var APIUtil = __webpack_require__(173);
+	var UserStore = __webpack_require__(180);
+	var ApiActions = __webpack_require__(174);
+	var President = __webpack_require__(217);
+	var OutputData = __webpack_require__(216);
+	var Swings = ["NV", "AZ", "CO", "IA", "OH", "NC", "FL", "PA", "NH", "NE2", "ME2", "MN", "MN", "WI"];
+	
+	var Results = React.createClass({
+	  displayName: 'Results',
+	
+	  getInitialState: function () {
+	    this.toWhere = "/Search";
+	    return { loggedIn: UserStore.loggedIn(), username: null, password: null, message: "" };
+	  },
+	  componentDidMount: function () {
+	    this.userIndex = UserStore.addListener(this._onChange);
+	  },
+	  getPresident: function () {
+	    if (OutputData.location === "UT") {
+	      if (OutputData.gun === "DT") {
+	        if (OutputData.preferred === "DT") {
+	          return "DT";
+	        } else {
+	          return "EM";
+	        }
+	      } else if (OutputData.gun === "HC") {
+	        return "HC";
+	      } else {
+	        return OutputData.preferred;
+	      }
+	    } else if (Swings.indexOf(OutputData.location) !== -1) {
+	      if (OutputData.gun === "DT") {
+	        return "DT";
+	      } else if (OutputData.gun === "HC") {
+	        return "HC";
+	      } else {
+	        return OutputData.preferred;
+	      }
+	    } else {
+	      return OutputData.preferred;
+	    }
+	  },
+	  getMessage: function () {
+	    if (OutputData.gun === null) {
+	      return "You would rather die than vote for either of the two major candidates, so just do what you feel to gain attention to your preffered candidate";
+	    } else if (Swings.indexOf(OutputData.location) !== -1) {
+	      return "You live in a potential swing state. Your vote counts! Also it means you should probably vote for one the major candidates, even if you have to hold your nose.";
+	    } else if (OutputData.location === "UT") {
+	      return "You live in Utah. Utah is special because it appears Evan McMullin is going to win it. Best strategy is either to vote for him or Hillary Clinton";
+	    } else {
+	      return "You don't live in a swing state, your electoral votes are already decided. Vote for who you feel so they can gain attention";
+	    }
+	  },
+	  faceClick: function () {
+	    alert("hey there");
+	  },
+	  nextClick: function () {
+	    this.props.nextClick("Welcome");
+	  },
+	  render: function () {
+	    var pres = this.getPresident();
+	    var message = this.getMessage();
+	    return React.createElement(
+	      'div',
+	      { className: 'inner' },
+	      React.createElement(
+	        'h2',
+	        null,
+	        'Result: '
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        message
+	      ),
+	      React.createElement(
+	        'h1',
+	        null,
+	        ' Best strategic vote: '
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'vertical-container' },
+	        React.createElement(
+	          'div',
+	          { className: 'result-div' },
+	          React.createElement(President, { id: pres, faceClick: this.faceClick })
+	        ),
+	        React.createElement(
+	          'button',
+	          { className: 'btn btn-primary', onClick: this.nextClick },
+	          'Start Over'
+	        )
+	      )
+	    );
+	  }
+	
+	});
+	
+	module.exports = Results;
+
+/***/ },
+/* 225 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	
+	var Country = React.createClass({
+	  displayName: 'Country',
+	
+	  getInitialState: function () {
+	    return {};
+	  },
+	  componentDidMount: function () {},
+	  nextClick: function (event) {
+	    this.props.nextClick('Welcome');
+	  },
+	
+	  render: function () {
+	
+	    return React.createElement(
+	      'div',
+	      { className: 'inner' },
+	      React.createElement(
+	        'h2',
+	        null,
+	        'edgy'
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'input-buttons' },
+	        React.createElement(
+	          'div',
+	          { className: 'vertical-container' },
+	          React.createElement(
+	            'div',
+	            { className: 'anarchy-div' },
+	            React.createElement('img', { src: 'http://podcast.robohara.com/wp-content/uploads/2016/06/Anarchy-psd355091.png' })
+	          ),
+	          React.createElement(
+	            'button',
+	            { className: 'btn btn-primary', onClick: this.nextClick },
+	            'Back to Main Page'
+	          )
+	        )
+	      )
+	    );
+	  }
+	
+	});
+	
+	module.exports = Country;
 
 /***/ }
 /******/ ]);
