@@ -34550,10 +34550,10 @@
 	              null,
 	              React.createElement(
 	                'div',
-	                { 'class': 'fb-share-button', 'data-href': 'https://agee6.github.io/democracy', 'data-layout': 'button', 'data-size': 'large', 'data-mobile-iframe': 'true' },
+	                { className: 'fb-share-button', 'data-href': 'https://agee6.github.io/democracy', 'data-layout': 'button', 'data-size': 'large', 'data-mobile-iframe': 'true' },
 	                React.createElement(
 	                  'a',
-	                  { 'class': 'fb-xfbml-parse-ignore', target: '_blank', href: 'https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fagee6.github.io%2Fdemocracy&src=sdkpreparse' },
+	                  { className: 'fb-xfbml-parse-ignore', target: '_blank', href: 'https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fagee6.github.io%2Fdemocracy&src=sdkpreparse' },
 	                  'Share'
 	                )
 	              )
