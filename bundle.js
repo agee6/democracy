@@ -34557,6 +34557,15 @@
 	                  'Share'
 	                )
 	              )
+	            ),
+	            React.createElement(
+	              'li',
+	              null,
+	              React.createElement('div', {
+	                className: 'fb-like',
+	                'data-share': 'true',
+	                'data-width': '450',
+	                'data-show-faces': 'true' })
 	            )
 	          ),
 	          React.createElement('div', { className: 'fb-share-button',
