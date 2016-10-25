@@ -97,10 +97,6 @@ var Navbar = React.createClass({
                   </div>
               </li>
             </ul>
-            <div className="fb-share-button"
-              data-href="http://www.your-domain.com/your-page.html"
-              data-layout="button_count">
-            </div>
           </nav>
         </div>
       </div>
