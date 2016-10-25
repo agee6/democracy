@@ -34558,10 +34558,7 @@
 	                  'data-show-faces': 'true' })
 	              )
 	            )
-	          ),
-	          React.createElement('div', { className: 'fb-share-button',
-	            'data-href': 'http://www.your-domain.com/your-page.html',
-	            'data-layout': 'button_count' })
+	          )
 	        )
 	      )
 	    );
