@@ -50,7 +50,7 @@
 	
 	//components
 	var Welcome = __webpack_require__(172);
-	var Navbar = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/Navbar.jsx\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var Navbar = __webpack_require__(199);
 	var GraphArea = __webpack_require__(200);
 	var SideBar = __webpack_require__(213);
 	var Footer = __webpack_require__(214);
@@ -34432,7 +34432,147 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(198).setImmediate, __webpack_require__(198).clearImmediate))
 
 /***/ },
-/* 199 */,
+/* 199 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var APIUtil = __webpack_require__(173);
+	var UserStore = __webpack_require__(180);
+	var ApiActions = __webpack_require__(174);
+	var helloUtil = __webpack_require__(196);
+	
+	var Navbar = React.createClass({
+	  displayName: 'Navbar',
+	
+	  getInitialState: function () {
+	    return { loggedIn: false, onGraph: false };
+	  },
+	  componentDidMount: function () {
+	    this.userIndex = UserStore.addListener(this._onChange);
+	  },
+	
+	  signOutClick: function (event) {
+	
+	    APIUtil.logoutUser();
+	
+	    ApiActions.emptyShelves();
+	    ApiActions.deleteCurrentBook();
+	
+	    this.history.push({ pathname: "/Search" });
+	  },
+	  signClick: function (event) {
+	    event.preventDefault();
+	    this.clicked = true;
+	
+	    if (this.state.password !== null && this.state.password.length >= 6) {
+	      APIUtil.signIn(this.state.username, this.state.password);
+	    } else {
+	      this.state.password = "";
+	      this.setState({ message: "invalid password, must be at least 6 digits please try again" });
+	    }
+	  },
+	  _onChange: function () {
+	
+	    this.props.nextClick('GraphArea');
+	  },
+	  signUpClick: function (event) {
+	    event.preventDefault();
+	
+	    this.clicked = true;
+	    if (this.state.username !== "" && this.state.password !== "") {
+	      APIUtil.createUser(this.state.username, this.state.password);
+	    } else {
+	      this.setState({ message: "invalid password please try again" });
+	    }
+	    debugger;
+	  },
+	  toGraph: function () {
+	    APIUtil.getTrumpFacebook();
+	    this.props.nextClick("GraphArea");
+	    this.setState({ onGraph: true });
+	  },
+	  goHome: function () {
+	    this.props.nextClick("Welcome");
+	    this.setState({ onGraph: false });
+	  },
+	  facebookLogin: function () {
+	    if (this.state.loggedIn) {
+	      this.nextClick("GraphArea");
+	    } else {
+	      helloUtil.loginToFacebook();
+	    }
+	  },
+	
+	  render: function () {
+	    var element;
+	    if (this.state.onGraph) {
+	      element = React.createElement(
+	        'li',
+	        { className: 'active', onClick: this.goHome },
+	        React.createElement(
+	          'a',
+	          { href: '#' },
+	          'Home'
+	        )
+	      );
+	    } else {
+	      element = React.createElement(
+	        'li',
+	        { className: 'active', onClick: this.toGraph },
+	        React.createElement(
+	          'a',
+	          { href: '#' },
+	          'Graphs'
+	        )
+	      );
+	    }
+	
+	    return React.createElement(
+	      'div',
+	      { className: 'masthead clearfix' },
+	      React.createElement(
+	        'div',
+	        { className: 'nav-container container-fluid' },
+	        React.createElement(
+	          'h3',
+	          { className: 'masthead-brand' },
+	          'Strategic Voting'
+	        ),
+	        React.createElement(
+	          'nav',
+	          null,
+	          React.createElement(
+	            'ul',
+	            { className: 'nav masthead-nav' },
+	            element,
+	            React.createElement(
+	              'li',
+	              null,
+	              React.createElement(
+	                'div',
+	                { className: 'facebook-area' },
+	                React.createElement('div', {
+	                  className: 'fb-like',
+	                  'data-share': 'true',
+	                  'data-width': '450',
+	                  'data-show-faces': 'true' })
+	              )
+	            )
+	          ),
+	          React.createElement('div', { className: 'fb-share-button',
+	            'data-href': 'http://www.your-domain.com/your-page.html',
+	            'data-layout': 'button_count' })
+	        )
+	      )
+	    );
+	  }
+	
+	});
+	
+	// <li><button id="facebook" className="btn btn-primary" onClick={this.facebookLogin}>F</button></li>
+	module.exports = Navbar;
+
+/***/ },
 /* 200 */
 /***/ function(module, exports, __webpack_require__) {
 
