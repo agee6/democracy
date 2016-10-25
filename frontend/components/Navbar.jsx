@@ -87,13 +87,14 @@ var Navbar = React.createClass({
           <nav>
             <ul className="nav masthead-nav">
               {element}
-              <li>
+              <li><div className="facebook-area"
                     <div
-                      className="fb-like fb-area"
+                      className="fb-like"
                       data-share="true"
                       data-width="450"
                       data-show-faces="true">
                     </div>
+                  </div>
               </li>
             </ul>
             <div className="fb-share-button"
