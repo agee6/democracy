@@ -19,14 +19,7 @@ var APIUtil = {
 
   },
   getTrumpFacebook: function(){
-    FB.api(
-    "/{object-id}/likes",
-    function (response) {
-      if (response && !response.error) {
-        /* handle the result */
-      }
-    }
-);
+  
   },
   getUserBooks: function(){
     $.get('/api/books', {}, function(books){
