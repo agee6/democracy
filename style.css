@@ -55,12 +55,15 @@ body {
 }
 .facebook-like-button{
   position: absolute;
-  left: 0;
+  right: 0;
   top:0;
+  height: 50px;
+  width: 100px;
+  background-color: blue;
 }
 .facebook-area{
   width: 100px;
-  height: 50px; 
+  height: 50px;
 }
 
 .president{
