@@ -73,17 +73,19 @@ var Navbar = React.createClass({
   },
 
   render: function() {
-    var element;
+    var element, header;
     if(this.state.onGraph){
-      element = <li className="active" onClick={this.goHome}><a href="#">Home</a></li>
+      element = <button className="btn btn-primary" onClick={this.goHome}><a href="#">Home</a></button>
+      header = <h3 className="masthead-brand" onClick={this.goHome}>Strategic Voting</h3>
     }else{
-      element = <li className="active" onClick={this.toGraph}><a href="#">Graphs</a></li>
+      element = <button className="btn btn-primary" onClick={this.toGraph}><a href="#">Social Media Election</a></button>
+      header = <h3 className="masthead-brand">Strategic Voting</h3>
     }
 
     return (
       <div className="masthead clearfix">
         <div className="nav-container container-fluid">
-          <h3 className="masthead-brand">Strategic Voting</h3>
+          {header}
           <nav>
             <ul className="nav masthead-nav">
               {element}

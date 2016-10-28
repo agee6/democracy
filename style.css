@@ -21,10 +21,6 @@ a:hover {
   border: 1px solid #fff;
 }
 
-
-
-
-
 /*
  * Base structure
  */
@@ -219,7 +215,7 @@ body {
   width: 200px;
   margin-left: auto;
   margin-right: auto;
-  color: #333;
+  color: #ddd;
 }
 .btn#facebook {
   width: 40px;
@@ -240,4 +236,12 @@ body {
 
 .chartLabel {
   margin-bottom: 15px;
+}
+
+.masthead-brand {
+  cursor: pointer;
+}
+.masthead-brand:hover{
+  background-color: #ccc;
+
 }
