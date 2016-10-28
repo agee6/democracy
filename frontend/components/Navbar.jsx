@@ -93,7 +93,7 @@ var Navbar = React.createClass({
                     <div
                       className="fb-like"
                       data-share="true"
-                      data-width="450"
+                      data-width="200"
                       data-show-faces="true">
                     </div>
                   </div>

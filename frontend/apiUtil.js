@@ -1,4 +1,5 @@
 var ApiActions = require('./actions/api_actions');
+// var artoo = require('artoo-js'); 
 
 var APIUtil = {
 
@@ -19,7 +20,7 @@ var APIUtil = {
 
   },
   getTrumpFacebook: function(){
-  
+
   },
   getUserBooks: function(){
     $.get('/api/books', {}, function(books){

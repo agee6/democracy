@@ -21562,6 +21562,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var ApiActions = __webpack_require__(174);
+	// var artoo = require('artoo-js'); 
 	
 	var APIUtil = {
 	
@@ -34560,7 +34561,7 @@
 	                React.createElement('div', {
 	                  className: 'fb-like',
 	                  'data-share': 'true',
-	                  'data-width': '450',
+	                  'data-width': '200',
 	                  'data-show-faces': 'true' })
 	              )
 	            )
