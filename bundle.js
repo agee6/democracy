@@ -34504,26 +34504,36 @@
 	  },
 	
 	  render: function () {
-	    var element;
+	    var element, header;
 	    if (this.state.onGraph) {
 	      element = React.createElement(
-	        'li',
-	        { className: 'active', onClick: this.goHome },
+	        'button',
+	        { className: 'btn btn-primary', onClick: this.goHome },
 	        React.createElement(
 	          'a',
 	          { href: '#' },
 	          'Home'
 	        )
 	      );
+	      header = React.createElement(
+	        'h3',
+	        { className: 'masthead-brand', onClick: this.goHome },
+	        'Strategic Voting'
+	      );
 	    } else {
 	      element = React.createElement(
-	        'li',
-	        { className: 'active', onClick: this.toGraph },
+	        'button',
+	        { className: 'btn btn-primary', onClick: this.toGraph },
 	        React.createElement(
 	          'a',
 	          { href: '#' },
-	          'Graphs'
+	          'Social Media Election'
 	        )
+	      );
+	      header = React.createElement(
+	        'h3',
+	        { className: 'masthead-brand' },
+	        'Strategic Voting'
 	      );
 	    }
 	
@@ -34533,11 +34543,7 @@
 	      React.createElement(
 	        'div',
 	        { className: 'nav-container container-fluid' },
-	        React.createElement(
-	          'h3',
-	          { className: 'masthead-brand' },
-	          'Strategic Voting'
-	        ),
+	        header,
 	        React.createElement(
 	          'nav',
 	          null,
@@ -38913,13 +38919,13 @@
 	  render: function () {
 	    var title, subtitle, buttonText;
 	    if (this.state.gun) {
-	      title = "Okay, we will shoot you, but...";
+	      title = "Okay, but seriously...";
 	      subtitle = "Your children will have to live under one of these, who do you choose?";
-	      buttonText = "Please, just do it. I don't care.";
+	      buttonText = "Really, no preference";
 	    } else {
-	      title = "Gun to your head, who do you choose?";
-	      subtitle = "I'm sorry you have to do this.";
-	      buttonText = "Just Shoot me";
+	      title = "If you absolutely had to choose one who would it be?";
+	      subtitle = "One or the other.";
+	      buttonText = "Neither";
 	    }
 	
 	    return React.createElement(
